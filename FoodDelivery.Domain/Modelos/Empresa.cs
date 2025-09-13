@@ -5,27 +5,29 @@ using System.Collections.Generic;
 
 namespace FoodDelivery.Domain.Modelos
 {
+    [Table("empresas")]
     public class Empresa
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        [Column("id_empresa")]
+        public Guid IdEmpresa { get; set; }
 
-        [Required]
-        [StringLength(255)]
+        [Column("nombre")]
         public string Nombre { get; set; }
 
-        [Required]
+        [Column("direccion")]
         public string Direccion { get; set; }
 
-        [StringLength(20)]
+        [Column("telefono")]
         public string Telefono { get; set; }
 
-        [StringLength(255)]
+        [Column("email")]
         public string Email { get; set; }
+        [Column("latitud")]
 
         public decimal? Latitud { get; set; }
 
+        [Column("longitud")]
         public decimal? Longitud { get; set; }
 
         // Propiedades de navegación para relaciones
