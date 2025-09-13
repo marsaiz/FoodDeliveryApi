@@ -4,26 +4,25 @@ using System.Collections.Generic;
 
 namespace FoodDelivery.Domain.Modelos
 {
+    [Table("adicionales")]
     public class Adicional
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        [Column("id_adicionales")]
+        public int IdAdicional { get; set; }
 
         [Required]
-        [StringLength(100)]
-        public string Nombre { get; set; }
+        [Column ("nombre_adicional")]
+        public string NombreAdicional { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
-        public decimal? Precio { get; set; }
+        [Column("precio_adicional")]
+        public decimal? PrecioAdicional { get; set; }
 
         // Clave foránea
-        public int EmpresaId { get; set; }
+        public Guid EmpresaId { get; set; }
 
         // Propiedades de navegación
-        [ForeignKey("EmpresaId")]
         public Empresa Empresa { get; set; }
-
         public ICollection<PedidoAdicionales> PedidoAdicionales { get; set; }
     }
 }

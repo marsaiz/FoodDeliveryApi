@@ -4,35 +4,41 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodDelivery.Domain.Modelos
 {
+    [Table("direcciones_cliente")]
     public class DireccionCliente
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        [Column("id_direccion_cliente")]
+        public int IdDireccionCliente { get; set; }
 
-        [Required]
-        [StringLength(255)]
+        [Column("calle")]
         public string Calle { get; set; }
 
-        [StringLength(20)]
-        public string Numero { get; set; }
+        [Column("numero")]
+        public int Numero { get; set; }
 
-        [StringLength(50)]
+        [Column("piso_depto")]
         public string PisoDepto { get; set; }
 
+        [Column("ciudad")]
+        public string Ciudad { get; set; }
+
+        [Column("codigo_postal")]
+        public string CodigoPostal { get; set; }
+
+        [Column("referencia")]
         public string Referencia { get; set; }
 
-        [Column(TypeName = "decimal(9, 6)")]
+        [Column("latitud")]
         public decimal? Latitud { get; set; }
 
-        [Column(TypeName = "decimal(9, 6)")]
+        [Column("longitud")]
         public decimal? Longitud { get; set; }
 
         // Clave foránea
-        public int ClienteId { get; set; }
+        public Guid IdCliente { get; set; }
 
         // Propiedad de navegación
-        [ForeignKey("ClienteId")]
         public Cliente Cliente { get; set; }
     }
 }

@@ -5,21 +5,20 @@ using System.Collections.Generic;
 
 namespace FoodDelivery.Domain.Modelos
 {
+    [Table("categorias")]
     public class Categoria
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        [Column("id_categoria")]
+        public int IdCategoria { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string Nombre { get; set; }
+        [Column ("nombre_categoria")]
+        public string NombreCategoria { get; set; }
 
         // Clave foránea
-        public int EmpresaId { get; set; }
+        public Guid EmpresaId { get; set; }
 
         // Propiedades de navegación
-        [ForeignKey("EmpresaId")]
         public Empresa Empresa { get; set; }
         public ICollection<Producto> Productos { get; set; }
     }

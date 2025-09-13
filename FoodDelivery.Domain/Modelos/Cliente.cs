@@ -21,8 +21,8 @@ namespace FoodDelivery.Domain.Modelos
         [Column("email")]
         public string Email { get; set; }
 
-        // Propiedades de navegación
-        public ICollection<DireccionCliente> Direcciones { get; set; }
+        // Propiedades de navegación para relaciones
         public ICollection<Pedido> Pedidos { get; set; }
+        public ICollection<DireccionCliente> Direcciones { get; set; }
     }
 }

@@ -6,46 +6,37 @@ using System;
 
 namespace FoodDelivery.Domain.Modelos
 {
+    [Table("pedidos")]
     public class Pedido
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        [Column("id_pedido")]
+        public int IdPedido { get; set; }
 
-        [Required]
+        [Column("fecha_hora")]
         public DateTime FechaHora { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Estado { get; set; }
+        [Column("estado_pedido")]
+        public string EstadoPedido { get; set; }
 
-        [Required]
-        [Column(TypeName = "decimal(10, 2)")]
-        public decimal Total { get; set; }
+        [Column ("total_pedido")]
+        public decimal TotalPeido { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Column("metodo_pago")]
         public string MetodoPago { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Column("tipo_entrega")]
         public string TipoEntrega { get; set; }
 
         // Claves foráneas
-        public int ClienteId { get; set; }
-        public int EmpresaId { get; set; }
-        public int? DireccionEntregaId { get; set; }
+        public Guid IdCliente { get; set; }
+        public Guid IdEmpresa { get; set; }
+        public int? IdDireccionCliente { get; set; }
 
-        // Propiedades de navegación
-        [ForeignKey("ClienteId")]
+        // Propiedades de navegación 
         public Cliente Cliente { get; set; }
-
-        [ForeignKey("EmpresaId")]
         public Empresa Empresa { get; set; }
-
-        [ForeignKey("DireccionEntregaId")]
         public DireccionCliente DireccionEntrega { get; set; }
-
         public ICollection<DetallePedido> DetallePedidos { get; set; }
     }
 }

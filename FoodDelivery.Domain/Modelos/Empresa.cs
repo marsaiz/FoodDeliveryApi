@@ -23,8 +23,8 @@ namespace FoodDelivery.Domain.Modelos
 
         [Column("email")]
         public string Email { get; set; }
-        [Column("latitud")]
 
+        [Column("latitud")]
         public decimal? Latitud { get; set; }
 
         [Column("longitud")]
@@ -34,6 +34,8 @@ namespace FoodDelivery.Domain.Modelos
         public ICollection<Categoria> Categorias { get; set; }
         public ICollection<Producto> Productos { get; set; }
         public ICollection<Adicional> Adicionales { get; set; }
+
+        // ICollection<T> indica una relación uno a muchos
         public ICollection<Pedido> Pedidos { get; set; }
     }
 }
