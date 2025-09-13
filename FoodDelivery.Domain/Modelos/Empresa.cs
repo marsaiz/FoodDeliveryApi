@@ -31,11 +31,11 @@ namespace FoodDelivery.Domain.Modelos
         public decimal? Longitud { get; set; }
 
         // Propiedades de navegación para relaciones
+        // ICollection<T> indica una relación uno a muchos o muchos a muchos
+        // la coleccion debe estar en la entidad "uno" en una relación uno a muchos
         public ICollection<Categoria> Categorias { get; set; }
         public ICollection<Producto> Productos { get; set; }
         public ICollection<Adicional> Adicionales { get; set; }
-
-        // ICollection<T> indica una relación uno a muchos
         public ICollection<Pedido> Pedidos { get; set; }
     }
 }

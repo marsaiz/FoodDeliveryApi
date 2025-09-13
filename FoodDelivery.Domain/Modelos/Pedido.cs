@@ -37,6 +37,10 @@ namespace FoodDelivery.Domain.Modelos
         public Cliente Cliente { get; set; }
         public Empresa Empresa { get; set; }
         public DireccionCliente DireccionEntrega { get; set; }
+
+        // ICollection<T> indica una relación uno a muchos o muchos a muchos
+        // la coleccion debe estar en la entidad "uno" en una relación uno a muchos
+        // o en ambas entidades en una relación muchos a muchos
         public ICollection<DetallePedido> DetallePedidos { get; set; }
     }
 }

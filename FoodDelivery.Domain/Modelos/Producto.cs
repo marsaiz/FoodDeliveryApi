@@ -12,13 +12,12 @@ namespace FoodDelivery.Domain.Modelos
         [Column("id_producto")]
         public int IdProducto { get; set; }
 
-        [Column ("nombre_producto")]
+        [Column("nombre_producto")]
         public string NombreProducto { get; set; }
 
         [Column("descripcion_producto")]
         public string DescripcionProducto { get; set; }
 
-        [Required]
         [Column("precio_producto")]
         public decimal PrecioProducto { get; set; }
 
