@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "GtvaCEw1dSm9JMWaYCheMlSqPrFtLX+u8F/U9WWiJ9Y=",
-  "Source": "FoodDeliveryApi",
-  "BasePath": "_content/FoodDeliveryApi",
+  "Hash": "n2t299L0Buqmd6Gd1+XTNbxa6lf83VZpvCgxTJ1XTnU=",
+  "Source": "FoodDelivery.API",
+  "BasePath": "_content/FoodDelivery.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

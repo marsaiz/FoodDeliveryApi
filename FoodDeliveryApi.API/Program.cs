@@ -1,9 +1,28 @@
+using Microsoft.EntityFrameworkCore;
+using FoodDelivery.Persistencia.Repositorios;
+using FoodDelivery.Aplicacion.Servicios;
+using FoodDelivery.Domain.Servicios;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<FoodDelivery.Persistencia.Repositorios.FoodDeliveryDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Registrar repositorio y servicio Cliente
+builder.Services.AddScoped<IClienteRepository, FoodDelivery.Persistencia.Repositorios.Implementaciones.ClienteRepository>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
+
+// Registrar repositorio y servicio Empresa
+builder.Services.AddScoped<IEmpresaRepository, FoodDelivery.Persistencia.Repositorios.Implementaciones.EmpresaRepository>();
+builder.Services.AddScoped<IEmpresaService, EmpresaService>();
+
+// Registrar repositorio y servicio Adicional
+builder.Services.AddScoped<IAdicionalRepository, FoodDelivery.Persistencia.Repositorios.Implementaciones.AdicionalRepository>();
+builder.Services.AddScoped<IAdicionalService, AdicionalService>();
 
 var app = builder.Build();
 

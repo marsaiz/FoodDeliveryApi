@@ -1,0 +1,16 @@
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/bin/Debug/net8.0/FoodDelivery.Persistencia.deps.json
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/bin/Debug/net8.0/FoodDelivery.Persistencia.dll
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/bin/Debug/net8.0/FoodDelivery.Persistencia.pdb
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/bin/Debug/net8.0/FoodDelivery.Domain.dll
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/bin/Debug/net8.0/FoodDelivery.Domain.pdb
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/obj/Debug/net8.0/FoodDelivery.Persistencia.csproj.AssemblyReference.cache
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/obj/Debug/net8.0/FoodDelivery.Persistencia.GeneratedMSBuildEditorConfig.editorconfig
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/obj/Debug/net8.0/FoodDelivery.Persistencia.AssemblyInfoInputs.cache
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/obj/Debug/net8.0/FoodDelivery.Persistencia.AssemblyInfo.cs
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/obj/Debug/net8.0/FoodDelivery.Persistencia.csproj.CoreCompileInputs.cache
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/obj/Debug/net8.0/FoodDelivery.Persistencia.sourcelink.json
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/obj/Debug/net8.0/FoodDelivery.Persistencia.csproj.CopyComplete
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/obj/Debug/net8.0/FoodDelivery.Persistencia.dll
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/obj/Debug/net8.0/refint/FoodDelivery.Persistencia.dll
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/obj/Debug/net8.0/FoodDelivery.Persistencia.pdb
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/obj/Debug/net8.0/ref/FoodDelivery.Persistencia.dll

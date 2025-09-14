@@ -6,6 +6,13 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.19" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FoodDelivery.Persistencia\FoodDelivery.Persistencia.csproj" />
+    <ProjectReference Include="..\FoodDelivery.Domain\FoodDelivery.Domain.csproj" />
+    <ProjectReference Include="..\FoodDelivery.Aplicacion\FoodDelivery.Aplicacion.csproj" />
   </ItemGroup>
 </Project>
