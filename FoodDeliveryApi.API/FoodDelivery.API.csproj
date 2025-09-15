@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FoodDelivery.Persistencia\FoodDelivery.Persistencia.csproj" />
-    <ProjectReference Include="..\FoodDelivery.Domain\FoodDelivery.Domain.csproj" />
-    <ProjectReference Include="..\FoodDelivery.Aplicacion\FoodDelivery.Aplicacion.csproj" />
+    <ProjectReference Include="..\FoodDelivery.Servicios\FoodDelivery.Servicios.csproj" />
   </ItemGroup>
 </Project>

@@ -18,7 +18,7 @@ namespace FoodDelivery.Domain.Modelos
         public int Numero { get; set; }
 
         [Column("piso_depto")]
-        public string PisoDepto { get; set; }
+        public string? PisoDepto { get; set; }
 
         [Column("ciudad")]
         public string Ciudad { get; set; }

@@ -19,7 +19,7 @@ namespace FoodDelivery.Domain.Modelos
         [Column("estado_pedido")]
         public string EstadoPedido { get; set; }
 
-        [Column ("total_pedido")]
+        [Column("total_pedido")]
         public decimal TotalPeido { get; set; }
 
         [Column("metodo_pago")]
@@ -42,5 +42,6 @@ namespace FoodDelivery.Domain.Modelos
         // la coleccion debe estar en la entidad "uno" en una relación uno a muchos
         // o en ambas entidades en una relación muchos a muchos
         public ICollection<DetallePedido> DetallePedidos { get; set; }
+        public ICollection<PedidoAdicionales> PedidosAdicionales { get; set; }
     }
 }

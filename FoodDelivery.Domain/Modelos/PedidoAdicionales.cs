@@ -9,7 +9,7 @@ namespace FoodDelivery.Domain.Modelos
     {
         // Clave compuesta: DetallePedidoId + IdAdicional + Mitad
         public int IdPedido { get; set; } // Clave foránea
-        public int IdProducto { get; set; }
+        // public int IdProducto { get; set; }
 
         // Clave foránea a Adicional
         public int IdAdicional { get; set; }

@@ -295,6 +295,19 @@
         "runtime": {
           "bin/placeholder/FoodDelivery.Domain.dll": {}
         }
+      },
+      "FoodDelivery.Servicios/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "FoodDelivery.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/FoodDelivery.Servicios.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FoodDelivery.Servicios.dll": {}
+        }
       }
     }
   },
@@ -740,29 +753,34 @@
       "type": "project",
       "path": "../FoodDelivery.Domain/FoodDelivery.Domain.csproj",
       "msbuildProject": "../FoodDelivery.Domain/FoodDelivery.Domain.csproj"
+    },
+    "FoodDelivery.Servicios/1.0.0": {
+      "type": "project",
+      "path": "../FoodDelivery.Servicios/FoodDelivery.Servicios.csproj",
+      "msbuildProject": "../FoodDelivery.Servicios/FoodDelivery.Servicios.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "FoodDelivery.Domain >= 1.0.0",
+      "FoodDelivery.Servicios >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 9.0.9",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 9.0.4"
     ]
   },
   "packageFolders": {
-    "/home/marcelo/.nuget/packages/": {}
+    "C:\\Users\\marsa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/FoodDelivery.Persistencia.csproj",
+      "projectUniqueName": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj",
       "projectName": "FoodDelivery.Persistencia",
-      "projectPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/FoodDelivery.Persistencia.csproj",
-      "packagesPath": "/home/marcelo/.nuget/packages/",
-      "outputPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/obj/",
+      "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj",
+      "packagesPath": "C:\\Users\\marsa\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/marcelo/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\marsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -774,8 +792,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/FoodDelivery.Domain.csproj": {
-              "projectPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/FoodDelivery.Domain.csproj"
+            "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj": {
+              "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj"
             }
           }
         }
@@ -784,6 +802,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -815,7 +838,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.119/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -12,7 +12,8 @@ namespace FoodDelivery.Domain.Modelos
         [Column("id_categoria")]
         public int IdCategoria { get; set; }
 
-        [Column ("nombre_categoria")]
+        [Required]
+        [Column("nombre_categoria")]
         public string NombreCategoria { get; set; }
 
         // Clave foránea

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodDelivery.API", "FoodDel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodDelivery.Persistencia", "FoodDelivery.Persistencia\FoodDelivery.Persistencia.csproj", "{3E14ACA3-4FA8-4DB1-84CC-5697F9C3FE74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodDelivery.Aplicacion", "FoodDelivery.Aplicacion\FoodDelivery.Aplicacion.csproj", "{92973394-BFDC-4C88-9D1D-5D0B588C421F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodDelivery.Servicios", "FoodDelivery.Servicios\FoodDelivery.Servicios.csproj", "{FC4BF3C1-6BD6-4D00-87AA-F11540B739CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,9 +40,9 @@ Global
 		{3E14ACA3-4FA8-4DB1-84CC-5697F9C3FE74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E14ACA3-4FA8-4DB1-84CC-5697F9C3FE74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E14ACA3-4FA8-4DB1-84CC-5697F9C3FE74}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92973394-BFDC-4C88-9D1D-5D0B588C421F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92973394-BFDC-4C88-9D1D-5D0B588C421F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92973394-BFDC-4C88-9D1D-5D0B588C421F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92973394-BFDC-4C88-9D1D-5D0B588C421F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC4BF3C1-6BD6-4D00-87AA-F11540B739CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC4BF3C1-6BD6-4D00-87AA-F11540B739CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC4BF3C1-6BD6-4D00-87AA-F11540B739CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC4BF3C1-6BD6-4D00-87AA-F11540B739CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
