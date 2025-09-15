@@ -17,7 +17,7 @@ namespace FoodDelivery.Domain.Modelos
         public string NombreCategoria { get; set; }
 
         // Clave foránea
-        public Guid EmpresaId { get; set; }
+        public Guid IdEmpresa { get; set; }
 
         // Propiedades de navegación
         public Empresa Empresa { get; set; }
