@@ -11,16 +11,3 @@
 /home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/obj/Debug/net8.0/refint/FoodDelivery.Domain.dll
 /home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/obj/Debug/net8.0/FoodDelivery.Domain.pdb
 /home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/obj/Debug/net8.0/ref/FoodDelivery.Domain.dll
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Domain\bin\Debug\net8.0\FoodDelivery.Domain.deps.json
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Domain\bin\Debug\net8.0\FoodDelivery.Domain.dll
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Domain\bin\Debug\net8.0\FoodDelivery.Domain.pdb
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Domain\obj\Debug\net8.0\FoodDelivery.Domain.csproj.AssemblyReference.cache
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Domain\obj\Debug\net8.0\FoodDelivery.Domain.GeneratedMSBuildEditorConfig.editorconfig
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Domain\obj\Debug\net8.0\FoodDelivery.Domain.AssemblyInfoInputs.cache
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Domain\obj\Debug\net8.0\FoodDelivery.Domain.AssemblyInfo.cs
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Domain\obj\Debug\net8.0\FoodDelivery.Domain.csproj.CoreCompileInputs.cache
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Domain\obj\Debug\net8.0\FoodDelivery.Domain.sourcelink.json
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Domain\obj\Debug\net8.0\FoodDelivery.Domain.dll
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Domain\obj\Debug\net8.0\refint\FoodDelivery.Domain.dll
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Domain\obj\Debug\net8.0\FoodDelivery.Domain.pdb
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Domain\obj\Debug\net8.0\ref\FoodDelivery.Domain.dll

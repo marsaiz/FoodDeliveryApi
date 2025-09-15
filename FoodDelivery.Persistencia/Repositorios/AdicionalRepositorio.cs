@@ -1,37 +1,57 @@
-
+using FoodDelivery.Servicios.Interfaces;
+using FoodDelivery.Domain.Modelos;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodDelivery.Persistencia.Repositorios;
 
 public class AdicionalRepositorio : IAdicionalRepositorio
 {
-    private readonly ApplicationDbContext _context;
+    private readonly FoodDeliveryContexto _context;
 
-    public AdicionalRepositorio(ApplicationDbContext context)
+    public AdicionalRepositorio(FoodDeliveryContexto context)
     {
         _context = context;
     }
-    public Task<Adicional> CrearAdicionalAsync(Adicional adicional)
+    public async Task<Adicional> CrearAdicionalAsync(Adicional adicional)
     {
-        throw new NotImplementedException();
+        await _context.Adicionales.AddAsync(adicional);
+        await _context.SaveChangesAsync();
+        return adicional;
     }
 
-    public Task<Adicional> ActualizarAdicionalAsync(Adicional adicional)
+    public async Task<Adicional> ActualizarAdicionalAsync(Adicional adicional)
     {
-        throw new NotImplementedException();
+        _context.Entry(adicional).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+        return adicional;
     }
 
-    public Task<bool> EliminarAdicionalAsync(int idAdicional, Guid idEmpresa)
+    public async Task<bool> EliminarAdicionalAsync(int idAdicional, Guid idEmpresa)
     {
-        throw new NotImplementedException();
+        var adicional = await _context.Adicionales
+            .Where(a => a.IdAdicional == idAdicional && a.IdEmpresa == idEmpresa)
+            .FirstOrDefaultAsync();
+
+        if (adicional != null)
+        {
+            _context.Adicionales.Remove(adicional);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        return false;
     }
 
-    public Task<Adicional> ObtenerAdicionalPorIdAsync(int idAdicional, Guid idEmpresa)
+    public async Task<Adicional> ObtenerAdicionalPorIdAsync(int idAdicional, Guid idEmpresa)
     {
-        throw new NotImplementedException();
+        return await _context.Adicionales
+            .Where(a => a.IdAdicional == idAdicional && a.IdEmpresa == idEmpresa)
+            .FirstOrDefaultAsync();
     }
 
-    public Task<IEnumerable<Adicional>> ObtenerAdicionalesPorEmpresaAsync(Guid idEmpresa)
+    public async Task<List<Adicional>> ObtenerAdicionalesPorEmpresaAsync(Guid idEmpresa)
     {
-        throw new NotImplementedException();
+        return await _context.Adicionales
+        .Where(a => a.IdEmpresa == idEmpresa)
+        .ToListAsync();
     }
 }

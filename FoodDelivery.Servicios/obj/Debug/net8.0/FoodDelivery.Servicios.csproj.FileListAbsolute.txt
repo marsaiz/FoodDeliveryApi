@@ -1,6 +1,0 @@
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.csproj.AssemblyReference.cache
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.GeneratedMSBuildEditorConfig.editorconfig
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.AssemblyInfoInputs.cache
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.AssemblyInfo.cs
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.csproj.CoreCompileInputs.cache
-c:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.sourcelink.json

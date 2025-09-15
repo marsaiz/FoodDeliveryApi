@@ -19,7 +19,7 @@ namespace FoodDelivery.Domain.Modelos
         public decimal? PrecioAdicional { get; set; }
 
         // Clave foránea
-        public Guid EmpresaId { get; set; }
+        public Guid IdEmpresa { get; set; }
 
         // Propiedades de navegación
         public Empresa Empresa { get; set; }
