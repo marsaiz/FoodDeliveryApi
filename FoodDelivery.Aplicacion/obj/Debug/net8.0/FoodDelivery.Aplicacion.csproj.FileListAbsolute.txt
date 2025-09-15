@@ -1,3 +1,9 @@
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.csproj.AssemblyReference.cache
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.GeneratedMSBuildEditorConfig.editorconfig
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.AssemblyInfoInputs.cache
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.AssemblyInfo.cs
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.csproj.CoreCompileInputs.cache
+/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.sourcelink.json
 /home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/bin/Debug/net8.0/FoodDelivery.Aplicacion.deps.json
 /home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/bin/Debug/net8.0/FoodDelivery.Aplicacion.dll
 /home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/bin/Debug/net8.0/FoodDelivery.Aplicacion.pdb
@@ -5,12 +11,6 @@
 /home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/bin/Debug/net8.0/FoodDelivery.Persistencia.dll
 /home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/bin/Debug/net8.0/FoodDelivery.Domain.pdb
 /home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/bin/Debug/net8.0/FoodDelivery.Persistencia.pdb
-/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.csproj.AssemblyReference.cache
-/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.GeneratedMSBuildEditorConfig.editorconfig
-/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.AssemblyInfoInputs.cache
-/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.AssemblyInfo.cs
-/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.csproj.CoreCompileInputs.cache
-/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.sourcelink.json
 /home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.csproj.CopyComplete
 /home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/FoodDelivery.Aplicacion.dll
 /home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Aplicacion/obj/Debug/net8.0/refint/FoodDelivery.Aplicacion.dll

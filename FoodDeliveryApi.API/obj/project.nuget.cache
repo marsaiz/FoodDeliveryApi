@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "gMwwhyaYm1WaRSJNtYiUA75kgFIAKGv5Z/HpQTpIvRWE2GgB42d+YkC7gvCNFoP0wd6LyjJfZkr3Av2mYYMcRA==",
+  "dgSpecHash": "hhSMguUUJS6m5c8ZZiQeUHHEGq43gZ4Aa+lOXyfmyz8WWy/vB1nrdhukTBP6MjImnkeW1V1PlmL7flTdREDuFg==",
   "success": true,
   "projectFilePath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDeliveryApi.API/FoodDelivery.API.csproj",
   "expectedPackageFiles": [
+    "/home/marcelo/.nuget/packages/automapper/15.0.1/automapper.15.0.1.nupkg.sha512",
     "/home/marcelo/.nuget/packages/microsoft.aspnetcore.openapi/8.0.19/microsoft.aspnetcore.openapi.8.0.19.nupkg.sha512",
     "/home/marcelo/.nuget/packages/microsoft.entityframeworkcore/9.0.9/microsoft.entityframeworkcore.9.0.9.nupkg.sha512",
     "/home/marcelo/.nuget/packages/microsoft.entityframeworkcore.abstractions/9.0.9/microsoft.entityframeworkcore.abstractions.9.0.9.nupkg.sha512",
@@ -19,6 +20,10 @@
     "/home/marcelo/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.9/microsoft.extensions.logging.abstractions.9.0.9.nupkg.sha512",
     "/home/marcelo/.nuget/packages/microsoft.extensions.options/9.0.9/microsoft.extensions.options.9.0.9.nupkg.sha512",
     "/home/marcelo/.nuget/packages/microsoft.extensions.primitives/9.0.9/microsoft.extensions.primitives.9.0.9.nupkg.sha512",
+    "/home/marcelo/.nuget/packages/microsoft.identitymodel.abstractions/8.0.1/microsoft.identitymodel.abstractions.8.0.1.nupkg.sha512",
+    "/home/marcelo/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.0.1/microsoft.identitymodel.jsonwebtokens.8.0.1.nupkg.sha512",
+    "/home/marcelo/.nuget/packages/microsoft.identitymodel.logging/8.0.1/microsoft.identitymodel.logging.8.0.1.nupkg.sha512",
+    "/home/marcelo/.nuget/packages/microsoft.identitymodel.tokens/8.0.1/microsoft.identitymodel.tokens.8.0.1.nupkg.sha512",
     "/home/marcelo/.nuget/packages/microsoft.openapi/1.6.14/microsoft.openapi.1.6.14.nupkg.sha512",
     "/home/marcelo/.nuget/packages/npgsql/9.0.3/npgsql.9.0.3.nupkg.sha512",
     "/home/marcelo/.nuget/packages/npgsql.entityframeworkcore.postgresql/9.0.4/npgsql.entityframeworkcore.postgresql.9.0.4.nupkg.sha512",

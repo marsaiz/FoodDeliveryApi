@@ -2,6 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using FoodDelivery.Persistencia.Repositorios;
 using FoodDelivery.Aplicacion.Servicios;
 using FoodDelivery.Domain.Servicios;
+using FoodDelivery.Aplicacion;
+using FoodDelivery.Domain.Modelos;
+using AutoMapper;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<FoodDelivery.Persistencia.Repositorios.FoodDeliveryDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 // Registrar repositorio y servicio Cliente
 builder.Services.AddScoped<IClienteRepository, FoodDelivery.Persistencia.Repositorios.Implementaciones.ClienteRepository>();

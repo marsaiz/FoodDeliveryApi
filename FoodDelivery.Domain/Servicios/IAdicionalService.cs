@@ -9,7 +9,7 @@ namespace FoodDelivery.Domain.Servicios
     {
         Task<IEnumerable<Adicional>> GetAllAsync();
         Task<Adicional> GetByIdAsync(int id);
-        Task AddAsync(Adicional adicional);
+        Task AddAsync (Adicional adicional);
         Task UpdateAsync(Adicional adicional);
         Task DeleteAsync(int id);
     }
