@@ -16,10 +16,10 @@ namespace FoodDelivery.Domain.Modelos
         public string Nombre { get; set; }
 
         [Column("telefono")]
-        public string Telefono { get; set; }
+        public string? Telefono { get; set; }
 
         [Column("email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         // Propiedades de navegación para relaciones
         public ICollection<Pedido> Pedidos { get; set; }

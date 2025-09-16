@@ -6,9 +6,9 @@ namespace FoodDelivery.Persistencia.Repositorios;
 
 public class AdicionalRepositorio : IAdicionalRepositorio
 {
-    private readonly FoodDeliveryContexto _context;
+    private readonly FoodDeliveryDbContext _context;
 
-    public AdicionalRepositorio(FoodDeliveryContexto context)
+    public AdicionalRepositorio(FoodDeliveryDbContext context)
     {
         _context = context;
     }

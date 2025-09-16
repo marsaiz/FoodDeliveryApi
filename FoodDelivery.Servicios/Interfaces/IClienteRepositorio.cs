@@ -1,4 +1,4 @@
-using FoodDelivery.Datos.Modelos;
+using FoodDelivery.Domain.Modelos;
 namespace FoodDelivery.Servicios.Interfaces;
 
 public interface IClienteRepositorio
@@ -7,5 +7,5 @@ public interface IClienteRepositorio
     Task<Cliente> ActualizarClienteAsync(Cliente cliente);
     Task<bool> EliminarClienteAsync(Guid idCliente);
     Task<Cliente> ObtenerClientePorIdAsync(Guid idCliente);
-    Task<IEnumerable<Cliente>> ObtenerClientesAsync();
+    Task<List<Cliente>> ObtenerClientesAsync(Guid idCliente);
 }

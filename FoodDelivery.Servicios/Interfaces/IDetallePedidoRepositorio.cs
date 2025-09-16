@@ -1,4 +1,4 @@
-using FoodDelivery.Datos.Modelos;
+using FoodDelivery.Domain.Modelos;
 namespace FoodDelivery.Servicios.Interfaces;
 
 public interface IDetallePedidoRepositorio

@@ -1,33 +1,21 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using FoodDelivery.Persistencia.Repositorios;
-using FoodDelivery.Aplicacion.Servicios;
-using FoodDelivery.Domain.Servicios;
-using FoodDelivery.Aplicacion;
-using FoodDelivery.Domain.Modelos;
-using AutoMapper;
-
+using FoodDelivery.Servicios.Interfaces;
+using FoodDelivery.Servicios.Servicios;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<FoodDelivery.Persistencia.Repositorios.FoodDeliveryDbContext>(options =>
+builder.Services.AddDbContext<FoodDeliveryDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-// Registrar repositorio y servicio Cliente
-builder.Services.AddScoped<IClienteRepository, FoodDelivery.Persistencia.Repositorios.Implementaciones.ClienteRepository>();
-builder.Services.AddScoped<IClienteService, ClienteService>();
-
-// Registrar repositorio y servicio Empresa
-builder.Services.AddScoped<IEmpresaRepository, FoodDelivery.Persistencia.Repositorios.Implementaciones.EmpresaRepository>();
-builder.Services.AddScoped<IEmpresaService, EmpresaService>();
-
-// Registrar repositorio y servicio Adicional
-builder.Services.AddScoped<IAdicionalRepository, FoodDelivery.Persistencia.Repositorios.Implementaciones.AdicionalRepository>();
-builder.Services.AddScoped<IAdicionalService, AdicionalService>();
+builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
+builder.Services.AddScoped<IClienteServicio, ClienteServicio>();
 
 var app = builder.Build();
 

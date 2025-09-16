@@ -3,9 +3,9 @@ using FoodDelivery.Domain.Modelos;
 
 namespace FoodDelivery.Persistencia.Repositorios;
 
-public class FoodDeliveryContexto : DbContext
+public class FoodDeliveryDbContext : DbContext
 {
-    public FoodDeliveryContexto(DbContextOptions<FoodDeliveryContexto> options) : base(options)
+    public FoodDeliveryDbContext(DbContextOptions<FoodDeliveryDbContext> options) : base(options)
     {
     }
 

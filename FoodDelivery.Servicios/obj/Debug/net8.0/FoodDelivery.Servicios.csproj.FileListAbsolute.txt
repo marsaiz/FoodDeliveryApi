@@ -1,0 +1,16 @@
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.csproj.AssemblyReference.cache
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.AssemblyInfoInputs.cache
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.AssemblyInfo.cs
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.csproj.CoreCompileInputs.cache
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.sourcelink.json
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\bin\Debug\net8.0\FoodDelivery.Servicios.deps.json
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\bin\Debug\net8.0\FoodDelivery.Servicios.dll
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\bin\Debug\net8.0\FoodDelivery.Servicios.pdb
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\bin\Debug\net8.0\FoodDelivery.Domain.dll
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\bin\Debug\net8.0\FoodDelivery.Domain.pdb
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDeli.B855FC4E.Up2Date
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.dll
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\refint\FoodDelivery.Servicios.dll
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\FoodDelivery.Servicios.pdb
+C:\Users\marsa\Desktop\programacion\ProyectosComerciales\FoodDeliveryApi\FoodDelivery.Servicios\obj\Debug\net8.0\ref\FoodDelivery.Servicios.dll
