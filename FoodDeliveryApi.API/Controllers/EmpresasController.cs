@@ -35,7 +35,7 @@ namespace FoodDeliveryApi.API.Controllers
         public async Task<ActionResult> Create(EmpresaDTO empresaDTO)
         {
             var empresa = await _empresaService.CrearEmpresaAsync(empresaDTO);
-            return CreatedAtAction(nameof(GetById), new { id = empresa.IdEmpresa }, empresa);
+            return CreatedAtAction(nameof(GetById), new { idEmpresa = empresa.IdEmpresa }, empresa);
         }
 
         [HttpPut("{id}")]

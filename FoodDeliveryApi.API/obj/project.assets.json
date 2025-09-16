@@ -1742,19 +1742,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\marsa\\.nuget\\packages\\": {}
+    "/home/marcelo/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\FoodDelivery.API.csproj",
+      "projectUniqueName": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDeliveryApi.API/FoodDelivery.API.csproj",
       "projectName": "FoodDelivery.API",
-      "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\FoodDelivery.API.csproj",
-      "packagesPath": "C:\\Users\\marsa\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\obj\\",
+      "projectPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDeliveryApi.API/FoodDelivery.API.csproj",
+      "packagesPath": "/home/marcelo/.nuget/packages/",
+      "outputPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDeliveryApi.API/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\marsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/marcelo/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -1766,11 +1766,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj": {
-              "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj"
+            "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/FoodDelivery.Persistencia.csproj": {
+              "projectPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Persistencia/FoodDelivery.Persistencia.csproj"
             },
-            "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj": {
-              "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj"
+            "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Servicios/FoodDelivery.Servicios.csproj": {
+              "projectPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Servicios/FoodDelivery.Servicios.csproj"
             }
           }
         }
@@ -1779,11 +1779,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -1822,7 +1817,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.119/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
