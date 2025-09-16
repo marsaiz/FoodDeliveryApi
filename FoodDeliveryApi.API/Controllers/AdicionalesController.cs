@@ -22,24 +22,25 @@ namespace FoodDeliveryApi.API.Controllers
             return Ok(adicionales);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Adicional>> GetById(int adicional, Guid idEmpresa)
+        [HttpGet("{idAdicional}/{idEmpresa}")]
+        public async Task<ActionResult<Adicional>> GetById(int idAdicional, Guid idEmpresa)
         {
-            var adicionalSeleccionado = await _adicionalService.ObtenerAdicionalPorIdAsync(adicional, idEmpresa);
+            var adicionalSeleccionado = await _adicionalService.ObtenerAdicionalPorIdAsync(idAdicional, idEmpresa);
             if (adicionalSeleccionado == null)
                 return NotFound();
             return Ok(adicionalSeleccionado);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(AdicionalDTO adicionalDTO)
+        public async Task<ActionResult> Create(AdicionalCreateDTO adicionalDTO)
         {
-            await _adicionalService.CrearAdicionalAsync(adicionalDTO);
-            return CreatedAtAction(nameof(GetById), new { id = adicionalDTO.IdAdicional }, adicionalDTO);
+            var creado = await _adicionalService.CrearAdicionalAsync(adicionalDTO);
+            // Suponiendo que 'creado' es el objeto Adicional creado y tiene IdAdicional y IdEmpresa
+            return CreatedAtAction(nameof(GetById), new { idAdicional = creado.IdAdicional, idEmpresa = creado.IdEmpresa }, creado);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, AdicionalDTO adicionalDTO)
+        public async Task<ActionResult> Update(int id, AdicionalUpdateDTO adicionalDTO)
         {
             if (id != adicionalDTO.IdAdicional)
                 return BadRequest();

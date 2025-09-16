@@ -9,6 +9,7 @@ namespace FoodDelivery.Domain.Modelos
     {
         [Key]
         [Column("id_adicionales")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdAdicional { get; set; }
 
         [Required]

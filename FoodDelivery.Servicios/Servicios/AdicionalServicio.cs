@@ -7,12 +7,19 @@ namespace FoodDelivery.Servicios.Servicios;
 public class AdicionalServicio : IAdicionalServicio
 {
     private readonly IAdicionalRepositorio _adicionalRepositorio;
-    public AdicionalServicio(IAdicionalRepositorio adicionalRepositorio)
+    private readonly IEmpresaRepositorio _empresaRepositorio; // Asegúrate de tener este repositorio
+    public AdicionalServicio(IAdicionalRepositorio adicionalRepositorio, IEmpresaRepositorio empresaRepositorio)
     {
         _adicionalRepositorio = adicionalRepositorio;
+        _empresaRepositorio = empresaRepositorio;
     }
-    public async Task<Adicional> CrearAdicionalAsync(AdicionalDTO adicionalDto)
+    public async Task<Adicional> CrearAdicionalAsync(AdicionalCreateDTO adicionalDto)
     {
+        // Validar si la empresa existe
+        var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(adicionalDto.IdEmpresa);
+        if (empresa == null)
+            throw new Exception("La empresa especificada no existe.");
+    
         var nuevoAdicional = new Adicional
         {
             NombreAdicional = adicionalDto.NombreAdicional,
@@ -22,7 +29,7 @@ public class AdicionalServicio : IAdicionalServicio
         return await _adicionalRepositorio.CrearAdicionalAsync(nuevoAdicional);
     }
 
-    public async Task<Adicional> ActualizarAdicionalAsync(AdicionalDTO adicionalDto)
+    public async Task<Adicional> ActualizarAdicionalAsync(AdicionalUpdateDTO adicionalDto)
     {
         if (adicionalDto.IdAdicional == null)
         {
@@ -30,12 +37,12 @@ public class AdicionalServicio : IAdicionalServicio
         }
 
         // 1. Obtener la entidad existente desde el repositorio (y la base de datos)
-        var adicionalExistente = await _adicionalRepositorio.ObtenerAdicionalPorIdAsync(adicionalDto.IdAdicional.Value, adicionalDto.IdEmpresa);
+        var adicionalExistente = await _adicionalRepositorio.ObtenerAdicionalPorIdAsync(adicionalDto.IdAdicional, adicionalDto.IdEmpresa);
 
         if (adicionalExistente == null)
         {
             // Manejar el caso donde no se encuentra la entidad
-            throw new KeyNotFoundException($"Adicional con Id {adicionalDto.IdAdicional.Value} no encontrado.");
+            throw new KeyNotFoundException($"Adicional con Id {adicionalDto.IdAdicional} no encontrado.");
         }
 
         // 2. Actualizar las propiedades de la entidad existente

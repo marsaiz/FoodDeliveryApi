@@ -22,7 +22,7 @@ namespace FoodDeliveryApi.API.Controllers
             return Ok(empresas);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{idEmpresa}")]
         public async Task<ActionResult<Empresa>> GetById(Guid idEmpresa)
         {
             var empresa = await _empresaService.ObtenerEmpresaPorIdAsync(idEmpresa);
