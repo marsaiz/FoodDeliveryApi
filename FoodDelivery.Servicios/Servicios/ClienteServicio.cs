@@ -51,8 +51,8 @@ public class ClienteServicio : IClienteServicio
         return await _clienteRepositorio.ObtenerClientePorIdAsync(idCliente);
     }
 
-    public async Task<List<Cliente>> ObtenerClientesAsync(Guid idCliente)
+    public async Task<List<Cliente>> ObtenerClientesAsync()
     {
-        return await _clienteRepositorio.ObtenerClientesAsync(idCliente);
+        return await _clienteRepositorio.ObtenerClientesAsync();
     }
 }

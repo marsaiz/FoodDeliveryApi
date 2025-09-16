@@ -1,5 +1,5 @@
 using FoodDelivery.Domain.Modelos;
-using FoodDelivery.Domain.Servicios;
+using FoodDelivery.Servicios.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodDeliveryApi.API.Controllers
@@ -8,9 +8,9 @@ namespace FoodDeliveryApi.API.Controllers
     [Route("api/[controller]")]
     public class EmpresasController : ControllerBase
     {
-        private readonly IEmpresaService _empresaService;
+        private readonly IEmpresaServicio _empresaService;
 
-        public EmpresasController(IEmpresaService empresaService)
+        public EmpresasController(IEmpresaServicio empresaService)
         {
             _empresaService = empresaService;
         }
@@ -18,39 +18,39 @@ namespace FoodDeliveryApi.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Empresa>>> GetAll()
         {
-            var empresas = await _empresaService.GetAllAsync();
+            var empresas = await _empresaService.ObtenerEmpresasAsync();
             return Ok(empresas);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Empresa>> GetById(Guid id)
+        public async Task<ActionResult<Empresa>> GetById(Guid idEmpresa)
         {
-            var empresa = await _empresaService.GetByIdAsync(id);
+            var empresa = await _empresaService.ObtenerEmpresaPorIdAsync(idEmpresa);
             if (empresa == null)
                 return NotFound();
             return Ok(empresa);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(Empresa empresa)
+        public async Task<ActionResult> Create(EmpresaDTO empresaDTO)
         {
-            await _empresaService.AddAsync(empresa);
+            var empresa = await _empresaService.CrearEmpresaAsync(empresaDTO);
             return CreatedAtAction(nameof(GetById), new { id = empresa.IdEmpresa }, empresa);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(Guid id, Empresa empresa)
+        public async Task<ActionResult> Update(Guid id, EmpresaDTO empresaDTO)
         {
-            if (id != empresa.IdEmpresa)
+            if (id != empresaDTO.IdEmpresa)
                 return BadRequest();
-            await _empresaService.UpdateAsync(empresa);
+            await _empresaService.ObtenerEmpresaPorIdAsync(empresaDTO.IdEmpresa.Value);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid idEmpresa)
         {
-            await _empresaService.DeleteAsync(id);
+            await _empresaService.EliminarEmpresaAsync(idEmpresa);
             return NoContent();
         }
     }

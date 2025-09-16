@@ -49,11 +49,9 @@ namespace FoodDelivery.Persistencia.Repositorios
             .FirstOrDefaultAsync();
         }
 
-        public async Task<List<Cliente>> ObtenerClientesAsync(Guid idCliente)
+        public async Task<List<Cliente>> ObtenerClientesAsync()
         {
-            return await _context.Clientes
-            .Where(c => c.IdCliente == idCliente)
-            .ToListAsync();
+            return await _context.Clientes.ToListAsync();
         }
     }
 }

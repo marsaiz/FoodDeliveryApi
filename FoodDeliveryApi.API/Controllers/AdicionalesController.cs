@@ -1,5 +1,5 @@
 using FoodDelivery.Domain.Modelos;
-using FoodDelivery.Domain.Servicios;
+using FoodDelivery.Servicios.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodDeliveryApi.API.Controllers
@@ -8,49 +8,54 @@ namespace FoodDeliveryApi.API.Controllers
     [Route("api/[controller]")]
     public class AdicionalesController : ControllerBase
     {
-        private readonly IAdicionalService _adicionalService;
+        private readonly IAdicionalServicio _adicionalService;
 
-        public AdicionalesController(IAdicionalService adicionalService)
+        public AdicionalesController(IAdicionalServicio adicionalService)
         {
             _adicionalService = adicionalService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Adicional>>> GetAll()
+        public async Task<ActionResult<IEnumerable<Adicional>>> GetAll(Guid idEmpresa)
         {
-            var adicionales = await _adicionalService.GetAllAsync();
+            var adicionales = await _adicionalService.ObtenerAdicionalesPorEmpresaAsync(idEmpresa);
             return Ok(adicionales);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Adicional>> GetById(int id)
+        public async Task<ActionResult<Adicional>> GetById(int adicional, Guid idEmpresa)
         {
-            var adicional = await _adicionalService.GetByIdAsync(id);
-            if (adicional == null)
+            var adicionalSeleccionado = await _adicionalService.ObtenerAdicionalPorIdAsync(adicional, idEmpresa);
+            if (adicionalSeleccionado == null)
                 return NotFound();
-            return Ok(adicional);
+            return Ok(adicionalSeleccionado);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(Adicional adicional)
+        public async Task<ActionResult> Create(AdicionalDTO adicionalDTO)
         {
-            await _adicionalService.AddAsync(adicional);
-            return CreatedAtAction(nameof(GetById), new { id = adicional.IdAdicional }, adicional);
+            await _adicionalService.CrearAdicionalAsync(adicionalDTO);
+            return CreatedAtAction(nameof(GetById), new { id = adicionalDTO.IdAdicional }, adicionalDTO);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, Adicional adicional)
+        public async Task<ActionResult> Update(int id, AdicionalDTO adicionalDTO)
         {
-            if (id != adicional.IdAdicional)
+            if (id != adicionalDTO.IdAdicional)
                 return BadRequest();
-            await _adicionalService.UpdateAsync(adicional);
+            await _adicionalService.ActualizarAdicionalAsync(adicionalDTO);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int idAdicional, Guid idEmpresa)
         {
-            await _adicionalService.DeleteAsync(id);
+            var adicionalExistente = await _adicionalService.ObtenerAdicionalPorIdAsync(idAdicional, idEmpresa);
+            if (adicionalExistente == null)
+            {
+                return NotFound();
+            }
+            await _adicionalService.EliminarAdicionalAsync(idAdicional, idEmpresa);
             return NoContent();
         }
     }

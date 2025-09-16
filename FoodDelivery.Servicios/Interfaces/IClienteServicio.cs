@@ -8,6 +8,6 @@ namespace FoodDelivery.Servicios.Interfaces
         Task<Cliente> ActualizarClienteAsync(ClienteDTO cliente);
         Task<bool> EliminarClienteAsync(Guid idCliente);
         Task<Cliente> ObtenerClientePorIdAsync(Guid idCliente);
-        Task<List<Cliente>> ObtenerClientesAsync(Guid idCliente);
+        Task<List<Cliente>> ObtenerClientesAsync();
     }
 }

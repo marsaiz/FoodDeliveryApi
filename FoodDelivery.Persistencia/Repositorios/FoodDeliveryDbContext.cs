@@ -27,7 +27,7 @@ public class FoodDeliveryDbContext : DbContext
 
         // Configuración de la relación muchos a muchos entre Pedido y Adicional a través de PedidoAdicionales
         modelBuilder.Entity<PedidoAdicionales>()
-            .HasKey(pa => new { pa.IdPedido, pa.IdAdicional, pa.Mitad });
+            .HasKey(pa => new { pa.IdPedido, pa.IdAdicional });
 
         modelBuilder.Entity<PedidoAdicionales>()
             .HasOne<Pedido>()
@@ -38,5 +38,8 @@ public class FoodDeliveryDbContext : DbContext
             .HasOne<Adicional>()
             .WithMany(a => a.PedidoAdicionales)
             .HasForeignKey(pa => pa.IdAdicional);
+
+        modelBuilder.Entity<DetallePedido>()
+        .HasKey(dp => new { dp.IdPedido, dp.IdProducto });
     }
 }

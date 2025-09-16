@@ -18,8 +18,8 @@ namespace FoodDelivery.Persistencia.Migrations
                 {
                     id_cliente = table.Column<Guid>(type: "uuid", nullable: false),
                     nombre = table.Column<string>(type: "text", nullable: false),
-                    telefono = table.Column<string>(type: "text", nullable: false),
-                    email = table.Column<string>(type: "text", nullable: false)
+                    telefono = table.Column<string>(type: "text", nullable: true),
+                    email = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,7 +51,7 @@ namespace FoodDelivery.Persistencia.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     calle = table.Column<string>(type: "text", nullable: false),
                     numero = table.Column<int>(type: "integer", nullable: false),
-                    piso_depto = table.Column<string>(type: "text", nullable: false),
+                    piso_depto = table.Column<string>(type: "text", nullable: true),
                     ciudad = table.Column<string>(type: "text", nullable: false),
                     codigo_postal = table.Column<string>(type: "text", nullable: false),
                     referencia = table.Column<string>(type: "text", nullable: false),
@@ -79,14 +79,15 @@ namespace FoodDelivery.Persistencia.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nombre_adicional = table.Column<string>(type: "text", nullable: false),
                     precio_adicional = table.Column<decimal>(type: "numeric", nullable: true),
-                    EmpresaId = table.Column<Guid>(type: "uuid", nullable: false)
+                    IdEmpresa = table.Column<Guid>(type: "uuid", nullable: false),
+                    EmpresaIdEmpresa = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_adicionales", x => x.id_adicionales);
                     table.ForeignKey(
-                        name: "FK_adicionales_empresas_EmpresaId",
-                        column: x => x.EmpresaId,
+                        name: "FK_adicionales_empresas_EmpresaIdEmpresa",
+                        column: x => x.EmpresaIdEmpresa,
                         principalTable: "empresas",
                         principalColumn: "id_empresa",
                         onDelete: ReferentialAction.Cascade);
@@ -99,14 +100,15 @@ namespace FoodDelivery.Persistencia.Migrations
                     id_categoria = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nombre_categoria = table.Column<string>(type: "text", nullable: false),
-                    EmpresaId = table.Column<Guid>(type: "uuid", nullable: false)
+                    IdEmpresa = table.Column<Guid>(type: "uuid", nullable: false),
+                    EmpresaIdEmpresa = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_categorias", x => x.id_categoria);
                     table.ForeignKey(
-                        name: "FK_categorias_empresas_EmpresaId",
-                        column: x => x.EmpresaId,
+                        name: "FK_categorias_empresas_EmpresaIdEmpresa",
+                        column: x => x.EmpresaIdEmpresa,
                         principalTable: "empresas",
                         principalColumn: "id_empresa",
                         onDelete: ReferentialAction.Cascade);
@@ -216,9 +218,8 @@ namespace FoodDelivery.Persistencia.Migrations
                 columns: table => new
                 {
                     IdPedido = table.Column<int>(type: "integer", nullable: false),
-                    IdProducto = table.Column<int>(type: "integer", nullable: false),
                     IdAdicional = table.Column<int>(type: "integer", nullable: false),
-                    mitad = table.Column<int>(type: "integer", nullable: false),
+                    mitad = table.Column<int>(type: "integer", nullable: true),
                     precio_adicional_personalizado = table.Column<decimal>(type: "numeric", nullable: true),
                     DetallePedidoIdPedido = table.Column<int>(type: "integer", nullable: false),
                     DetallePedidoIdProducto = table.Column<int>(type: "integer", nullable: false),
@@ -226,10 +227,16 @@ namespace FoodDelivery.Persistencia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_pedido_adicionales", x => new { x.IdPedido, x.IdProducto, x.IdAdicional, x.mitad });
+                    table.PrimaryKey("PK_pedido_adicionales", x => new { x.IdPedido, x.IdAdicional });
                     table.ForeignKey(
                         name: "FK_pedido_adicionales_adicionales_AdicionalIdAdicional",
                         column: x => x.AdicionalIdAdicional,
+                        principalTable: "adicionales",
+                        principalColumn: "id_adicionales",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_pedido_adicionales_adicionales_IdAdicional",
+                        column: x => x.IdAdicional,
                         principalTable: "adicionales",
                         principalColumn: "id_adicionales",
                         onDelete: ReferentialAction.Cascade);
@@ -239,17 +246,23 @@ namespace FoodDelivery.Persistencia.Migrations
                         principalTable: "detalle_pedidos",
                         principalColumns: new[] { "IdPedido", "IdProducto" },
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_pedido_adicionales_pedidos_IdPedido",
+                        column: x => x.IdPedido,
+                        principalTable: "pedidos",
+                        principalColumn: "id_pedido",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_adicionales_EmpresaId",
+                name: "IX_adicionales_EmpresaIdEmpresa",
                 table: "adicionales",
-                column: "EmpresaId");
+                column: "EmpresaIdEmpresa");
 
             migrationBuilder.CreateIndex(
-                name: "IX_categorias_EmpresaId",
+                name: "IX_categorias_EmpresaIdEmpresa",
                 table: "categorias",
-                column: "EmpresaId");
+                column: "EmpresaIdEmpresa");
 
             migrationBuilder.CreateIndex(
                 name: "IX_detalle_pedidos_IdProducto",
@@ -270,6 +283,11 @@ namespace FoodDelivery.Persistencia.Migrations
                 name: "IX_pedido_adicionales_DetallePedidoIdPedido_DetallePedidoIdPro~",
                 table: "pedido_adicionales",
                 columns: new[] { "DetallePedidoIdPedido", "DetallePedidoIdProducto" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pedido_adicionales_IdAdicional",
+                table: "pedido_adicionales",
+                column: "IdAdicional");
 
             migrationBuilder.CreateIndex(
                 name: "IX_pedidos_ClienteIdCliente",

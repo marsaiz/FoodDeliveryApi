@@ -1,5 +1,5 @@
 using FoodDelivery.Domain.Modelos;
-using FoodDelivery.Domain.Servicios;
+using FoodDelivery.Servicios.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodDeliveryApi.API.Controllers
@@ -8,49 +8,49 @@ namespace FoodDeliveryApi.API.Controllers
     [Route("api/[controller]")]
     public class ClientesController : ControllerBase
     {
-        private readonly IClienteService _clienteService;
+        private readonly IClienteServicio _clienteService;
 
-        public ClientesController(IClienteService clienteService)
+        public ClientesController(IClienteServicio clienteService)
         {
             _clienteService = clienteService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cliente>>> GetAll()
+        public async Task<ActionResult<List<Cliente>>> GetAll()
         {
-            var clientes = await _clienteService.GetAllAsync();
+            var clientes = await _clienteService.ObtenerClientesAsync();
             return Ok(clientes);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cliente>> GetById(Guid id)
+        public async Task<ActionResult<Cliente>> GetById(Guid idCliente)
         {
-            var cliente = await _clienteService.GetByIdAsync(id);
+            var cliente = await _clienteService.ObtenerClientePorIdAsync(idCliente);
             if (cliente == null)
                 return NotFound();
             return Ok(cliente);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(Cliente cliente)
+        public async Task<ActionResult> Create(ClienteDTO clienteDTO)
         {
-            await _clienteService.AddAsync(cliente);
-            return CreatedAtAction(nameof(GetById), new { id = cliente.IdCliente }, cliente);
+            await _clienteService.CrearClienteAsync(clienteDTO);
+            return CreatedAtAction(nameof(GetById), new { id = clienteDTO.IdCliente }, clienteDTO);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(Guid id, Cliente cliente)
+        public async Task<ActionResult> Update(Guid id, ClienteDTO clienteDTO)
         {
-            if (id != cliente.IdCliente)
+            if (id != clienteDTO.IdCliente)
                 return BadRequest();
-            await _clienteService.UpdateAsync(cliente);
+            await _clienteService.ActualizarClienteAsync(clienteDTO);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid idCliente)
         {
-            await _clienteService.DeleteAsync(id);
+            await _clienteService.EliminarClienteAsync(idCliente);
             return NoContent();
         }
     }

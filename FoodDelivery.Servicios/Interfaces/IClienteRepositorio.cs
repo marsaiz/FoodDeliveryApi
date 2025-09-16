@@ -7,5 +7,5 @@ public interface IClienteRepositorio
     Task<Cliente> ActualizarClienteAsync(Cliente cliente);
     Task<bool> EliminarClienteAsync(Guid idCliente);
     Task<Cliente> ObtenerClientePorIdAsync(Guid idCliente);
-    Task<List<Cliente>> ObtenerClientesAsync(Guid idCliente);
+    Task<List<Cliente>> ObtenerClientesAsync();
 }

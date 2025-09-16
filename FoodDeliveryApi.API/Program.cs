@@ -16,6 +16,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
 builder.Services.AddScoped<IClienteServicio, ClienteServicio>();
+builder.Services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
+builder.Services.AddScoped<IEmpresaServicio, EmpresaServicio>();
+builder.Services.AddScoped<IAdicionalRepositorio, AdicionalRepositorio>();
+builder.Services.AddScoped<IAdicionalServicio, AdicionalServicio>();
+builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
+
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -27,6 +35,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapControllers();
 
 var summaries = new[]
 {
