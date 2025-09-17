@@ -9,7 +9,10 @@ namespace FoodDelivery.Domain.Modelos
     public class DetallePedido
     {
         // Claves foráneas que actúan como clave primaria compuesta
+        [Column("id_pedido")]
         public int IdPedido { get; set; }
+        
+        [Column("id_producto")]
         public int IdProducto { get; set; }
 
         [Required]
@@ -21,7 +24,10 @@ namespace FoodDelivery.Domain.Modelos
         public decimal PrecioUnitario { get; set; }
 
         // Propiedades de navegación
-        public Pedido Pedido { get; set; }
+        [ForeignKey("IdPedido")]
+        public Pedido Pedido { get; set; }  
+
+        [ForeignKey("IdProducto")]
         public Producto Producto { get; set; }
 
         public ICollection<PedidoAdicionales> PedidoAdicionales { get; set; }

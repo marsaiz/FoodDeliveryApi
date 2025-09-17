@@ -20,9 +20,11 @@ namespace FoodDelivery.Domain.Modelos
         public decimal? PrecioAdicional { get; set; }
 
         // Clave foránea
+        [Column("id_empresa")]
         public Guid IdEmpresa { get; set; }
 
         // Propiedades de navegación
+        [ForeignKey("IdEmpresa")]
         public Empresa Empresa { get; set; }
         public ICollection<PedidoAdicionales> PedidoAdicionales { get; set; }
     }

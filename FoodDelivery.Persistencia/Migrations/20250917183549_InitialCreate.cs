@@ -57,15 +57,14 @@ namespace FoodDelivery.Persistencia.Migrations
                     referencia = table.Column<string>(type: "text", nullable: false),
                     latitud = table.Column<decimal>(type: "numeric", nullable: true),
                     longitud = table.Column<decimal>(type: "numeric", nullable: true),
-                    IdCliente = table.Column<Guid>(type: "uuid", nullable: false),
-                    ClienteIdCliente = table.Column<Guid>(type: "uuid", nullable: false)
+                    id_cliente = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_direcciones_cliente", x => x.id_direccion_cliente);
                     table.ForeignKey(
-                        name: "FK_direcciones_cliente_clientes_ClienteIdCliente",
-                        column: x => x.ClienteIdCliente,
+                        name: "FK_direcciones_cliente_clientes_id_cliente",
+                        column: x => x.id_cliente,
                         principalTable: "clientes",
                         principalColumn: "id_cliente",
                         onDelete: ReferentialAction.Cascade);
@@ -79,15 +78,14 @@ namespace FoodDelivery.Persistencia.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nombre_adicional = table.Column<string>(type: "text", nullable: false),
                     precio_adicional = table.Column<decimal>(type: "numeric", nullable: true),
-                    IdEmpresa = table.Column<Guid>(type: "uuid", nullable: false),
-                    EmpresaIdEmpresa = table.Column<Guid>(type: "uuid", nullable: false)
+                    id_empresa = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_adicionales", x => x.id_adicionales);
                     table.ForeignKey(
-                        name: "FK_adicionales_empresas_EmpresaIdEmpresa",
-                        column: x => x.EmpresaIdEmpresa,
+                        name: "FK_adicionales_empresas_id_empresa",
+                        column: x => x.id_empresa,
                         principalTable: "empresas",
                         principalColumn: "id_empresa",
                         onDelete: ReferentialAction.Cascade);
@@ -100,15 +98,14 @@ namespace FoodDelivery.Persistencia.Migrations
                     id_categoria = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nombre_categoria = table.Column<string>(type: "text", nullable: false),
-                    IdEmpresa = table.Column<Guid>(type: "uuid", nullable: false),
-                    EmpresaIdEmpresa = table.Column<Guid>(type: "uuid", nullable: false)
+                    id_empresa = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_categorias", x => x.id_categoria);
                     table.ForeignKey(
-                        name: "FK_categorias_empresas_EmpresaIdEmpresa",
-                        column: x => x.EmpresaIdEmpresa,
+                        name: "FK_categorias_empresas_id_empresa",
+                        column: x => x.id_empresa,
                         principalTable: "empresas",
                         principalColumn: "id_empresa",
                         onDelete: ReferentialAction.Cascade);
@@ -125,31 +122,27 @@ namespace FoodDelivery.Persistencia.Migrations
                     total_pedido = table.Column<decimal>(type: "numeric", nullable: false),
                     metodo_pago = table.Column<string>(type: "text", nullable: false),
                     tipo_entrega = table.Column<string>(type: "text", nullable: false),
-                    IdCliente = table.Column<Guid>(type: "uuid", nullable: false),
-                    IdEmpresa = table.Column<Guid>(type: "uuid", nullable: false),
-                    IdDireccionCliente = table.Column<int>(type: "integer", nullable: true),
-                    ClienteIdCliente = table.Column<Guid>(type: "uuid", nullable: false),
-                    EmpresaIdEmpresa = table.Column<Guid>(type: "uuid", nullable: false),
-                    DireccionEntregaIdDireccionCliente = table.Column<int>(type: "integer", nullable: false)
+                    id_cliente = table.Column<Guid>(type: "uuid", nullable: false),
+                    id_empresa = table.Column<Guid>(type: "uuid", nullable: false),
+                    id_direccion_cliente = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_pedidos", x => x.id_pedido);
                     table.ForeignKey(
-                        name: "FK_pedidos_clientes_ClienteIdCliente",
-                        column: x => x.ClienteIdCliente,
+                        name: "FK_pedidos_clientes_id_cliente",
+                        column: x => x.id_cliente,
                         principalTable: "clientes",
                         principalColumn: "id_cliente",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_pedidos_direcciones_cliente_DireccionEntregaIdDireccionClie~",
-                        column: x => x.DireccionEntregaIdDireccionCliente,
+                        name: "FK_pedidos_direcciones_cliente_id_direccion_cliente",
+                        column: x => x.id_direccion_cliente,
                         principalTable: "direcciones_cliente",
-                        principalColumn: "id_direccion_cliente",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id_direccion_cliente");
                     table.ForeignKey(
-                        name: "FK_pedidos_empresas_EmpresaIdEmpresa",
-                        column: x => x.EmpresaIdEmpresa,
+                        name: "FK_pedidos_empresas_id_empresa",
+                        column: x => x.id_empresa,
                         principalTable: "empresas",
                         principalColumn: "id_empresa",
                         onDelete: ReferentialAction.Cascade);
@@ -165,23 +158,21 @@ namespace FoodDelivery.Persistencia.Migrations
                     descripcion_producto = table.Column<string>(type: "text", nullable: false),
                     precio_producto = table.Column<decimal>(type: "numeric", nullable: false),
                     imagen_url = table.Column<string>(type: "text", nullable: false),
-                    IdCategoria = table.Column<int>(type: "integer", nullable: false),
-                    IdEmpresa = table.Column<Guid>(type: "uuid", nullable: false),
-                    CategoriaIdCategoria = table.Column<int>(type: "integer", nullable: false),
-                    EmpresaIdEmpresa = table.Column<Guid>(type: "uuid", nullable: false)
+                    id_categoria = table.Column<int>(type: "integer", nullable: false),
+                    id_empresa = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_productos", x => x.id_producto);
                     table.ForeignKey(
-                        name: "FK_productos_categorias_CategoriaIdCategoria",
-                        column: x => x.CategoriaIdCategoria,
+                        name: "FK_productos_categorias_id_categoria",
+                        column: x => x.id_categoria,
                         principalTable: "categorias",
                         principalColumn: "id_categoria",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_productos_empresas_EmpresaIdEmpresa",
-                        column: x => x.EmpresaIdEmpresa,
+                        name: "FK_productos_empresas_id_empresa",
+                        column: x => x.id_empresa,
                         principalTable: "empresas",
                         principalColumn: "id_empresa",
                         onDelete: ReferentialAction.Cascade);
@@ -191,23 +182,23 @@ namespace FoodDelivery.Persistencia.Migrations
                 name: "detalle_pedidos",
                 columns: table => new
                 {
-                    IdPedido = table.Column<int>(type: "integer", nullable: false),
-                    IdProducto = table.Column<int>(type: "integer", nullable: false),
+                    id_pedido = table.Column<int>(type: "integer", nullable: false),
+                    id_producto = table.Column<int>(type: "integer", nullable: false),
                     cantidad = table.Column<int>(type: "integer", nullable: false),
                     precio_unitario = table.Column<decimal>(type: "numeric", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_detalle_pedidos", x => new { x.IdPedido, x.IdProducto });
+                    table.PrimaryKey("PK_detalle_pedidos", x => new { x.id_pedido, x.id_producto });
                     table.ForeignKey(
-                        name: "FK_detalle_pedidos_pedidos_IdPedido",
-                        column: x => x.IdPedido,
+                        name: "FK_detalle_pedidos_pedidos_id_pedido",
+                        column: x => x.id_pedido,
                         principalTable: "pedidos",
                         principalColumn: "id_pedido",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_detalle_pedidos_productos_IdProducto",
-                        column: x => x.IdProducto,
+                        name: "FK_detalle_pedidos_productos_id_producto",
+                        column: x => x.id_producto,
                         principalTable: "productos",
                         principalColumn: "id_producto",
                         onDelete: ReferentialAction.Cascade);
@@ -217,102 +208,95 @@ namespace FoodDelivery.Persistencia.Migrations
                 name: "pedido_adicionales",
                 columns: table => new
                 {
-                    IdPedido = table.Column<int>(type: "integer", nullable: false),
-                    IdAdicional = table.Column<int>(type: "integer", nullable: false),
+                    id_pedido = table.Column<int>(type: "integer", nullable: false),
+                    id_producto = table.Column<int>(type: "integer", nullable: false),
+                    id_adicional = table.Column<int>(type: "integer", nullable: false),
                     mitad = table.Column<int>(type: "integer", nullable: true),
-                    precio_adicional_personalizado = table.Column<decimal>(type: "numeric", nullable: true),
-                    DetallePedidoIdPedido = table.Column<int>(type: "integer", nullable: false),
-                    DetallePedidoIdProducto = table.Column<int>(type: "integer", nullable: false),
-                    AdicionalIdAdicional = table.Column<int>(type: "integer", nullable: false)
+                    precio_adicional_personalizado = table.Column<decimal>(type: "numeric", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_pedido_adicionales", x => new { x.IdPedido, x.IdAdicional });
+                    table.PrimaryKey("PK_pedido_adicionales", x => new { x.id_pedido, x.id_producto, x.id_adicional });
                     table.ForeignKey(
-                        name: "FK_pedido_adicionales_adicionales_AdicionalIdAdicional",
-                        column: x => x.AdicionalIdAdicional,
+                        name: "FK_pedido_adicionales_adicionales_id_adicional",
+                        column: x => x.id_adicional,
                         principalTable: "adicionales",
                         principalColumn: "id_adicionales",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_pedido_adicionales_adicionales_IdAdicional",
-                        column: x => x.IdAdicional,
-                        principalTable: "adicionales",
-                        principalColumn: "id_adicionales",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_pedido_adicionales_detalle_pedidos_DetallePedidoIdPedido_De~",
-                        columns: x => new { x.DetallePedidoIdPedido, x.DetallePedidoIdProducto },
+                        name: "FK_pedido_adicionales_detalle_pedidos_id_pedido_id_producto",
+                        columns: x => new { x.id_pedido, x.id_producto },
                         principalTable: "detalle_pedidos",
-                        principalColumns: new[] { "IdPedido", "IdProducto" },
+                        principalColumns: new[] { "id_pedido", "id_producto" },
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_pedido_adicionales_pedidos_IdPedido",
-                        column: x => x.IdPedido,
+                        name: "FK_pedido_adicionales_pedidos_id_pedido",
+                        column: x => x.id_pedido,
                         principalTable: "pedidos",
                         principalColumn: "id_pedido",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_pedido_adicionales_productos_id_producto",
+                        column: x => x.id_producto,
+                        principalTable: "productos",
+                        principalColumn: "id_producto",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_adicionales_EmpresaIdEmpresa",
+                name: "IX_adicionales_id_empresa",
                 table: "adicionales",
-                column: "EmpresaIdEmpresa");
+                column: "id_empresa");
 
             migrationBuilder.CreateIndex(
-                name: "IX_categorias_EmpresaIdEmpresa",
+                name: "IX_categorias_id_empresa",
                 table: "categorias",
-                column: "EmpresaIdEmpresa");
+                column: "id_empresa");
 
             migrationBuilder.CreateIndex(
-                name: "IX_detalle_pedidos_IdProducto",
+                name: "IX_detalle_pedidos_id_producto",
                 table: "detalle_pedidos",
-                column: "IdProducto");
+                column: "id_producto");
 
             migrationBuilder.CreateIndex(
-                name: "IX_direcciones_cliente_ClienteIdCliente",
+                name: "IX_direcciones_cliente_id_cliente",
                 table: "direcciones_cliente",
-                column: "ClienteIdCliente");
+                column: "id_cliente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_pedido_adicionales_AdicionalIdAdicional",
+                name: "IX_pedido_adicionales_id_adicional",
                 table: "pedido_adicionales",
-                column: "AdicionalIdAdicional");
+                column: "id_adicional");
 
             migrationBuilder.CreateIndex(
-                name: "IX_pedido_adicionales_DetallePedidoIdPedido_DetallePedidoIdPro~",
+                name: "IX_pedido_adicionales_id_producto",
                 table: "pedido_adicionales",
-                columns: new[] { "DetallePedidoIdPedido", "DetallePedidoIdProducto" });
+                column: "id_producto");
 
             migrationBuilder.CreateIndex(
-                name: "IX_pedido_adicionales_IdAdicional",
-                table: "pedido_adicionales",
-                column: "IdAdicional");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_pedidos_ClienteIdCliente",
+                name: "IX_pedidos_id_cliente",
                 table: "pedidos",
-                column: "ClienteIdCliente");
+                column: "id_cliente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_pedidos_DireccionEntregaIdDireccionCliente",
+                name: "IX_pedidos_id_direccion_cliente",
                 table: "pedidos",
-                column: "DireccionEntregaIdDireccionCliente");
+                column: "id_direccion_cliente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_pedidos_EmpresaIdEmpresa",
+                name: "IX_pedidos_id_empresa",
                 table: "pedidos",
-                column: "EmpresaIdEmpresa");
+                column: "id_empresa");
 
             migrationBuilder.CreateIndex(
-                name: "IX_productos_CategoriaIdCategoria",
+                name: "IX_productos_id_categoria",
                 table: "productos",
-                column: "CategoriaIdCategoria");
+                column: "id_categoria");
 
             migrationBuilder.CreateIndex(
-                name: "IX_productos_EmpresaIdEmpresa",
+                name: "IX_productos_id_empresa",
                 table: "productos",
-                column: "EmpresaIdEmpresa");
+                column: "id_empresa");
         }
 
         /// <inheritdoc />

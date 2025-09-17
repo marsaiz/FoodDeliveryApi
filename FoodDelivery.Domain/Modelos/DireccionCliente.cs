@@ -36,9 +36,11 @@ namespace FoodDelivery.Domain.Modelos
         public decimal? Longitud { get; set; }
 
         // Clave foránea
+        [Column("id_cliente")]
         public Guid IdCliente { get; set; }
 
         // Propiedad de navegación
+        [ForeignKey("IdCliente")]
         public Cliente Cliente { get; set; }
     }
 }

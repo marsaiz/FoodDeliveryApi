@@ -35,19 +35,19 @@ namespace FoodDeliveryApi.API.Controllers
         public async Task<ActionResult> Create(ClienteDTO clienteDTO)
         {
             await _clienteService.CrearClienteAsync(clienteDTO);
-            return CreatedAtAction(nameof(GetById), new { id = clienteDTO.IdCliente }, clienteDTO);
+            return CreatedAtAction(nameof(GetById), new { idCliente = clienteDTO.IdCliente }, clienteDTO);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(Guid id, ClienteDTO clienteDTO)
+        [HttpPut("{idCliente}")]
+        public async Task<ActionResult> Update(Guid idCliente, ClienteDTO clienteDTO)
         {
-            if (id != clienteDTO.IdCliente)
+            if (idCliente != clienteDTO.IdCliente)
                 return BadRequest();
             await _clienteService.ActualizarClienteAsync(clienteDTO);
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{idCliente}")]
         public async Task<ActionResult> Delete(Guid idCliente)
         {
             await _clienteService.EliminarClienteAsync(idCliente);

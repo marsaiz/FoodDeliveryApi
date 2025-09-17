@@ -31,11 +31,9 @@ namespace FoodDelivery.Persistencia.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdAdicional"));
 
-                    b.Property<Guid>("EmpresaIdEmpresa")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("IdEmpresa")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id_empresa");
 
                     b.Property<string>("NombreAdicional")
                         .IsRequired()
@@ -48,7 +46,7 @@ namespace FoodDelivery.Persistencia.Migrations
 
                     b.HasKey("IdAdicional");
 
-                    b.HasIndex("EmpresaIdEmpresa");
+                    b.HasIndex("IdEmpresa");
 
                     b.ToTable("adicionales");
                 });
@@ -62,11 +60,9 @@ namespace FoodDelivery.Persistencia.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdCategoria"));
 
-                    b.Property<Guid>("EmpresaIdEmpresa")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("IdEmpresa")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id_empresa");
 
                     b.Property<string>("NombreCategoria")
                         .IsRequired()
@@ -75,7 +71,7 @@ namespace FoodDelivery.Persistencia.Migrations
 
                     b.HasKey("IdCategoria");
 
-                    b.HasIndex("EmpresaIdEmpresa");
+                    b.HasIndex("IdEmpresa");
 
                     b.ToTable("categorias");
                 });
@@ -108,10 +104,12 @@ namespace FoodDelivery.Persistencia.Migrations
             modelBuilder.Entity("FoodDelivery.Domain.Modelos.DetallePedido", b =>
                 {
                     b.Property<int>("IdPedido")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id_pedido");
 
                     b.Property<int>("IdProducto")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id_producto");
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("integer")
@@ -147,16 +145,14 @@ namespace FoodDelivery.Persistencia.Migrations
                         .HasColumnType("text")
                         .HasColumnName("ciudad");
 
-                    b.Property<Guid>("ClienteIdCliente")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("CodigoPostal")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("codigo_postal");
 
                     b.Property<Guid>("IdCliente")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id_cliente");
 
                     b.Property<decimal?>("Latitud")
                         .HasColumnType("numeric")
@@ -181,7 +177,7 @@ namespace FoodDelivery.Persistencia.Migrations
 
                     b.HasKey("IdDireccionCliente");
 
-                    b.HasIndex("ClienteIdCliente");
+                    b.HasIndex("IdCliente");
 
                     b.ToTable("direcciones_cliente");
                 });
@@ -235,15 +231,6 @@ namespace FoodDelivery.Persistencia.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdPedido"));
 
-                    b.Property<Guid>("ClienteIdCliente")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("DireccionEntregaIdDireccionCliente")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("EmpresaIdEmpresa")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("EstadoPedido")
                         .IsRequired()
                         .HasColumnType("text")
@@ -254,13 +241,16 @@ namespace FoodDelivery.Persistencia.Migrations
                         .HasColumnName("fecha_hora");
 
                     b.Property<Guid>("IdCliente")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id_cliente");
 
                     b.Property<int?>("IdDireccionCliente")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id_direccion_cliente");
 
                     b.Property<Guid>("IdEmpresa")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id_empresa");
 
                     b.Property<string>("MetodoPago")
                         .IsRequired()
@@ -278,11 +268,11 @@ namespace FoodDelivery.Persistencia.Migrations
 
                     b.HasKey("IdPedido");
 
-                    b.HasIndex("ClienteIdCliente");
+                    b.HasIndex("IdCliente");
 
-                    b.HasIndex("DireccionEntregaIdDireccionCliente");
+                    b.HasIndex("IdDireccionCliente");
 
-                    b.HasIndex("EmpresaIdEmpresa");
+                    b.HasIndex("IdEmpresa");
 
                     b.ToTable("pedidos");
                 });
@@ -290,19 +280,16 @@ namespace FoodDelivery.Persistencia.Migrations
             modelBuilder.Entity("FoodDelivery.Domain.Modelos.PedidoAdicionales", b =>
                 {
                     b.Property<int>("IdPedido")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id_pedido");
+
+                    b.Property<int>("IdProducto")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_producto");
 
                     b.Property<int>("IdAdicional")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("AdicionalIdAdicional")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("DetallePedidoIdPedido")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("DetallePedidoIdProducto")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id_adicional");
 
                     b.Property<int?>("Mitad")
                         .HasColumnType("integer")
@@ -312,13 +299,11 @@ namespace FoodDelivery.Persistencia.Migrations
                         .HasColumnType("numeric")
                         .HasColumnName("precio_adicional_personalizado");
 
-                    b.HasKey("IdPedido", "IdAdicional");
-
-                    b.HasIndex("AdicionalIdAdicional");
+                    b.HasKey("IdPedido", "IdProducto", "IdAdicional");
 
                     b.HasIndex("IdAdicional");
 
-                    b.HasIndex("DetallePedidoIdPedido", "DetallePedidoIdProducto");
+                    b.HasIndex("IdProducto");
 
                     b.ToTable("pedido_adicionales");
                 });
@@ -332,22 +317,18 @@ namespace FoodDelivery.Persistencia.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdProducto"));
 
-                    b.Property<int>("CategoriaIdCategoria")
-                        .HasColumnType("integer");
-
                     b.Property<string>("DescripcionProducto")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("descripcion_producto");
 
-                    b.Property<Guid>("EmpresaIdEmpresa")
-                        .HasColumnType("uuid");
-
                     b.Property<int>("IdCategoria")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id_categoria");
 
                     b.Property<Guid>("IdEmpresa")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id_empresa");
 
                     b.Property<string>("ImagenUrl")
                         .IsRequired()
@@ -365,9 +346,9 @@ namespace FoodDelivery.Persistencia.Migrations
 
                     b.HasKey("IdProducto");
 
-                    b.HasIndex("CategoriaIdCategoria");
+                    b.HasIndex("IdCategoria");
 
-                    b.HasIndex("EmpresaIdEmpresa");
+                    b.HasIndex("IdEmpresa");
 
                     b.ToTable("productos");
                 });
@@ -376,7 +357,7 @@ namespace FoodDelivery.Persistencia.Migrations
                 {
                     b.HasOne("FoodDelivery.Domain.Modelos.Empresa", "Empresa")
                         .WithMany("Adicionales")
-                        .HasForeignKey("EmpresaIdEmpresa")
+                        .HasForeignKey("IdEmpresa")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -387,7 +368,7 @@ namespace FoodDelivery.Persistencia.Migrations
                 {
                     b.HasOne("FoodDelivery.Domain.Modelos.Empresa", "Empresa")
                         .WithMany("Categorias")
-                        .HasForeignKey("EmpresaIdEmpresa")
+                        .HasForeignKey("IdEmpresa")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -417,7 +398,7 @@ namespace FoodDelivery.Persistencia.Migrations
                 {
                     b.HasOne("FoodDelivery.Domain.Modelos.Cliente", "Cliente")
                         .WithMany("Direcciones")
-                        .HasForeignKey("ClienteIdCliente")
+                        .HasForeignKey("IdCliente")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -428,19 +409,17 @@ namespace FoodDelivery.Persistencia.Migrations
                 {
                     b.HasOne("FoodDelivery.Domain.Modelos.Cliente", "Cliente")
                         .WithMany("Pedidos")
-                        .HasForeignKey("ClienteIdCliente")
+                        .HasForeignKey("IdCliente")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FoodDelivery.Domain.Modelos.DireccionCliente", "DireccionEntrega")
                         .WithMany()
-                        .HasForeignKey("DireccionEntregaIdDireccionCliente")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdDireccionCliente");
 
                     b.HasOne("FoodDelivery.Domain.Modelos.Empresa", "Empresa")
                         .WithMany("Pedidos")
-                        .HasForeignKey("EmpresaIdEmpresa")
+                        .HasForeignKey("IdEmpresa")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -454,12 +433,6 @@ namespace FoodDelivery.Persistencia.Migrations
             modelBuilder.Entity("FoodDelivery.Domain.Modelos.PedidoAdicionales", b =>
                 {
                     b.HasOne("FoodDelivery.Domain.Modelos.Adicional", "Adicional")
-                        .WithMany()
-                        .HasForeignKey("AdicionalIdAdicional")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FoodDelivery.Domain.Modelos.Adicional", null)
                         .WithMany("PedidoAdicionales")
                         .HasForeignKey("IdAdicional")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -471,28 +444,36 @@ namespace FoodDelivery.Persistencia.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FoodDelivery.Domain.Modelos.Producto", "Producto")
+                        .WithMany()
+                        .HasForeignKey("IdProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("FoodDelivery.Domain.Modelos.DetallePedido", "DetallePedido")
                         .WithMany("PedidoAdicionales")
-                        .HasForeignKey("DetallePedidoIdPedido", "DetallePedidoIdProducto")
+                        .HasForeignKey("IdPedido", "IdProducto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Adicional");
 
                     b.Navigation("DetallePedido");
+
+                    b.Navigation("Producto");
                 });
 
             modelBuilder.Entity("FoodDelivery.Domain.Modelos.Producto", b =>
                 {
                     b.HasOne("FoodDelivery.Domain.Modelos.Categoria", "Categoria")
                         .WithMany("Productos")
-                        .HasForeignKey("CategoriaIdCategoria")
+                        .HasForeignKey("IdCategoria")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FoodDelivery.Domain.Modelos.Empresa", "Empresa")
                         .WithMany("Productos")
-                        .HasForeignKey("EmpresaIdEmpresa")
+                        .HasForeignKey("IdEmpresa")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

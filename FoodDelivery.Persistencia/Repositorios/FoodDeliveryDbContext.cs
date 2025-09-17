@@ -24,22 +24,24 @@ public class FoodDeliveryDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        // Clave primaria compuesta para DetallePedido
+        modelBuilder.Entity<DetallePedido>()
+            .HasKey(dp => new { dp.IdPedido, dp.IdProducto });
 
-        // Configuración de la relación muchos a muchos entre Pedido y Adicional a través de PedidoAdicionales
+        // Clave primaria compuesta para PedidoAdicionales
         modelBuilder.Entity<PedidoAdicionales>()
-            .HasKey(pa => new { pa.IdPedido, pa.IdAdicional });
+            .HasKey(pa => new { pa.IdPedido, pa.IdProducto, pa.IdAdicional });
 
+        // Relación PedidoAdicionales -> DetallePedido
         modelBuilder.Entity<PedidoAdicionales>()
-            .HasOne<Pedido>()
-            .WithMany(p => p.PedidosAdicionales)
-            .HasForeignKey(pa => pa.IdPedido);
+            .HasOne(pa => pa.DetallePedido)
+            .WithMany(dp => dp.PedidoAdicionales)
+            .HasForeignKey(pa => new { pa.IdPedido, pa.IdProducto });
 
+        // Relación PedidoAdicionales -> Adicional
         modelBuilder.Entity<PedidoAdicionales>()
-            .HasOne<Adicional>()
+            .HasOne(pa => pa.Adicional)
             .WithMany(a => a.PedidoAdicionales)
             .HasForeignKey(pa => pa.IdAdicional);
-
-        modelBuilder.Entity<DetallePedido>()
-        .HasKey(dp => new { dp.IdPedido, dp.IdProducto });
     }
 }

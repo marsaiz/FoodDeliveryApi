@@ -29,13 +29,19 @@ namespace FoodDelivery.Domain.Modelos
         public string TipoEntrega { get; set; }
 
         // Claves foráneas
+        [Column("id_cliente")]
         public Guid IdCliente { get; set; }
+        [Column("id_empresa")]
         public Guid IdEmpresa { get; set; }
+        [Column("id_direccion_cliente")]
         public int? IdDireccionCliente { get; set; }
 
         // Propiedades de navegación 
+        [ForeignKey("IdCliente")]
         public Cliente Cliente { get; set; }
+        [ForeignKey("IdEmpresa")]
         public Empresa Empresa { get; set; }
+        [ForeignKey("IdDireccionCliente")]
         public DireccionCliente DireccionEntrega { get; set; }
 
         // ICollection<T> indica una relación uno a muchos o muchos a muchos

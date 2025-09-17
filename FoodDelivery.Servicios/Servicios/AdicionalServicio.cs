@@ -19,6 +19,7 @@ public class AdicionalServicio : IAdicionalServicio
         var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(adicionalDto.IdEmpresa);
         if (empresa == null)
             throw new Exception("La empresa especificada no existe.");
+        Console.WriteLine($"Creando adicional para empresa: {adicionalDto.IdEmpresa}");
     
         var nuevoAdicional = new Adicional
         {

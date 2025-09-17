@@ -17,9 +17,11 @@ namespace FoodDelivery.Domain.Modelos
         public string NombreCategoria { get; set; }
 
         // Clave foránea
+        [Column("id_empresa")]
         public Guid IdEmpresa { get; set; }
 
         // Propiedades de navegación
+        [ForeignKey("IdEmpresa")]
         public Empresa Empresa { get; set; }
         public ICollection<Producto> Productos { get; set; }
     }
