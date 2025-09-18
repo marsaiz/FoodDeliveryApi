@@ -1,5 +1,6 @@
 using FoodDelivery.Domain.Modelos;
 using FoodDelivery.Servicios.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodDelivery.Persistencia.Repositorios;
 
@@ -23,7 +24,7 @@ public class ProductoRepositorio : IProductoRepositorio
     {
         return await _context.Productos
             .Where(p => p.IdProducto == idProducto && p.IdEmpresa == idEmpresa)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(); // si encuentra, devuelve el producto, sino null
     }
 
     public async Task<Producto> CrearProductoAsync(Producto producto)
@@ -33,7 +34,7 @@ public class ProductoRepositorio : IProductoRepositorio
         return producto;
     }
 
-    public async Task ActualizarProductoAsync(Producto producto)
+    public async Task<Producto> ActualizarProductoAsync(Producto producto)
     {
         _context.Entry(producto).State = EntityState.Modified;
         await _context.SaveChangesAsync();

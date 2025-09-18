@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FoodDeliveryApi.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] // la palabra controller se reemplaza por el nombre del controlador sin el sufijo "Controller"
     public class ProductoController : ControllerBase
     {
         private readonly IProductoServicio _productoService;
@@ -36,7 +36,7 @@ namespace FoodDeliveryApi.API.Controllers
         {
             var creado = await _productoService.CrearProductoAsync(productoDTO);
 
-            // Mapeo manual, a ProductoDT. Hacía referencia circularn en el swagger.
+            // Mapeo manual, a ProductoDTO. Hacía referencia circularn en el swagger.
             //  En el servicio se recibe el DTO de ProductoCreateDTO
             var dto = new ProductoDTO
             {

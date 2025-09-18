@@ -52,7 +52,7 @@ public class ProductoServicio : IProductoServicio
             throw new ArgumentException("IdProducto es requerido para actualizar.");
         }
 
-        var productoExistente = await _productoRepositorio.ObtenerProductoPorIdAsync(productoDTO.IdProducto.Value, productoDTO.IdEmpresa);
+        var productoExistente = await _productoRepositorio.ObtenerProductoPorIdAsync(productoDTO.IdProducto, productoDTO.IdEmpresa);
         if (productoExistente == null)
         {
             throw new KeyNotFoundException($"Producto con Id {productoDTO.IdProducto} no encontrado.");
