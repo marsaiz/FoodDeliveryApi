@@ -36,7 +36,8 @@ namespace FoodDeliveryApi.API.Controllers
         {
             var creado = await _adicionalService.CrearAdicionalAsync(adicionalDTO);
 
-            // Mapeo manual a AdicionalDTO, hacia referencia circular
+            // Mapeo manual, a AdicionalDT. Hacía referencia circularn en el swagger.
+            //  En el servicio se recibe el DTO de AdicionalCreateDTO
             var dto = new AdicionalDTO
             {
                 IdAdicional = creado.IdAdicional,

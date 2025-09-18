@@ -22,6 +22,8 @@ builder.Services.AddScoped<IAdicionalRepositorio, AdicionalRepositorio>();
 builder.Services.AddScoped<IAdicionalServicio, AdicionalServicio>();
 builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
 builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
+builder.Services.AddScoped<IProductoServicio, ProductoServicio>();
+builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
 
 builder.Services.AddControllers();
 

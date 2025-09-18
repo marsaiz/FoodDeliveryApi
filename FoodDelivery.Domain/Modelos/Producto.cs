@@ -22,7 +22,7 @@ namespace FoodDelivery.Domain.Modelos
         public decimal PrecioProducto { get; set; }
 
         [Column("imagen_url")]
-        public string ImagenUrl { get; set; }
+        public string? ImagenUrl { get; set; }
 
         // Claves foráneas
         [Column("id_categoria")]
