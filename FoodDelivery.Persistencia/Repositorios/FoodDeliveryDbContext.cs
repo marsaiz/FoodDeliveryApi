@@ -43,5 +43,9 @@ public class FoodDeliveryDbContext : DbContext
             .HasOne(pa => pa.Adicional)
             .WithMany(a => a.PedidoAdicionales)
             .HasForeignKey(pa => pa.IdAdicional);
+
+        modelBuilder.Entity<Pedido>()
+            .Property(p => p.Estado)
+            .HasConversion<string>();
     }
 }

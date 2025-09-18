@@ -6,6 +6,16 @@ using System;
 
 namespace FoodDelivery.Domain.Modelos
 {
+
+    public enum EstadoPedido
+    {
+        Pendiente,
+        EnPreparacion,
+        EnCamino,
+        Entregado,
+        Cancelado
+    }
+
     [Table("pedidos")]
     public class Pedido
     {
@@ -16,9 +26,6 @@ namespace FoodDelivery.Domain.Modelos
         [Column("fecha_hora")]
         public DateTime FechaHora { get; set; }
 
-        [Column("estado_pedido")]
-        public string EstadoPedido { get; set; }
-
         [Column("total_pedido")]
         public decimal TotalPeido { get; set; }
 
@@ -27,6 +34,10 @@ namespace FoodDelivery.Domain.Modelos
 
         [Column("tipo_entrega")]
         public string TipoEntrega { get; set; }
+
+        [Required]
+        [Column("estado_pedido")]
+        public EstadoPedido Estado { get; set; }
 
         // Claves foráneas
         [Column("id_cliente")]
