@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+// Cuando el cliente se cargue en la app debería traer sus direcciones
 
 namespace FoodDelivery.Domain.Modelos
 {
@@ -27,7 +28,7 @@ namespace FoodDelivery.Domain.Modelos
         public string CodigoPostal { get; set; }
 
         [Column("referencia")]
-        public string Referencia { get; set; }
+        public string? Referencia { get; set; } // Ejemplo: "cerca del parque"
 
         [Column("latitud")]
         public decimal? Latitud { get; set; }

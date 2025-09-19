@@ -13,7 +13,7 @@ public class FoodDeliveryDbContext : DbContext
     public DbSet<Adicional> Adicionales { get; set; }
     public DbSet<Categoria> Categorias { get; set; }
     public DbSet<Cliente> Clientes { get; set; }
-    public DbSet<DireccionCliente> Direcciones { get; set; }
+    public DbSet<DireccionCliente> DireccionesClientes { get; set; }
     public DbSet<DetallePedido> DetallePedidos { get; set; }
     public DbSet<Producto> Productos { get; set; }
     public DbSet<Empresa> Empresas { get; set; }

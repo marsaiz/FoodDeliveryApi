@@ -33,18 +33,18 @@ namespace FoodDeliveryApi.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(EmpresaDTO empresaDTO)
+        public async Task<ActionResult> Create(EmpresaCreateDTO empresaDTO)
         {
             var empresa = await _empresaService.CrearEmpresaAsync(empresaDTO);
-            return CreatedAtAction(nameof(GetById), new { idEmpresa = empresaDTO.IdEmpresa }, empresaDTO);
+            return CreatedAtAction(nameof(GetById), new { idEmpresa = empresa.IdEmpresa }, empresa);
         }
 
         [HttpPut("{idEmpresa}")]
-        public async Task<ActionResult> Update(Guid idEmpresa, EmpresaDTO empresaDTO)
+        public async Task<ActionResult> Update(Guid idEmpresa, EmpresaUpdateDTO empresaDTO)
         {
             if (idEmpresa != empresaDTO.IdEmpresa)
                 return BadRequest();
-            await _empresaService.ObtenerEmpresaPorIdAsync(empresaDTO.IdEmpresa.Value);
+            await _empresaService.ObtenerEmpresaPorIdAsync(empresaDTO.IdEmpresa);
             return NoContent();
         }
 

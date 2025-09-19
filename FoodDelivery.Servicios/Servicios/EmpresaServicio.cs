@@ -13,7 +13,7 @@ public class EmpresaServicio : IEmpresaServicio
         _empresaRepositorio = empresaRepositorio;
     }
 
-    public async Task<Empresa> CrearEmpresaAsync(EmpresaDTO empresaDTO)
+    public async Task<Empresa> CrearEmpresaAsync(EmpresaCreateDTO empresaDTO)
     {
         var empresa = new Empresa
         {
@@ -28,12 +28,9 @@ public class EmpresaServicio : IEmpresaServicio
         return empresa;
     }
 
-    public async Task<Empresa> ActualizarEmpresaAsync(EmpresaDTO empresaDTO)
+    public async Task<Empresa> ActualizarEmpresaAsync(EmpresaUpdateDTO empresaDTO)
     {
-        if (empresaDTO.IdEmpresa == null)
-            throw new ArgumentException("El IdEmpresa no puede ser nulo para la actualización.");
-
-        var empresaExistente = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(empresaDTO.IdEmpresa.Value);
+        var empresaExistente = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(empresaDTO.IdEmpresa);
         if (empresaExistente == null)
             throw new Exception("Empresa no encontrada.");
 
