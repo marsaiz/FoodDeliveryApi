@@ -1,7 +1,8 @@
 using FoodDelivery.Domain.Modelos;
 using FoodDelivery.Servicios.Interfaces;
-namespace FoodDelivery.Servicios.Servicios;
+using FoodDelivery.Servicios.DTOs;
 
+namespace FoodDelivery.Servicios.Servicios;
 public class CategoriaServicio : ICategoriaServicio
 {
     private readonly ICategoriaRepositorio _categoriaRepositorio;

@@ -1,4 +1,5 @@
 using FoodDelivery.Domain.Modelos;
+using FoodDelivery.Servicios.DTOs;
 
 namespace FoodDelivery.Servicios.Interfaces;
 

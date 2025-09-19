@@ -1,7 +1,8 @@
-namespace FoodDelivery.Servicios.Interfaces;
+namespace FoodDelivery.Servicios.DTOs;
 
-public class ProductoCreateDTO
+public class ProductoUpdateDTO
 {
+    public int IdProducto { get; set; }
     public string NombreProducto { get; set; }
     public string DescripcionProducto { get; set; }
     public decimal PrecioProducto { get; set; }

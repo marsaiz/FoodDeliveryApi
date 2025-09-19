@@ -1,6 +1,6 @@
 using FoodDelivery.Domain.Modelos;
 
-namespace FoodDelivery.Servicios.Interfaces;
+namespace FoodDelivery.Servicios.DTOs;
 
 public class PedidoDTO
 {

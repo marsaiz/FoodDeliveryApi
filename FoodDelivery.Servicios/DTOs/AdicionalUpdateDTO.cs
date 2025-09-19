@@ -1,4 +1,4 @@
-namespace FoodDelivery.Servicios.Interfaces;
+namespace FoodDelivery.Servicios.DTOs;
 
 public class AdicionalUpdateDTO
 {

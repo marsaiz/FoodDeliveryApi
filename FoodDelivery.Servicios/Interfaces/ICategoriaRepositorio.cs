@@ -1,5 +1,5 @@
-
 using FoodDelivery.Domain.Modelos;
+
 namespace FoodDelivery.Servicios.Interfaces;
 
 public interface ICategoriaRepositorio
