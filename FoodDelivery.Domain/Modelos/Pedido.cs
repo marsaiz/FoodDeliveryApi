@@ -21,6 +21,7 @@ namespace FoodDelivery.Domain.Modelos
     {
         [Key]
         [Column("id_pedido")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdPedido { get; set; }
 
         [Column("fecha_hora")]

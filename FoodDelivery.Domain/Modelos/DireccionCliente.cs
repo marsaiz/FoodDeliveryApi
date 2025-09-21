@@ -10,6 +10,7 @@ namespace FoodDelivery.Domain.Modelos
     {
         [Key]
         [Column("id_direccion_cliente")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdDireccionCliente { get; set; }
 
         [Column("calle")]

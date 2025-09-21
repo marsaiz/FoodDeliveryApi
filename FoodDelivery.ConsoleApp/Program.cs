@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using FoodDelivery.ConsoleApp;
+using FoodDelivery.ConsoleApp.Servicios;
 
 class Program
 {
@@ -31,11 +32,11 @@ class Program
             {
                 case "1":
                     Console.WriteLine("Crear Empresa seleccionado.");
-                    await CrearEmpresaAsync();
+                    await new EmpresaServicioConsola(new HttpClient()).CrearEmpresaAsync();
                     break;
                 case "2":
                     Console.WriteLine("Listar Empresas seleccionado.");
-                    await ListarEmpresasAsync();
+                    await new EmpresaServicioConsola(new HttpClient()).ListarEmpresasAsync();
                     break;
                 case "3":
                     Console.WriteLine("Crear Categoria seleccionado.");
@@ -73,91 +74,5 @@ class Program
             }
             Console.WriteLine(); // Línea en blanco para mejor legibilidad
         }
-    }
-
-
-    // Métodos a implementar para cada funcionalidad:
-    static async Task CrearEmpresaAsync()
-    {
-        Console.WriteLine("Ingrese los detalles de la empresa:");
-        Console.Write("Nombre: ");
-        var nombre = Console.ReadLine();
-        Console.Write("Dirección: ");
-        var direccion = Console.ReadLine();
-        Console.Write("Teléfono: ");
-        var telefono = Console.ReadLine();
-        Console.Write("Email: ");
-        var email = Console.ReadLine();
-        Console.Write("Latitud: ");
-        var latitud = double.TryParse(Console.ReadLine(), out var lat) ? lat : (double?)null;
-        Console.Write("Longitud: ");
-        var longitud = double.TryParse(Console.ReadLine(), out var lon) ? lon : (double?)null;
-
-        var empresa = new EmpresaDTO
-        {
-            Nombre = nombre,
-            Direccion = direccion,
-            Telefono = telefono,
-            Email = email,
-            Latitud = latitud,
-            Longitud = longitud
-        };
-
-        using var httpClient = new HttpClient();
-        var apiUrl = await httpClient.PostAsJsonAsync("http://localhost:5012/api/empresas", empresa);
-        
-        if (apiUrl.IsSuccessStatusCode)
-        {
-            Console.WriteLine("Empresa creada exitosamente.");
-        }
-        else
-        {
-            Console.WriteLine($"Error al crear la empresa: {apiUrl.ReasonPhrase}");
-        }
-    }
-
-    static async Task ListarEmpresasAsync()
-    {
-        using var httpClient = new HttpClient();
-        var empresas = await httpClient.GetFromJsonAsync<List<EmpresaDTO>>("http://localhost:5012/api/empresas");
-        foreach (var emp in empresas)
-        {
-            Console.WriteLine($"Nombre: {emp.Nombre}");
-        }
-    }
-
-    static async Task CrearCategoriaAsync()
-    {
-        // Lógica para crear una categoría
-    }
-
-    static async Task ListarCategoriasPorEmpresaAsync()
-    {
-        // Lógica para listar las categorías por empresa
-    }
-
-    static async Task CrearProductoAsync()
-    {
-        // Lógica para crear un producto
-    }
-
-    static async Task ListarProductosPorCategoriaAsync()
-    {
-        // Lógica para listar los productos por categoría
-    }
-
-    static async Task CrearClienteAsync()
-    {
-        // Lógica para crear un cliente
-    }
-
-    static async Task ListarClientesAsync()
-    {
-        // Lógica para listar los clientes
-    }
-
-    static async Task CrearDireccionParaClienteAsync()
-    {
-        // Lógica para crear una dirección para un cliente
     }
 }

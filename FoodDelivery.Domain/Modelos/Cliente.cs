@@ -12,14 +12,14 @@ namespace FoodDelivery.Domain.Modelos
         [Column("id_cliente")]
         public Guid IdCliente { get; set; }
 
-        [Column("nombre")]
-        public string Nombre { get; set; }
+        [Column("nombre_cliente")]
+        public string NombreCliente { get; set; }
 
-        [Column("telefono")]
-        public string? Telefono { get; set; }
+        [Column("telefono_cliente")]
+        public string? TelefonoCliente { get; set; }
 
-        [Column("email")]
-        public string? Email { get; set; }
+        [Column("email_cliente")]
+        public string? EmailCliente { get; set; }
 
         // Propiedades de navegación para relaciones, uno a muchos o muchos a muchos.
         public ICollection<Pedido> Pedidos { get; set; }

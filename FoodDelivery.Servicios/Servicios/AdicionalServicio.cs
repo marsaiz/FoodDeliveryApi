@@ -24,6 +24,7 @@ public class AdicionalServicio : IAdicionalServicio
     
         var nuevoAdicional = new Adicional
         {
+            // IdAdicional = new int(), // [DatabaseGenerated] se encarga de esto en el modelo
             NombreAdicional = adicionalDto.NombreAdicional,
             PrecioAdicional = adicionalDto.PrecioAdicional ?? 0, // Asignar 0 si es null
             IdEmpresa = adicionalDto.IdEmpresa

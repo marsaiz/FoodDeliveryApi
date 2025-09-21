@@ -12,7 +12,7 @@ public class CategoriaServicio : ICategoriaServicio
         _categoriaRepositorio = categoriaRepositorio;
     }
 
-    public async Task<Categoria> CrearCategoriaAsync(CategoriaDTO categoriaDto)
+    public async Task<Categoria> CrearCategoriaAsync(CategoriaCreateDTO categoriaDto)
     {
         var categoria = new Categoria
         {
@@ -23,7 +23,7 @@ public class CategoriaServicio : ICategoriaServicio
         return await _categoriaRepositorio.CrearCategoriaAsync(categoria);
     }
 
-    public async Task<Categoria> ActualizarCategoriaAsync(CategoriaDTO categoriaDto)
+    public async Task<Categoria> ActualizarCategoriaAsync(CategoriaUpdateDTO categoriaDto)
     {
         if (categoriaDto.IdCategoria == null)
         {

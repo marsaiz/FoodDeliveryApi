@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\FoodDelivery.ConsoleApp.csproj": {}
+    "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.ConsoleApp/FoodDelivery.ConsoleApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\FoodDelivery.ConsoleApp.csproj": {
+    "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.ConsoleApp/FoodDelivery.ConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\FoodDelivery.ConsoleApp.csproj",
+        "projectUniqueName": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.ConsoleApp/FoodDelivery.ConsoleApp.csproj",
         "projectName": "FoodDelivery.ConsoleApp",
-        "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\FoodDelivery.ConsoleApp.csproj",
-        "packagesPath": "C:\\Users\\marsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\obj\\",
+        "projectPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.ConsoleApp/FoodDelivery.ConsoleApp.csproj",
+        "packagesPath": "/home/marcelo/.nuget/packages/",
+        "outputPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\marsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/marcelo/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -25,18 +25,17 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Servicios/FoodDelivery.Servicios.csproj": {
+                "projectPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Servicios/FoodDelivery.Servicios.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -64,7 +63,127 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.119/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/FoodDelivery.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/FoodDelivery.Domain.csproj",
+        "projectName": "FoodDelivery.Domain",
+        "projectPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/FoodDelivery.Domain.csproj",
+        "packagesPath": "/home/marcelo/.nuget/packages/",
+        "outputPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/marcelo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.9, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.119/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Servicios/FoodDelivery.Servicios.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Servicios/FoodDelivery.Servicios.csproj",
+        "projectName": "FoodDelivery.Servicios",
+        "projectPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Servicios/FoodDelivery.Servicios.csproj",
+        "packagesPath": "/home/marcelo/.nuget/packages/",
+        "outputPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Servicios/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/marcelo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/FoodDelivery.Domain.csproj": {
+                "projectPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/FoodDelivery.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.119/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

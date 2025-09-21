@@ -9,6 +9,7 @@ namespace FoodDelivery.Domain.Modelos
     public class Categoria
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id_categoria")]
         public int IdCategoria { get; set; }
 
