@@ -44,7 +44,7 @@ namespace FoodDeliveryApi.API.Controllers
         {
             if (idEmpresa != empresaDTO.IdEmpresa)
                 return BadRequest();
-            await _empresaService.ObtenerEmpresaPorIdAsync(empresaDTO.IdEmpresa);
+            await _empresaService.ActualizarEmpresaAsync(empresaDTO);
             return NoContent();
         }
 

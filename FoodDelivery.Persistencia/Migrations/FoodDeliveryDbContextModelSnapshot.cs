@@ -83,18 +83,18 @@ namespace FoodDelivery.Persistencia.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id_cliente");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("EmailCliente")
                         .HasColumnType("text")
-                        .HasColumnName("email");
+                        .HasColumnName("email_cliente");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("NombreCliente")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("nombre");
+                        .HasColumnName("nombre_cliente");
 
-                    b.Property<string>("Telefono")
+                    b.Property<string>("TelefonoCliente")
                         .HasColumnType("text")
-                        .HasColumnName("telefono");
+                        .HasColumnName("telefono_cliente");
 
                     b.HasKey("IdCliente");
 
@@ -171,7 +171,6 @@ namespace FoodDelivery.Persistencia.Migrations
                         .HasColumnName("piso_depto");
 
                     b.Property<string>("Referencia")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("referencia");
 
@@ -231,7 +230,7 @@ namespace FoodDelivery.Persistencia.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdPedido"));
 
-                    b.Property<string>("EstadoPedido")
+                    b.Property<string>("Estado")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("estado_pedido");
@@ -331,7 +330,6 @@ namespace FoodDelivery.Persistencia.Migrations
                         .HasColumnName("id_empresa");
 
                     b.Property<string>("ImagenUrl")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("imagen_url");
 

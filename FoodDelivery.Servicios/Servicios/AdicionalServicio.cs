@@ -32,28 +32,21 @@ public class AdicionalServicio : IAdicionalServicio
         return await _adicionalRepositorio.CrearAdicionalAsync(nuevoAdicional);
     }
 
-    public async Task<Adicional> ActualizarAdicionalAsync(AdicionalUpdateDTO adicionalDto)
+    public async Task<Adicional> ActualizarAdicionalAsync(int idAdicional, Guid idEmpresa, AdicionalUpdateDTO adicionalDto)
     {
-        if (adicionalDto.IdAdicional == null)
-        {
-            throw new ArgumentException("IdAdicional es requerido para actualizar.");
-        }
+        var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(idEmpresa);
+        if (empresa == null)
+            throw new Exception("La empresa especificada no existe.");
 
         // 1. Obtener la entidad existente desde el repositorio (y la base de datos)
-        var adicionalExistente = await _adicionalRepositorio.ObtenerAdicionalPorIdAsync(adicionalDto.IdAdicional, adicionalDto.IdEmpresa);
-
+        var adicionalExistente = await _adicionalRepositorio.ObtenerAdicionalPorIdAsync(idAdicional, idEmpresa);
         if (adicionalExistente == null)
-        {
-            // Manejar el caso donde no se encuentra la entidad
-            throw new KeyNotFoundException($"Adicional con Id {adicionalDto.IdAdicional} no encontrado.");
-        }
+            return null; // O lanzar una excepción si prefieres
+        
+            //IdAdicional = adicionalDto.IdAdicional,
+            adicionalExistente.NombreAdicional = adicionalDto.NombreAdicional;
+            adicionalExistente.PrecioAdicional = adicionalDto.PrecioAdicional ?? 0; // Asignar 0 si es null
 
-        // 2. Actualizar las propiedades de la entidad existente
-        adicionalExistente.NombreAdicional = adicionalDto.NombreAdicional;
-        adicionalExistente.PrecioAdicional = adicionalDto.PrecioAdicional ?? 0;
-        // No actualices IdEmpresa, ya que esta clave generalmente no cambia
-
-        // 3. Persistir los cambios usando el repositorio
         return await _adicionalRepositorio.ActualizarAdicionalAsync(adicionalExistente);
     }
     public async Task<bool> EliminarAdicionalAsync(int idAdicional, Guid idEmpresa)
