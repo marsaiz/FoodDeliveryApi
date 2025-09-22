@@ -6,38 +6,44 @@ namespace FoodDelivery.Servicios.Servicios;
 public class CategoriaServicio : ICategoriaServicio
 {
     private readonly ICategoriaRepositorio _categoriaRepositorio;
+    private readonly IEmpresaRepositorio _empresaRepositorio;
 
-    public CategoriaServicio(ICategoriaRepositorio categoriaRepositorio)
+    public CategoriaServicio(ICategoriaRepositorio categoriaRepositorio, IEmpresaRepositorio empresaRepositorio)
     {
         _categoriaRepositorio = categoriaRepositorio;
+        _empresaRepositorio = empresaRepositorio;
     }
 
     public async Task<Categoria> CrearCategoriaAsync(CategoriaCreateDTO categoriaDto)
     {
-        var categoria = new Categoria
+        var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(categoriaDto.IdEmpresa);
+        if (empresa == null)
+        {
+            throw new KeyNotFoundException("La empresa no existe.");
+        }
+
+        var nuevaCategoria = new Categoria
         {
             NombreCategoria = categoriaDto.NombreCategoria,
             IdEmpresa = categoriaDto.IdEmpresa
         };
 
-        return await _categoriaRepositorio.CrearCategoriaAsync(categoria);
+        return await _categoriaRepositorio.CrearCategoriaAsync(nuevaCategoria);
     }
 
-    public async Task<Categoria> ActualizarCategoriaAsync(CategoriaUpdateDTO categoriaDto)
+    public async Task<Categoria> ActualizarCategoriaAsync(int idCategoria, Guid idEmpresa, CategoriaUpdateDTO categoriaDto)
     {
-        if (categoriaDto.IdCategoria == null)
-        {
-            throw new ArgumentException("El IdCategoria no puede ser nulo para la actualización.");
-        }
+        var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(idEmpresa);
+        if (empresa == null)
+            throw new Exception("La empresa especificada no existe.");
 
-        var categoriaExistente = await _categoriaRepositorio.
-                            ObtenerCategoriaPorIdAsync(categoriaDto.IdCategoria.Value, categoriaDto.IdEmpresa);
+        // 1. Obtener la entidad existente desde el repositorio (y la base de datos)
+        var categoriaExistente = await _categoriaRepositorio.ObtenerCategoriaPorIdAsync(idCategoria, idEmpresa);
         if (categoriaExistente == null)
-        {
-            throw new KeyNotFoundException("La categoría no existe.");
-        }
-
-        categoriaExistente.NombreCategoria = categoriaDto.NombreCategoria;
+            return null; // O lanzar una excepción si prefieres
+        
+            //IdAdicional = adicionalDto.IdAdicional,
+            categoriaExistente.NombreCategoria = categoriaDto.NombreCategoria;
 
         return await _categoriaRepositorio.ActualizarCategoriaAsync(categoriaExistente);
     }

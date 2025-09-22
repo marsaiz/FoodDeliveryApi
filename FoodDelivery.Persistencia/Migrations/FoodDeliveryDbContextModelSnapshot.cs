@@ -198,6 +198,10 @@ namespace FoodDelivery.Persistencia.Migrations
                         .HasColumnType("text")
                         .HasColumnName("email");
 
+                    b.Property<bool>("EstaAbierta")
+                        .HasColumnType("boolean")
+                        .HasColumnName("esta_abierta");
+
                     b.Property<decimal?>("Latitud")
                         .HasColumnType("numeric")
                         .HasColumnName("latitud");
@@ -211,10 +215,18 @@ namespace FoodDelivery.Persistencia.Migrations
                         .HasColumnType("text")
                         .HasColumnName("nombre");
 
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text")
+                        .HasColumnName("password_hash");
+
                     b.Property<string>("Telefono")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("telefono");
+
+                    b.Property<string>("Usuario")
+                        .HasColumnType("text")
+                        .HasColumnName("usuario");
 
                     b.HasKey("IdEmpresa");
 

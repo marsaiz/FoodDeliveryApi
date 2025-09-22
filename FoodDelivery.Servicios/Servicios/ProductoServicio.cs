@@ -39,31 +39,27 @@ public class ProductoServicio : IProductoServicio
             DescripcionProducto = ProductoDTO.DescripcionProducto,
             PrecioProducto = ProductoDTO.PrecioProducto,
             ImagenUrl = ProductoDTO.ImagenUrl,
-            IdCategoria = ProductoDTO.IdCategoria,
-            IdEmpresa = ProductoDTO.IdEmpresa
         };
 
         return await _productoRepositorio.CrearProductoAsync(nuevoproducto);
     }
 
-    public async Task<Producto> ActualizarProductoAsync(ProductoUpdateDTO productoDTO)
+    public async Task<Producto> ActualizarProductoAsync(int id_producto, Guid id_empresa, ProductoUpdateDTO productoDTO)
     {
-        if (productoDTO.IdProducto == null)
+        var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(id_empresa);
+        if (empresa == null)
         {
-            throw new ArgumentException("IdProducto es requerido para actualizar.");
+            throw new Exception("La empresa no existe.");
         }
-
-        var productoExistente = await _productoRepositorio.ObtenerProductoPorIdAsync(productoDTO.IdProducto, productoDTO.IdEmpresa);
+        var productoExistente = await _productoRepositorio.ObtenerProductoPorIdAsync(id_producto, id_empresa);
         if (productoExistente == null)
-        {
-            throw new KeyNotFoundException($"Producto con Id {productoDTO.IdProducto} no encontrado.");
-        }
+            return null;
 
         productoExistente.NombreProducto = productoDTO.NombreProducto;
         productoExistente.DescripcionProducto = productoDTO.DescripcionProducto;
         productoExistente.PrecioProducto = productoDTO.PrecioProducto;
         productoExistente.ImagenUrl = productoDTO.ImagenUrl;
-        productoExistente.IdCategoria = productoDTO.IdCategoria;
+        //productoExistente.IdCategoria = productoDTO.IdCategoria; // No se actualiza la categoría
 
         return await _productoRepositorio.ActualizarProductoAsync(productoExistente);
     }

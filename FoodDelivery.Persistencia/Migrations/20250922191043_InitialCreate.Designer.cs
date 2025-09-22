@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FoodDelivery.Persistencia.Migrations
 {
     [DbContext(typeof(FoodDeliveryDbContext))]
-    [Migration("20250922120042_AddIdEmpresaToAdicionales")]
-    partial class AddIdEmpresaToAdicionales
+    [Migration("20250922191043_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -201,6 +201,10 @@ namespace FoodDelivery.Persistencia.Migrations
                         .HasColumnType("text")
                         .HasColumnName("email");
 
+                    b.Property<bool>("EstaAbierta")
+                        .HasColumnType("boolean")
+                        .HasColumnName("esta_abierta");
+
                     b.Property<decimal?>("Latitud")
                         .HasColumnType("numeric")
                         .HasColumnName("latitud");
@@ -214,10 +218,18 @@ namespace FoodDelivery.Persistencia.Migrations
                         .HasColumnType("text")
                         .HasColumnName("nombre");
 
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text")
+                        .HasColumnName("password_hash");
+
                     b.Property<string>("Telefono")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("telefono");
+
+                    b.Property<string>("Usuario")
+                        .HasColumnType("text")
+                        .HasColumnName("usuario");
 
                     b.HasKey("IdEmpresa");
 

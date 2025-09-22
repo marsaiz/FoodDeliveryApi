@@ -30,6 +30,14 @@ namespace FoodDelivery.Domain.Modelos
         [Column("longitud")]
         public decimal? Longitud { get; set; }
 
+        [Column("esta_abierta")]
+        public bool EstaAbierta { get; set; } = true;
+
+        [Column("usuario")]
+        public string? Usuario { get; set; }
+        [Column("password_hash")]
+        public string? PasswordHash { get; set; }
+        
         // Propiedades de navegación para relaciones
         // ICollection<T> indica una relación uno a muchos o muchos a muchos
         // la coleccion debe estar en la entidad "uno" en una relación uno a muchos

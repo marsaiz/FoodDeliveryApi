@@ -34,6 +34,7 @@ namespace FoodDelivery.Domain.Modelos
         // Propiedades de navegación
         [ForeignKey("IdCategoria")]
         public Categoria Categoria { get; set; }
+        
         [ForeignKey("IdEmpresa")]
         public Empresa Empresa { get; set; }
 

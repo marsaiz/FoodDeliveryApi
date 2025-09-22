@@ -52,12 +52,19 @@ namespace FoodDeliveryApi.API.Controllers
             return CreatedAtAction(nameof(GetById), new { idProducto = dto.IdProducto, idEmpresa = dto.IdEmpresa }, dto);
         }
 
-        [HttpPut("{idProducto}")]
-        public async Task<ActionResult> Update(int idProducto, ProductoUpdateDTO productoDTO)
+        [HttpPut("{idProducto}/{idEmpresa}")]
+        public async Task<ActionResult> Update(int idProducto, Guid idEmpresa, ProductoUpdateDTO productoDTO)
         {
-            if (idProducto != productoDTO.IdProducto)
-                return BadRequest();
-            await _productoService.ActualizarProductoAsync(productoDTO);
+            var productoUpdate = new ProductoUpdateDTO
+            {
+                NombreProducto = productoDTO.NombreProducto,
+                DescripcionProducto = productoDTO.DescripcionProducto,
+                PrecioProducto = productoDTO.PrecioProducto,
+                ImagenUrl = productoDTO.ImagenUrl
+            };
+            var actualizado = await _productoService.ActualizarProductoAsync(idProducto, idEmpresa, productoUpdate);
+            if (actualizado == null)
+                return NotFound();
             return NoContent();
         }
 

@@ -17,9 +17,9 @@ namespace FoodDelivery.Persistencia.Migrations
                 columns: table => new
                 {
                     id_cliente = table.Column<Guid>(type: "uuid", nullable: false),
-                    nombre = table.Column<string>(type: "text", nullable: false),
-                    telefono = table.Column<string>(type: "text", nullable: true),
-                    email = table.Column<string>(type: "text", nullable: true)
+                    nombre_cliente = table.Column<string>(type: "text", nullable: false),
+                    telefono_cliente = table.Column<string>(type: "text", nullable: true),
+                    email_cliente = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,7 +36,10 @@ namespace FoodDelivery.Persistencia.Migrations
                     telefono = table.Column<string>(type: "text", nullable: false),
                     email = table.Column<string>(type: "text", nullable: false),
                     latitud = table.Column<decimal>(type: "numeric", nullable: true),
-                    longitud = table.Column<decimal>(type: "numeric", nullable: true)
+                    longitud = table.Column<decimal>(type: "numeric", nullable: true),
+                    esta_abierta = table.Column<bool>(type: "boolean", nullable: false),
+                    usuario = table.Column<string>(type: "text", nullable: true),
+                    password_hash = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,7 +57,7 @@ namespace FoodDelivery.Persistencia.Migrations
                     piso_depto = table.Column<string>(type: "text", nullable: true),
                     ciudad = table.Column<string>(type: "text", nullable: false),
                     codigo_postal = table.Column<string>(type: "text", nullable: false),
-                    referencia = table.Column<string>(type: "text", nullable: false),
+                    referencia = table.Column<string>(type: "text", nullable: true),
                     latitud = table.Column<decimal>(type: "numeric", nullable: true),
                     longitud = table.Column<decimal>(type: "numeric", nullable: true),
                     id_cliente = table.Column<Guid>(type: "uuid", nullable: false)
@@ -118,10 +121,10 @@ namespace FoodDelivery.Persistencia.Migrations
                     id_pedido = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     fecha_hora = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    estado_pedido = table.Column<string>(type: "text", nullable: false),
                     total_pedido = table.Column<decimal>(type: "numeric", nullable: false),
                     metodo_pago = table.Column<string>(type: "text", nullable: false),
                     tipo_entrega = table.Column<string>(type: "text", nullable: false),
+                    estado_pedido = table.Column<string>(type: "text", nullable: false),
                     id_cliente = table.Column<Guid>(type: "uuid", nullable: false),
                     id_empresa = table.Column<Guid>(type: "uuid", nullable: false),
                     id_direccion_cliente = table.Column<int>(type: "integer", nullable: true)
@@ -157,7 +160,7 @@ namespace FoodDelivery.Persistencia.Migrations
                     nombre_producto = table.Column<string>(type: "text", nullable: false),
                     descripcion_producto = table.Column<string>(type: "text", nullable: false),
                     precio_producto = table.Column<decimal>(type: "numeric", nullable: false),
-                    imagen_url = table.Column<string>(type: "text", nullable: false),
+                    imagen_url = table.Column<string>(type: "text", nullable: true),
                     id_categoria = table.Column<int>(type: "integer", nullable: false),
                     id_empresa = table.Column<Guid>(type: "uuid", nullable: false)
                 },
