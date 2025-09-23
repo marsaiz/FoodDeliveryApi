@@ -10,4 +10,7 @@ public interface IEmpresaServicio
     Task<bool> EliminarEmpresaAsync(Guid idEmpresa);
     Task<Empresa> ObtenerEmpresaPorIdAsync(Guid idEmpresa);
     Task<List<Empresa>> ObtenerEmpresasAsync();
+    Task<Empresa> ObtenerEmpresaPorUsuarioAsync(string usuario);
+    Task<Empresa> ObtenerEmpresaPorEmailAsync(string email);
+    Task<bool> CambiarPasswordAsync(EmpresaChangePasswordDTO dto);
 }

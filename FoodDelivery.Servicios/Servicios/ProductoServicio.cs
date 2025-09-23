@@ -8,11 +8,13 @@ public class ProductoServicio : IProductoServicio
 {
     private readonly IProductoRepositorio _productoRepositorio;
     private readonly IEmpresaRepositorio _empresaRepositorio;
+    private readonly ICategoriaRepositorio _categoriaRepositorio; // Repositorio de categorías
 
-    public ProductoServicio(IProductoRepositorio productoRepositorio, IEmpresaRepositorio empresaRepositorio)
+    public ProductoServicio(IProductoRepositorio productoRepositorio, IEmpresaRepositorio empresaRepositorio, ICategoriaRepositorio categoriaRepositorio)
     {
         _productoRepositorio = productoRepositorio;
         _empresaRepositorio = empresaRepositorio;
+        _categoriaRepositorio = categoriaRepositorio;
     }
 
     public async Task<List<Producto>> ObtenerProductosPorEmpresaAsync(Guid idEmpresa)
@@ -27,6 +29,12 @@ public class ProductoServicio : IProductoServicio
 
     public async Task<Producto> CrearProductoAsync(ProductoCreateDTO ProductoDTO)
     {
+        var categoria = await _categoriaRepositorio.ObtenerCategoriaPorIdAsync(ProductoDTO.IdCategoria, ProductoDTO.IdEmpresa);
+        if (categoria == null)
+            throw new Exception("La categoría no existe.");
+        if (categoria.IdEmpresa != ProductoDTO.IdEmpresa)
+            throw new Exception("La categoría no pertenece a la empresa.");
+
         var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(ProductoDTO.IdEmpresa);
         if (empresa == null)
         {
@@ -39,6 +47,8 @@ public class ProductoServicio : IProductoServicio
             DescripcionProducto = ProductoDTO.DescripcionProducto,
             PrecioProducto = ProductoDTO.PrecioProducto,
             ImagenUrl = ProductoDTO.ImagenUrl,
+            IdCategoria = ProductoDTO.IdCategoria,
+            IdEmpresa = ProductoDTO.IdEmpresa
         };
 
         return await _productoRepositorio.CrearProductoAsync(nuevoproducto);

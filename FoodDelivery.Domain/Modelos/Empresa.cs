@@ -37,6 +37,8 @@ namespace FoodDelivery.Domain.Modelos
         public string? Usuario { get; set; }
         [Column("password_hash")]
         public string? PasswordHash { get; set; }
+        [Column("password_salt")]
+        public string? PasswordSalt { get; set; }
         
         // Propiedades de navegación para relaciones
         // ICollection<T> indica una relación uno a muchos o muchos a muchos

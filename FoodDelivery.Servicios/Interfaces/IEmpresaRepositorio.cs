@@ -9,4 +9,7 @@ public interface IEmpresaRepositorio
     Task CrearEmpresaAsync(Empresa empresa);
     Task ActualizarEmpresaAsync(Empresa empresa);
     Task<bool> EliminarEmpresaAsync(Guid idEmpresa);
+    Task<Empresa> ObtenerEmpresaPorUsuarioAsync(string usuario);
+    Task<Empresa> ObtenerEmpresaPorEmailAsync(string email);
+    Task<bool> CambiarPasswordAsync(Guid idEmpresa, string nuevoPasswordHash);
 }

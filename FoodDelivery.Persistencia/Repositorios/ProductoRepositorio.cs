@@ -36,7 +36,7 @@ public class ProductoRepositorio : IProductoRepositorio
 
     public async Task<Producto> ActualizarProductoAsync(Producto producto)
     {
-        _context.Entry(producto).State = EntityState.Modified;
+        _context.Entry(producto).State = EntityState.Modified; // Marca la entidad como modificada, antes de SaveChanges
         await _context.SaveChangesAsync();
         return producto;
     }
@@ -53,6 +53,6 @@ public class ProductoRepositorio : IProductoRepositorio
             await _context.SaveChangesAsync();
             return true;
     }
-    return false;
+    return false; // No se encontró el producto
     }
 }

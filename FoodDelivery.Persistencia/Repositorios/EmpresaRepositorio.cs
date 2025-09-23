@@ -49,4 +49,27 @@ public class EmpresaRepositorio : IEmpresaRepositorio
         await _context.SaveChangesAsync();
         return true;
     }
+    public async Task<bool> CambiarPasswordAsync(Guid idEmpresa, string nuevoPasswordHash)
+    {
+        var empresa = await _context.Empresas
+            .Where(e => e.IdEmpresa == idEmpresa)
+            .FirstOrDefaultAsync();
+
+        if (empresa == null) return false;
+
+        empresa.PasswordHash = nuevoPasswordHash;
+        _context.Entry(empresa).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<Empresa> ObtenerEmpresaPorUsuarioAsync(string usuario)
+    {
+        return await _context.Empresas.FirstOrDefaultAsync(e => e.Usuario == usuario);
+    }
+
+    public async Task<Empresa> ObtenerEmpresaPorEmailAsync(string email)
+    {
+        return await _context.Empresas.FirstOrDefaultAsync(e => e.Email == email);
+    }
 }

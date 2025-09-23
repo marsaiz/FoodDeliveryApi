@@ -9,4 +9,6 @@ public class EmpresaDTO
     public string Direccion { get; set; }
     public decimal? Latitud { get; set; }
     public decimal? Longitud { get; set; }
+    public bool EstaAbierta { get; set; } = true; // <-- Útil para la aplicación móvil
+    public string? Usuario { get; set; } // <-- Útil para la autenticación
 }
