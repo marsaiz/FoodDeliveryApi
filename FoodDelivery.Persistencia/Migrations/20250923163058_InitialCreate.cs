@@ -39,7 +39,8 @@ namespace FoodDelivery.Persistencia.Migrations
                     longitud = table.Column<decimal>(type: "numeric", nullable: true),
                     esta_abierta = table.Column<bool>(type: "boolean", nullable: false),
                     usuario = table.Column<string>(type: "text", nullable: true),
-                    password_hash = table.Column<string>(type: "text", nullable: true)
+                    password_hash = table.Column<string>(type: "text", nullable: true),
+                    password_salt = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

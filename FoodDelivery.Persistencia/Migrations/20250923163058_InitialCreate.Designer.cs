@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FoodDelivery.Persistencia.Migrations
 {
     [DbContext(typeof(FoodDeliveryDbContext))]
-    [Migration("20250922191043_InitialCreate")]
+    [Migration("20250923163058_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -221,6 +221,10 @@ namespace FoodDelivery.Persistencia.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text")
                         .HasColumnName("password_hash");
+
+                    b.Property<string>("PasswordSalt")
+                        .HasColumnType("text")
+                        .HasColumnName("password_salt");
 
                     b.Property<string>("Telefono")
                         .IsRequired()

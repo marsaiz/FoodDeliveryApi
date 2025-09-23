@@ -88,9 +88,9 @@ public class EmpresaServicio : IEmpresaServicio
         return await _empresaRepositorio.ObtenerEmpresasAsync();
     }
 
-    public async Task<bool> CambiarPasswordAsync(EmpresaChangePasswordDTO dto)
+    public async Task<bool> CambiarPasswordAsync(Guid idEmpresa, EmpresaChangePasswordDTO dto)
     {
-        var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(dto.IdEmpresa);
+        var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(idEmpresa);
         if (empresa == null)
             throw new Exception("Empresa no encontrada.");
 
@@ -105,7 +105,7 @@ public class EmpresaServicio : IEmpresaServicio
 
         // Ajusta la llamada según la firma correcta del método CambiarPasswordAsync
         // Por ejemplo, si el método acepta solo el id y el nuevo hash:
-        return await _empresaRepositorio.CambiarPasswordAsync(dto.IdEmpresa, nuevoPasswordHash);
+        return await _empresaRepositorio.CambiarPasswordAsync(idEmpresa, nuevoPasswordHash);
         // Si requiere un objeto DTO, usa:
         // return await _empresaRepositorio.CambiarPasswordAsync(new CambiarPasswordDTO { IdEmpresa = dto.IdEmpresa, PasswordHash = nuevoPasswordHash, PasswordSalt = nuevoPasswordSalt });
     }

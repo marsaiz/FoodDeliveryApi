@@ -219,6 +219,10 @@ namespace FoodDelivery.Persistencia.Migrations
                         .HasColumnType("text")
                         .HasColumnName("password_hash");
 
+                    b.Property<string>("PasswordSalt")
+                        .HasColumnType("text")
+                        .HasColumnName("password_salt");
+
                     b.Property<string>("Telefono")
                         .IsRequired()
                         .HasColumnType("text")
