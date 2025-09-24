@@ -26,6 +26,8 @@ builder.Services.AddScoped<IProductoServicio, ProductoServicio>();
 builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
 builder.Services.AddScoped<IDireccionClienteRepositorio, DireccionClienteRepositorio>();
 builder.Services.AddScoped<IDireccionClienteServicio, DireccionClienteServicio>();
+builder.Services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();
+builder.Services.AddScoped<IPedidoServicio, PedidoServicio>();
 
 builder.Services.AddControllers();
 

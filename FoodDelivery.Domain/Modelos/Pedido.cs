@@ -32,13 +32,13 @@ namespace FoodDelivery.Domain.Modelos
         public DateTime FechaHora { get; set; }
 
         [Column("total_pedido")]
-        public decimal TotalPeido { get; set; }
+        public decimal TotalPedido { get; set; }
 
         [Column("metodo_pago")]
         public string MetodoPago { get; set; }
 
         [Column("tipo_entrega")]
-        public string TipoEntrega { get; set; }
+        public TipoEntrega Entrega { get; set; }
 
         [Required]
         [Column("estado_pedido")]

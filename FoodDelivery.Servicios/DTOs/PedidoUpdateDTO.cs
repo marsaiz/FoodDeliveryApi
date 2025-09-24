@@ -1,10 +1,10 @@
+using FoodDelivery.Domain.Modelos;
+
 namespace FoodDelivery.Servicios.DTOs;
 
 public class PedidoUpdateDTO
 {
-    public DateTime FechaHora { get; set; }
-    public decimal TotalPedido { get; set; }
-    public string MetodoPago { get; set; }
-    public string TipoEntrega { get; set; }
-    public string EstadoPedido { get; set; }
+    public EstadoPedido Estado { get; set; } // Enum, no string
+    public string? MetodoPago { get; set; }
+    public TipoEntrega Entrega { get; set; }
 }

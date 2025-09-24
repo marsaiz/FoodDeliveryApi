@@ -3,79 +3,78 @@ using FoodDelivery.Servicios.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using FoodDelivery.Servicios.DTOs;
 
-namespace FoodDeliveryApi.API.Controllers
+namespace FoodDeliveryApi.API.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class AdicionalesController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class AdicionalesController : ControllerBase
+    private readonly IAdicionalServicio _adicionalService;
+
+    public AdicionalesController(IAdicionalServicio adicionalService)
     {
-        private readonly IAdicionalServicio _adicionalService;
+        _adicionalService = adicionalService;
+    }
 
-        public AdicionalesController(IAdicionalServicio adicionalService)
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Adicional>>> GetAll(Guid idEmpresa)
+    {
+        var adicionales = await _adicionalService.ObtenerAdicionalesPorEmpresaAsync(idEmpresa);
+        return Ok(adicionales);
+    }
+
+    [HttpGet("{idAdicional}/{idEmpresa}")]
+    public async Task<ActionResult<Adicional>> GetById(int idAdicional, Guid idEmpresa)
+    {
+        var adicionalSeleccionado = await _adicionalService.ObtenerAdicionalPorIdAsync(idAdicional, idEmpresa);
+        if (adicionalSeleccionado == null)
+            return NotFound();
+        return Ok(adicionalSeleccionado);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Create(AdicionalCreateDTO adicionalDTO)
+    {
+        var creado = await _adicionalService.CrearAdicionalAsync(adicionalDTO);
+
+        // Mapeo manual, a AdicionalDT. Hacía referencia circularn en el swagger.
+        //  En el servicio se recibe el DTO de AdicionalCreateDTO
+        var dto = new AdicionalDTO
         {
-            _adicionalService = adicionalService;
-        }
+            IdAdicional = creado.IdAdicional,
+            NombreAdicional = creado.NombreAdicional,
+            PrecioAdicional = creado.PrecioAdicional,
+            IdEmpresa = creado.IdEmpresa
+        };
+        // Suponiendo que 'creado' es el objeto Adicional creado y tiene IdAdicional y IdEmpresa
+        return CreatedAtAction(nameof(GetById), new { idAdicional = dto.IdAdicional, idEmpresa = dto.IdEmpresa }, dto);
+    }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Adicional>>> GetAll(Guid idEmpresa)
+    [HttpPut("{idAdicional}/{idEmpresa}")]
+    public async Task<ActionResult> Update(int idAdicional, Guid idEmpresa, [FromBody] AdicionalUpdateDTO adicionalDTO)
+    {
+        var adicionalUpdate = new AdicionalUpdateDTO
         {
-            var adicionales = await _adicionalService.ObtenerAdicionalesPorEmpresaAsync(idEmpresa);
-            return Ok(adicionales);
-        }
+            NombreAdicional = adicionalDTO.NombreAdicional,
+            PrecioAdicional = adicionalDTO.PrecioAdicional
+        };
 
-        [HttpGet("{idAdicional}/{idEmpresa}")]
-        public async Task<ActionResult<Adicional>> GetById(int idAdicional, Guid idEmpresa)
+        var actualizado = await _adicionalService.ActualizarAdicionalAsync(idAdicional, idEmpresa, adicionalUpdate);
+        if (actualizado == null)
+            return NotFound();
+
+        return NoContent();
+    }
+
+    [HttpDelete("{idAdicional}/{idEmpresa}")]
+    public async Task<ActionResult> Delete(int idAdicional, Guid idEmpresa)
+    {
+        var adicionalExistente = await _adicionalService.ObtenerAdicionalPorIdAsync(idAdicional, idEmpresa);
+        if (adicionalExistente == null)
         {
-            var adicionalSeleccionado = await _adicionalService.ObtenerAdicionalPorIdAsync(idAdicional, idEmpresa);
-            if (adicionalSeleccionado == null)
-                return NotFound();
-            return Ok(adicionalSeleccionado);
+            return NotFound();
         }
-
-        [HttpPost]
-        public async Task<ActionResult> Create(AdicionalCreateDTO adicionalDTO)
-        {
-            var creado = await _adicionalService.CrearAdicionalAsync(adicionalDTO);
-
-            // Mapeo manual, a AdicionalDT. Hacía referencia circularn en el swagger.
-            //  En el servicio se recibe el DTO de AdicionalCreateDTO
-            var dto = new AdicionalDTO
-            {
-                IdAdicional = creado.IdAdicional,
-                NombreAdicional = creado.NombreAdicional,
-                PrecioAdicional = creado.PrecioAdicional,
-                IdEmpresa = creado.IdEmpresa
-            };
-            // Suponiendo que 'creado' es el objeto Adicional creado y tiene IdAdicional y IdEmpresa
-            return CreatedAtAction(nameof(GetById), new { idAdicional = dto.IdAdicional, idEmpresa = dto.IdEmpresa }, dto);
-        }
-
-        [HttpPut("{idAdicional}/{idEmpresa}")]
-        public async Task<ActionResult> Update(int idAdicional, Guid idEmpresa, [FromBody] AdicionalUpdateDTO adicionalDTO)
-        {
-            var adicionalUpdate = new AdicionalUpdateDTO
-            {
-                NombreAdicional = adicionalDTO.NombreAdicional,
-                PrecioAdicional = adicionalDTO.PrecioAdicional
-            };
-
-            var actualizado = await _adicionalService.ActualizarAdicionalAsync(idAdicional, idEmpresa, adicionalUpdate);
-            if (actualizado == null)
-                return NotFound();
-
-            return NoContent();
-        }
-
-        [HttpDelete("{idAdicional}/{idEmpresa}")]
-        public async Task<ActionResult> Delete(int idAdicional, Guid idEmpresa)
-        {
-            var adicionalExistente = await _adicionalService.ObtenerAdicionalPorIdAsync(idAdicional, idEmpresa);
-            if (adicionalExistente == null)
-            {
-                return NotFound();
-            }
-            await _adicionalService.EliminarAdicionalAsync(idAdicional, idEmpresa);
-            return NoContent();
-        }
+        await _adicionalService.EliminarAdicionalAsync(idAdicional, idEmpresa);
+        return NoContent();
     }
 }
