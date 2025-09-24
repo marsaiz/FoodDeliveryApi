@@ -35,8 +35,10 @@ namespace FoodDelivery.Domain.Modelos
 
         [Column("usuario")]
         public string? Usuario { get; set; }
+
         [Column("password_hash")]
         public string? PasswordHash { get; set; }
+
         [Column("password_salt")]
         public string? PasswordSalt { get; set; }
         

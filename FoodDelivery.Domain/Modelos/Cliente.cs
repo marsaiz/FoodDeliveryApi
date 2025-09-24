@@ -21,6 +21,15 @@ namespace FoodDelivery.Domain.Modelos
         [Column("email_cliente")]
         public string? EmailCliente { get; set; }
 
+        [Column("usuario")]
+        public string? Usuario { get; set; }
+
+        [Column("password_hash")]
+        public string? PasswordHash { get; set; }
+
+        [Column("password_salt")]
+        public string? PasswordSalt { get; set; }
+
         // Propiedades de navegación para relaciones, uno a muchos o muchos a muchos.
         public ICollection<Pedido> Pedidos { get; set; }
         public ICollection<DireccionCliente> Direcciones { get; set; }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Domain\\FoodDelivery.Domain.csproj": {}
+    "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/FoodDelivery.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Domain\\FoodDelivery.Domain.csproj": {
+    "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/FoodDelivery.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Domain\\FoodDelivery.Domain.csproj",
+        "projectUniqueName": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/FoodDelivery.Domain.csproj",
         "projectName": "FoodDelivery.Domain",
-        "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Domain\\FoodDelivery.Domain.csproj",
-        "packagesPath": "C:\\Users\\marsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Domain\\obj\\",
+        "projectPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/FoodDelivery.Domain.csproj",
+        "packagesPath": "/home/marcelo/.nuget/packages/",
+        "outputPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\marsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/marcelo/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -32,11 +32,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -68,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.119/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
