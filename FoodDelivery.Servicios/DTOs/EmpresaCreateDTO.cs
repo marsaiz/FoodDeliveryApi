@@ -10,5 +10,4 @@ public class EmpresaCreateDTO
     public decimal? Longitud { get; set; }
     public string Usuario { get; set; } // Para registrarse en el sistema
     public string Password { get; set; }
-    
 }

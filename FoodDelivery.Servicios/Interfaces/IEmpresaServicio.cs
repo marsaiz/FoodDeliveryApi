@@ -8,9 +8,9 @@ public interface IEmpresaServicio
     Task<Empresa> CrearEmpresaAsync(EmpresaCreateDTO empresaDTO);
     Task<Empresa> ActualizarEmpresaAsync(EmpresaUpdateDTO empresaDTO);
     Task<bool> EliminarEmpresaAsync(Guid idEmpresa);
-    Task<Empresa> ObtenerEmpresaPorIdAsync(Guid idEmpresa);
-    Task<List<Empresa>> ObtenerEmpresasAsync();
-    Task<Empresa> ObtenerEmpresaPorUsuarioAsync(string usuario);
-    Task<Empresa> ObtenerEmpresaPorEmailAsync(string email);
+    Task<EmpresaDTO> ObtenerEmpresaPorIdAsync(Guid idEmpresa);
+    Task<List<EmpresaDTO>> ObtenerEmpresasAsync();
+    Task<EmpresaDTO> ObtenerEmpresaPorUsuarioAsync(string usuario);
+    Task<EmpresaDTO> ObtenerEmpresaPorEmailAsync(string email);
     Task<bool> CambiarPasswordAsync(Guid idEmpresa, EmpresaChangePasswordDTO dto);
 }

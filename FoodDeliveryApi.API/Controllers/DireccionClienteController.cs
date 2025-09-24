@@ -31,20 +31,43 @@ public class DireccionClienteController : ControllerBase
         return Ok(direccionSeleccionada);
     }
     [HttpPost]
-    public async Task<ActionResult<DireccionCliente>> Create(DireccionClienteDTO direccionDto)
+    public async Task<ActionResult<DireccionCliente>> Create(DireccionClienteCreateDTO direccionDto)
     {
         var nuevaDireccion = await _direccionClienteServicio.CrearDireccionClienteAsync(direccionDto);
-        return CreatedAtAction(nameof(GetById), new { idDireccion = nuevaDireccion.IdDireccionCliente, idCliente = nuevaDireccion.IdCliente }, nuevaDireccion);
+
+        var dto = new DireccionClienteDTO
+        {
+            IdDireccionCliente = nuevaDireccion.IdDireccionCliente,
+            Calle = nuevaDireccion.Calle,
+            Numero = nuevaDireccion.Numero,
+            PisoDepto = nuevaDireccion.PisoDepto,
+            Ciudad = nuevaDireccion.Ciudad,
+            CodigoPostal = nuevaDireccion.CodigoPostal,
+            Referencia = nuevaDireccion.Referencia,
+            Latitud = nuevaDireccion.Latitud,
+            Longitud = nuevaDireccion.Longitud,
+            IdCliente = nuevaDireccion.IdCliente
+        };
+        return CreatedAtAction(nameof(GetById), new { idDireccion = nuevaDireccion.IdDireccionCliente, idCliente = nuevaDireccion.IdCliente }, dto);
     }
 
-    [HttpPut("{idDireccion}")]
-    public async Task<ActionResult> Update(int idDireccion, DireccionClienteDTO direccionDto)
+    [HttpPut("{idDireccion}/{idCliente}")]
+    public async Task<ActionResult> Update(int idDireccion, Guid idCliente, DireccionClienteUpdateDTO direccionDto)
     {
-        if (idDireccion != direccionDto.IdDireccionCliente)
-            return BadRequest();
+       var direccionClienteUpdate = new DireccionClienteUpdateDTO
+        {
+            Calle = direccionDto.Calle,
+            Numero = direccionDto.Numero,
+            PisoDepto = direccionDto.PisoDepto,
+            Ciudad = direccionDto.Ciudad,
+            CodigoPostal = direccionDto.CodigoPostal,
+            Referencia = direccionDto.Referencia,
+            Latitud = direccionDto.Latitud,
+            Longitud = direccionDto.Longitud
+        };
 
-        var resultado = await _direccionClienteServicio.ActualizarDireccionClienteAsync(direccionDto);
-        if (resultado == null)
+        var actualizado = await _direccionClienteServicio.ActualizarDireccionClienteAsync(idDireccion, idCliente, direccionClienteUpdate);
+        if (actualizado == null)
             return NotFound();
 
         return NoContent();
@@ -55,9 +78,11 @@ public class DireccionClienteController : ControllerBase
     public async Task<ActionResult> Delete(int idDireccion, Guid idCliente)
     {
         var resultado = await _direccionClienteServicio.EliminarDireccionClienteAsync(idDireccion, idCliente);
-        if (!resultado)
+        if (resultado == null)
+        {
             return NotFound();
-
+        }
+        await _direccionClienteServicio.EliminarDireccionClienteAsync(idDireccion, idCliente);
         return NoContent();
     }
 }

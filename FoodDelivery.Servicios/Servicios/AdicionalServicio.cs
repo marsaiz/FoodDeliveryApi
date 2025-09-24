@@ -54,12 +54,29 @@ public class AdicionalServicio : IAdicionalServicio
         return await _adicionalRepositorio.EliminarAdicionalAsync(idAdicional, idEmpresa);
     }
 
-    public async Task<Adicional> ObtenerAdicionalPorIdAsync(int idAdicional, Guid idEmpresa)
+    public async Task<AdicionalDTO> ObtenerAdicionalPorIdAsync(int idAdicional, Guid idEmpresa)
     {
-        return await _adicionalRepositorio.ObtenerAdicionalPorIdAsync(idAdicional, idEmpresa);
+        var adicional = await _adicionalRepositorio.ObtenerAdicionalPorIdAsync(idAdicional, idEmpresa);
+        if (adicional == null)
+            return null;
+
+        return new AdicionalDTO
+        {
+            IdAdicional = adicional.IdAdicional,
+            NombreAdicional = adicional.NombreAdicional,
+            PrecioAdicional = adicional.PrecioAdicional,
+            IdEmpresa = adicional.IdEmpresa
+        };
     }
-    public async Task<List<Adicional>> ObtenerAdicionalesPorEmpresaAsync(Guid idEmpresa)
+    public async Task<List<AdicionalDTO>> ObtenerAdicionalesPorEmpresaAsync(Guid idEmpresa)
     {
-        return await _adicionalRepositorio.ObtenerAdicionalesPorEmpresaAsync(idEmpresa);
+        var adicionales = await _adicionalRepositorio.ObtenerAdicionalesPorEmpresaAsync(idEmpresa);
+        return adicionales.Select(a => new AdicionalDTO
+        {
+            IdAdicional = a.IdAdicional,
+            NombreAdicional = a.NombreAdicional,
+            PrecioAdicional = a.PrecioAdicional,
+            IdEmpresa = a.IdEmpresa
+        }).ToList();
     }
 }

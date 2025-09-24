@@ -53,13 +53,28 @@ public class CategoriaServicio : ICategoriaServicio
         return await _categoriaRepositorio.EliminarCategoriaAsync(idCategoria, idEmpresa);
     }
 
-    public async Task<Categoria> ObtenerCategoriaPorIdAsync(int idCategoria, Guid idEmpresa)
+    public async Task<CategoriaDTO> ObtenerCategoriaPorIdAsync(int idCategoria, Guid idEmpresa)
     {
-        return await _categoriaRepositorio.ObtenerCategoriaPorIdAsync(idCategoria, idEmpresa);
+        var categoria = await _categoriaRepositorio.ObtenerCategoriaPorIdAsync(idCategoria, idEmpresa);
+        if (categoria == null)
+            return null;
+
+        return new CategoriaDTO
+        {
+            IdCategoria = categoria.IdCategoria,
+            NombreCategoria = categoria.NombreCategoria,
+            IdEmpresa = categoria.IdEmpresa
+        };
     }
 
-    public async Task<List<Categoria>> ObtenerCategoriasPorEmpresaAsync(Guid idEmpresa)
+    public async Task<List<CategoriaDTO>> ObtenerCategoriasPorEmpresaAsync(Guid idEmpresa)
     {
-        return await _categoriaRepositorio.ObtenerCategoriasPorEmpresaAsync(idEmpresa);
+        var categorias = await _categoriaRepositorio.ObtenerCategoriasPorEmpresaAsync(idEmpresa);
+        return categorias.Select(c => new CategoriaDTO
+        {
+            IdCategoria = c.IdCategoria,
+            NombreCategoria = c.NombreCategoria,
+            IdEmpresa = c.IdEmpresa
+        }).ToList();
     }
 }

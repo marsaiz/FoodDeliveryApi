@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
 using System;
 
-
 namespace FoodDelivery.Domain.Modelos
 {
-
     public enum EstadoPedido
     {
         Pendiente,
@@ -14,6 +12,12 @@ namespace FoodDelivery.Domain.Modelos
         EnCamino,
         Entregado,
         Cancelado
+    }
+    public enum TipoEntrega
+    {
+        Domicilio,
+        ParaLlevar,
+        EnLocal
     }
 
     [Table("pedidos")]
@@ -51,8 +55,10 @@ namespace FoodDelivery.Domain.Modelos
         // Propiedades de navegación 
         [ForeignKey("IdCliente")]
         public Cliente Cliente { get; set; }
+
         [ForeignKey("IdEmpresa")]
         public Empresa Empresa { get; set; }
+
         [ForeignKey("IdDireccionCliente")]
         public DireccionCliente DireccionEntrega { get; set; }
 

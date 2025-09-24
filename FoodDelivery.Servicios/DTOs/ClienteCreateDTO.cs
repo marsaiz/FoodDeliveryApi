@@ -10,5 +10,7 @@ public class ClienteCreateDTO
     public string NombreCliente { get; set; }
     public string? TelefonoCliente { get; set; }
     public string? EmailCliente { get; set; }
+    public string Usuario { get; set; } // Para registrarse en el sistema
+    public string Password { get; set; }
 }
 // Note: Changed Nombre to NombreCliente to match the domain model.

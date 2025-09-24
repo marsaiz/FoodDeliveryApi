@@ -8,7 +8,10 @@ namespace FoodDelivery.Servicios.Interfaces
         Task<Cliente> CrearClienteAsync(ClienteCreateDTO cliente);
         Task<Cliente> ActualizarClienteAsync(ClienteUpdateDTO cliente);
         Task<bool> EliminarClienteAsync(Guid idCliente);
-        Task<Cliente> ObtenerClientePorIdAsync(Guid idCliente);
-        Task<List<Cliente>> ObtenerClientesAsync();
+        Task<ClienteDTO> ObtenerClientePorIdAsync(Guid idCliente);
+        Task<List<ClienteDTO>> ObtenerClientesAsync();
+        Task<bool> CambiarPasswordAsync(Guid idCliente, ClienteChangePasswordDTO dto);
+        Task<ClienteDTO> ObtenerClientePorUsuarioAsync(string usuario);
+        Task<ClienteDTO> ObtenerClientePorEmailAsync(string email);
     }
 }

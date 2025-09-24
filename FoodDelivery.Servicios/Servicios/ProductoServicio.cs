@@ -17,14 +17,35 @@ public class ProductoServicio : IProductoServicio
         _categoriaRepositorio = categoriaRepositorio;
     }
 
-    public async Task<List<Producto>> ObtenerProductosPorEmpresaAsync(Guid idEmpresa)
+    public async Task<List<ProductoDTO>> ObtenerProductosPorEmpresaAsync(Guid idEmpresa)
     {
-        return await _productoRepositorio.ObtenerProductosPorEmpresaAsync(idEmpresa);
+        var productos = await _productoRepositorio.ObtenerProductosPorEmpresaAsync(idEmpresa);
+        return productos.Select(p => new ProductoDTO
+        {
+            IdProducto = p.IdProducto,
+            NombreProducto = p.NombreProducto,
+            DescripcionProducto = p.DescripcionProducto,
+            PrecioProducto = p.PrecioProducto,
+            ImagenUrl = p.ImagenUrl,
+            IdCategoria = p.IdCategoria,
+            IdEmpresa = p.IdEmpresa
+        }).ToList();
     }
 
-    public async Task<Producto> ObtenerProductoPorIdAsync(int idProducto, Guid idEmpresa)
+    public async Task<ProductoDTO> ObtenerProductoPorIdAsync(int idProducto, Guid idEmpresa)
     {
-        return await _productoRepositorio.ObtenerProductoPorIdAsync(idProducto, idEmpresa);
+        var producto = await _productoRepositorio.ObtenerProductoPorIdAsync(idProducto, idEmpresa);
+        if (producto == null) return null;
+        return new ProductoDTO
+        {
+            IdProducto = producto.IdProducto,
+            NombreProducto = producto.NombreProducto,
+            DescripcionProducto = producto.DescripcionProducto,
+            PrecioProducto = producto.PrecioProducto,
+            ImagenUrl = producto.ImagenUrl,
+            IdCategoria = producto.IdCategoria,
+            IdEmpresa = producto.IdEmpresa
+        };
     }
 
     public async Task<Producto> CrearProductoAsync(ProductoCreateDTO ProductoDTO)

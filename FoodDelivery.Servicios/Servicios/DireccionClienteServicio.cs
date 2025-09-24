@@ -15,7 +15,7 @@ public class DireccionClienteServicio : IDireccionClienteServicio
         _clienteRepositorio = clienteRepositorio;
     }
 
-    public async Task<DireccionCliente> CrearDireccionClienteAsync(DireccionClienteDTO direccionDto)
+    public async Task<DireccionCliente> CrearDireccionClienteAsync(DireccionClienteCreateDTO direccionDto)
     {
         var clienteExistente = await _clienteRepositorio.ObtenerClientePorIdAsync(direccionDto.IdCliente);
         if (clienteExistente == null)
@@ -37,19 +37,11 @@ public class DireccionClienteServicio : IDireccionClienteServicio
         return await _direccionClienteRepositorio.CrearDireccionClienteAsync(direccion);
     }
 
-    public async Task<DireccionCliente> ActualizarDireccionClienteAsync(DireccionClienteDTO direccionDto)
+    public async Task<DireccionCliente> ActualizarDireccionClienteAsync(int idDireccionCliente, Guid idCliente, DireccionClienteUpdateDTO direccionDto)
     {
-        if (direccionDto.IdDireccionCliente == null)
-        {
-            throw new ArgumentException("El IdDireccionCliente no puede ser nulo para actualizar una dirección.");
-        }
-
-        var direccionExistente = await _direccionClienteRepositorio.ObtenerDireccionClientePorIdAsync(direccionDto.IdDireccionCliente.Value, Guid.Empty);
-        if (direccionExistente == null)
-        {
-            throw new KeyNotFoundException("No se encontró la dirección del cliente.");
-        }
-
+        var direccionExistente = await _direccionClienteRepositorio.ObtenerDireccionClientePorIdAsync(idDireccionCliente, idCliente);
+        if (direccionExistente == null) return null;
+            
         // Actualizar los campos de la dirección existente
         direccionExistente.Calle = direccionDto.Calle;
         direccionExistente.Numero = direccionDto.Numero;
@@ -68,13 +60,42 @@ public class DireccionClienteServicio : IDireccionClienteServicio
         return await _direccionClienteRepositorio.EliminarDireccionClienteAsync(idDireccion, idCliente);
     }
 
-    public async Task<DireccionCliente> ObtenerDireccionClientePorIdAsync(int idDireccion, Guid idCliente)
+    public async Task<DireccionClienteDTO> ObtenerDireccionClientePorIdAsync(int idDireccion, Guid idCliente)
     {
-        return await _direccionClienteRepositorio.ObtenerDireccionClientePorIdAsync(idDireccion, idCliente);
+        var direccion = await _direccionClienteRepositorio.ObtenerDireccionClientePorIdAsync(idDireccion, idCliente);
+        if (direccion == null)
+            return null;
+
+        return new DireccionClienteDTO
+        {
+            IdDireccionCliente = direccion.IdDireccionCliente,
+            Calle = direccion.Calle,
+            Numero = direccion.Numero,
+            PisoDepto = direccion.PisoDepto,
+            Ciudad = direccion.Ciudad,
+            CodigoPostal = direccion.CodigoPostal,
+            Referencia = direccion.Referencia,
+            Latitud = direccion.Latitud,
+            Longitud = direccion.Longitud,
+            IdCliente = direccion.IdCliente
+        };
     }
 
-    public async Task<List<DireccionCliente>> ObtenerDireccionesPorClienteAsync(Guid idCliente)
+    public async Task<List<DireccionClienteDTO>> ObtenerDireccionesPorClienteAsync(Guid idCliente)
     {
-        return await _direccionClienteRepositorio.ObtenerDireccionesPorClienteAsync(idCliente);
+        var direcciones = await _direccionClienteRepositorio.ObtenerDireccionesPorClienteAsync(idCliente);
+        return direcciones.Select(d => new DireccionClienteDTO
+        {
+            IdDireccionCliente = d.IdDireccionCliente,
+            Calle = d.Calle,
+            Numero = d.Numero,
+            PisoDepto = d.PisoDepto,
+            Ciudad = d.Ciudad,
+            CodigoPostal = d.CodigoPostal,
+            Referencia = d.Referencia,
+            Latitud = d.Latitud,
+            Longitud = d.Longitud,
+            IdCliente = d.IdCliente
+        }).ToList();
     }
 }

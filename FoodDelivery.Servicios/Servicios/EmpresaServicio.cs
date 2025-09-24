@@ -1,6 +1,7 @@
 using FoodDelivery.Domain.Modelos;
 using FoodDelivery.Servicios.Interfaces;
 using FoodDelivery.Servicios.DTOs;
+using static FoodDelivery.Servicios.Utils.PasswordHelper;
 
 namespace FoodDelivery.Servicios.Servicios;
 
@@ -48,14 +49,38 @@ public class EmpresaServicio : IEmpresaServicio
         return empresa;
     }
 
-    public async Task<Empresa> ObtenerEmpresaPorUsuarioAsync(string usuario)
+    public async Task<EmpresaDTO> ObtenerEmpresaPorUsuarioAsync(string usuario)
     {
-        return await _empresaRepositorio.ObtenerEmpresaPorUsuarioAsync(usuario);
+        var empresa = await _empresaRepositorio.ObtenerEmpresaPorUsuarioAsync(usuario);
+        if (empresa == null) return null;
+        return new EmpresaDTO
+        {
+            IdEmpresa = empresa.IdEmpresa,
+            Nombre = empresa.Nombre,
+            Direccion = empresa.Direccion,
+            Telefono = empresa.Telefono,
+            Email = empresa.Email,
+            Latitud = empresa.Latitud,
+            Longitud = empresa.Longitud,
+            Usuario = empresa.Usuario
+        };
     }
 
-    public async Task<Empresa> ObtenerEmpresaPorEmailAsync(string email)
+    public async Task<EmpresaDTO> ObtenerEmpresaPorEmailAsync(string email)
     {
-        return await _empresaRepositorio.ObtenerEmpresaPorEmailAsync(email);
+        var empresa = await _empresaRepositorio.ObtenerEmpresaPorEmailAsync(email);
+        if (empresa == null) return null;
+        return new EmpresaDTO
+        {
+            IdEmpresa = empresa.IdEmpresa,
+            Nombre = empresa.Nombre,
+            Direccion = empresa.Direccion,
+            Telefono = empresa.Telefono,
+            Email = empresa.Email,
+            Latitud = empresa.Latitud,
+            Longitud = empresa.Longitud,
+            Usuario = empresa.Usuario
+        };
     }
 
     public async Task<Empresa> ActualizarEmpresaAsync(EmpresaUpdateDTO empresaDTO)
@@ -78,14 +103,37 @@ public class EmpresaServicio : IEmpresaServicio
         return await _empresaRepositorio.EliminarEmpresaAsync(idEmpresa);
     }
 
-    public async Task<Empresa> ObtenerEmpresaPorIdAsync(Guid idEmpresa)
+    public async Task<EmpresaDTO> ObtenerEmpresaPorIdAsync(Guid idEmpresa)
     {
-        return await _empresaRepositorio.ObtenerEmpresaPorIdAsync(idEmpresa);
+        var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(idEmpresa);
+        if (empresa == null) return null;
+        return new EmpresaDTO
+        {
+            IdEmpresa = empresa.IdEmpresa,
+            Nombre = empresa.Nombre,
+            Direccion = empresa.Direccion,
+            Telefono = empresa.Telefono,
+            Email = empresa.Email,
+            Latitud = empresa.Latitud,
+            Longitud = empresa.Longitud,
+            Usuario = empresa.Usuario
+        };
     }
 
-    public async Task<List<Empresa>> ObtenerEmpresasAsync()
+    public async Task<List<EmpresaDTO>> ObtenerEmpresasAsync()
     {
-        return await _empresaRepositorio.ObtenerEmpresasAsync();
+        var empresas = await _empresaRepositorio.ObtenerEmpresasAsync();
+        return empresas.Select(e => new EmpresaDTO
+        {
+            IdEmpresa = e.IdEmpresa,
+            Nombre = e.Nombre,
+            Direccion = e.Direccion,
+            Telefono = e.Telefono,
+            Email = e.Email,
+            Latitud = e.Latitud,
+            Longitud = e.Longitud,
+            Usuario = e.Usuario
+        }).ToList();
     }
 
     public async Task<bool> CambiarPasswordAsync(Guid idEmpresa, EmpresaChangePasswordDTO dto)
@@ -108,28 +156,5 @@ public class EmpresaServicio : IEmpresaServicio
         return await _empresaRepositorio.CambiarPasswordAsync(idEmpresa, nuevoPasswordHash);
         // Si requiere un objeto DTO, usa:
         // return await _empresaRepositorio.CambiarPasswordAsync(new CambiarPasswordDTO { IdEmpresa = dto.IdEmpresa, PasswordHash = nuevoPasswordHash, PasswordSalt = nuevoPasswordSalt });
-    }
-
-    private string GenerateSalt()
-    {
-        // Genera un salt aleatorio (implementación simple, usa una más robusta en producción)
-        byte[] saltBytes = new byte[16];
-        using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())
-        {
-            rng.GetBytes(saltBytes);
-        }
-        return Convert.ToBase64String(saltBytes);
-    }
-    // Método simple de hashing de contraseña (usa una implementación real en producción)
-    private string HashPassword(string password, string salt) // Hashing simple, reemplazar con lógica real
-    {
-        // Ejemplo simple usando SHA256, reemplaza por tu lógica real de hashing y salting
-        using (var sha256 = System.Security.Cryptography.SHA256.Create())
-        {
-            var combined = password + salt;
-            var bytes = System.Text.Encoding.UTF8.GetBytes(combined);
-            var hash = sha256.ComputeHash(bytes);
-            return Convert.ToBase64String(hash);
-        }
-    }
+    }    
 }
