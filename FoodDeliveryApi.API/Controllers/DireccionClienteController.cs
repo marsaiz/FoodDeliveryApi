@@ -16,7 +16,7 @@ public class DireccionClienteController : ControllerBase
         _direccionClienteServicio = direccionClienteServicio;
     }
 
-    [HttpGet]
+    [HttpGet("cliente/{idCliente}")]
     public async Task<ActionResult<IEnumerable<DireccionCliente>>> GetAll(Guid idCliente)
     {
         var direcciones = await _direccionClienteServicio.ObtenerDireccionesPorClienteAsync(idCliente);

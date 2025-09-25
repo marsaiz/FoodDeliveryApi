@@ -16,26 +16,76 @@ public class PedidoController : ControllerBase
         _pedidoServicio = pedidoServicio;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CrearPedido([FromBody] PedidoCreateDTO nuevoPedido)
+    [HttpGet("empresa/{idEmpresa}")]
+    public async Task<ActionResult<IEnumerable<Pedido>>> GetAllForEmpresa(Guid idEmpresa)
     {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
-        var pedidoCreado = await _pedidoServicio.CrearPedidoAsync(nuevoPedido);
-        return CreatedAtAction(nameof(ObtenerPedidoPorId), new { id = pedidoCreado.IdPedido }, pedidoCreado);
+        var pedidos = await _pedidoServicio.ObtenerPedidosPorEmpresaAsync(idEmpresa);
+        return Ok(pedidos);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> ObtenerPedidoPorId(int id)
+    [HttpGet("cliente/{idCliente}")]
+    public async Task<ActionResult<IEnumerable<Pedido>>> GetAllForCliente(Guid idCliente)
     {
-        var pedido = await _pedidoServicio.ObtenerPedidoPorIdAsync(id);
-        if (pedido == null)
+        var pedidos = await _pedidoServicio.ObtenerPedidosPorClienteAsync(idCliente);
+        return Ok(pedidos);
+    }
+
+    [HttpGet("{idPedido}/{idCliente}/{idEmpresa}")]
+    public async Task<ActionResult<Pedido>> GetById(int idPedido, Guid idCliente, Guid idEmpresa)
+    {
+        var pedidoSeleccionado = await _pedidoServicio.ObtenerPedidoPorIdAsync(idPedido, idCliente, idEmpresa);
+        if (pedidoSeleccionado == null)
             return NotFound();
-
-        return Ok(pedido);
+        return Ok(pedidoSeleccionado);
     }
 
-    // Otros métodos del controlador...
-}
+    [HttpPost]
+    public async Task<ActionResult<Pedido>> Create(PedidoCreateDTO pedidoDto)
+    {
+        var nuevoPedido = await _pedidoServicio.CrearPedidoAsync(pedidoDto);
+
+        var dto = new PedidoDTO
+        {
+            IdPedido = nuevoPedido.IdPedido,
+            FechaHora = nuevoPedido.FechaHora,
+            TotalPedido = nuevoPedido.TotalPedido,
+            Estado = nuevoPedido.Estado,
+            MetodoPago = nuevoPedido.MetodoPago,
+            Entrega = nuevoPedido.Entrega,
+            IdCliente = nuevoPedido.IdCliente,
+            IdEmpresa = nuevoPedido.IdEmpresa
+        };
+        return CreatedAtAction(nameof(GetById), new { idPedido = nuevoPedido.IdPedido, idCliente = nuevoPedido.IdCliente, idEmpresa = nuevoPedido.IdEmpresa }, dto);
+    }
+
+    [HttpPut("{idPedido}/{idCliente}/{idEmpresa}")]
+    public async Task<ActionResult> Update(int idPedido, Guid idCliente, Guid idEmpresa, PedidoUpdateDTO pedidoDto)
+    {
+        try
+        {
+            var actualizado = await _pedidoServicio.ActualizarPedidoAsync(idPedido, idCliente, idEmpresa, pedidoDto);
+            return Ok(actualizado);
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
+    }
+
+    [HttpDelete("{idPedido}/{idCliente}/{idEmpresa}")]
+    public async Task<ActionResult> Delete(int idPedido, Guid idCliente, Guid idEmpresa)
+    {
+        try
+        {
+            var eliminado = await _pedidoServicio.EliminarPedidoAsync(idPedido, idCliente, idEmpresa);
+            if (!eliminado)
+                return NotFound();
+
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
+    }
 }

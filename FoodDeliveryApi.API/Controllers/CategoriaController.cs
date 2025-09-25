@@ -16,7 +16,7 @@ public class CategoriaController : ControllerBase
         _categoriaServicio = categoriaServicio;
     }
 
-    [HttpGet]
+    [HttpGet("empresa/{idEmpresa}")]
     public async Task<ActionResult<IEnumerable<Categoria>>> GetAll(Guid idEmpresa)
     {
         var categorias = await _categoriaServicio.ObtenerCategoriasPorEmpresaAsync(idEmpresa);

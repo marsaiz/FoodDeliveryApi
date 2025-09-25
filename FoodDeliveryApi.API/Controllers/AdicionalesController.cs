@@ -16,7 +16,7 @@ public class AdicionalesController : ControllerBase
         _adicionalService = adicionalService;
     }
 
-    [HttpGet]
+    [HttpGet("empresa/{idEmpresa}")]
     public async Task<ActionResult<IEnumerable<Adicional>>> GetAll(Guid idEmpresa)
     {
         var adicionales = await _adicionalService.ObtenerAdicionalesPorEmpresaAsync(idEmpresa);

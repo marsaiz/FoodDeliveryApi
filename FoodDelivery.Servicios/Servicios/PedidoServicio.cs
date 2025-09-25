@@ -81,7 +81,7 @@ public class PedidoServicio : IPedidoServicio
         };
     }
 
-    public async Task<List<PedidoDTO>> ObtenerPedidosPorClienteAsync(int idPedido, Guid idCliente)
+    public async Task<List<PedidoDTO>> ObtenerPedidosPorClienteAsync(Guid idCliente)
     {
         var pedidos = await _pedidoRepositorio.ObtenerPedidosPorClienteAsync(idCliente);
         return pedidos.Select(p => new PedidoDTO
@@ -95,7 +95,7 @@ public class PedidoServicio : IPedidoServicio
         }).ToList();
     }
 
-    public async Task<List<PedidoDTO>> ObtenerPedidosPorEmpresaAsync(int idPedido, Guid idEmpresa)
+    public async Task<List<PedidoDTO>> ObtenerPedidosPorEmpresaAsync(Guid idEmpresa)
     {
         var pedidos = await _pedidoRepositorio.ObtenerPedidosPorEmpresaAsync(idEmpresa);
         return pedidos.Select(p => new PedidoDTO
