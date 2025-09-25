@@ -1,7 +1,6 @@
 using FoodDelivery.Domain.Modelos;
 
-namespace FoodDelivery.Servicios.Interfaces;
-
+namespace FoodDelivery.Persistencia.Interfaces;
 public interface IProductoRepositorio
 {
     Task<List<Producto>> ObtenerProductosPorEmpresaAsync(Guid idEmpresa);

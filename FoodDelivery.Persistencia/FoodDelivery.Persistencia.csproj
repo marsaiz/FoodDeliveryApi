@@ -10,7 +10,7 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FoodDelivery.Servicios\FoodDelivery.Servicios.csproj" />
+    <ProjectReference Include="..\FoodDelivery.Domain\FoodDelivery.Domain.csproj" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>

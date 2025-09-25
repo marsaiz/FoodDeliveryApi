@@ -1,6 +1,7 @@
 using FoodDelivery.Servicios.Interfaces;
 using FoodDelivery.Domain.Modelos;
 using FoodDelivery.Servicios.DTOs;
+using FoodDelivery.Persistencia.Interfaces;
 
 namespace FoodDelivery.Servicios.Servicios;
 
@@ -15,7 +16,7 @@ public class DireccionClienteServicio : IDireccionClienteServicio
         _clienteRepositorio = clienteRepositorio;
     }
 
-    public async Task<DireccionCliente> CrearDireccionClienteAsync(DireccionClienteCreateDTO direccionDto)
+    public async Task<DireccionClienteDTO> CrearDireccionClienteAsync(DireccionClienteCreateDTO direccionDto)
     {
         var clienteExistente = await _clienteRepositorio.ObtenerClientePorIdAsync(direccionDto.IdCliente);
         if (clienteExistente == null)
@@ -34,10 +35,23 @@ public class DireccionClienteServicio : IDireccionClienteServicio
             IdCliente = direccionDto.IdCliente
         };
 
-        return await _direccionClienteRepositorio.CrearDireccionClienteAsync(direccion);
+        var direccionCreada = await _direccionClienteRepositorio.CrearDireccionClienteAsync(direccion);
+        return new DireccionClienteDTO
+        {
+            IdDireccionCliente = direccionCreada.IdDireccionCliente,
+            Calle = direccionCreada.Calle,
+            Numero = direccionCreada.Numero,
+            PisoDepto = direccionCreada.PisoDepto,
+            Ciudad = direccionCreada.Ciudad,
+            CodigoPostal = direccionCreada.CodigoPostal,
+            Referencia = direccionCreada.Referencia,
+            Latitud = direccionCreada.Latitud,
+            Longitud = direccionCreada.Longitud,
+            IdCliente = direccionCreada.IdCliente
+        };
     }
 
-    public async Task<DireccionCliente> ActualizarDireccionClienteAsync(int idDireccionCliente, Guid idCliente, DireccionClienteUpdateDTO direccionDto)
+    public async Task<DireccionClienteDTO> ActualizarDireccionClienteAsync(int idDireccionCliente, Guid idCliente, DireccionClienteUpdateDTO direccionDto)
     {
         var direccionExistente = await _direccionClienteRepositorio.ObtenerDireccionClientePorIdAsync(idDireccionCliente, idCliente);
         if (direccionExistente == null) return null;
@@ -52,7 +66,20 @@ public class DireccionClienteServicio : IDireccionClienteServicio
         direccionExistente.Latitud = direccionDto.Latitud;
         direccionExistente.Longitud = direccionDto.Longitud;
 
-        return await _direccionClienteRepositorio.ActualizarDireccionClienteAsync(direccionExistente);
+        var direccionActualizada = await _direccionClienteRepositorio.ActualizarDireccionClienteAsync(direccionExistente);
+        return new DireccionClienteDTO
+        {
+            IdDireccionCliente = direccionActualizada.IdDireccionCliente,
+            Calle = direccionActualizada.Calle,
+            Numero = direccionActualizada.Numero,
+            PisoDepto = direccionActualizada.PisoDepto,
+            Ciudad = direccionActualizada.Ciudad,
+            CodigoPostal = direccionActualizada.CodigoPostal,
+            Referencia = direccionActualizada.Referencia,
+            Latitud = direccionActualizada.Latitud,
+            Longitud = direccionActualizada.Longitud,
+            IdCliente = direccionActualizada.IdCliente
+        };
     }
 
     public async Task<bool> EliminarDireccionClienteAsync(int idDireccion, Guid idCliente)

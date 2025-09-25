@@ -1,6 +1,7 @@
 using FoodDelivery.Domain.Modelos;
 using FoodDelivery.Servicios.Interfaces;
 using FoodDelivery.Servicios.DTOs;
+using FoodDelivery.Persistencia.Interfaces;
 using static FoodDelivery.Servicios.Utils.PasswordHelper;
 
 namespace FoodDelivery.Servicios.Servicios;
@@ -14,7 +15,7 @@ public class ClienteServicio : IClienteServicio
         _clienteRepositorio = clienteRepositorio;
     }
 
-    public async Task<Cliente> CrearClienteAsync(ClienteCreateDTO clienteDTO)
+    public async Task<ClienteDTO> CrearClienteAsync(ClienteCreateDTO clienteDTO)
     {
         // Verificar si el usuario o email ya existen podría ser una buena práctica aquí.
         var clienteExistentePorUsuario = await _clienteRepositorio.ObtenerClientePorUsuarioAsync(clienteDTO.EmailCliente);
@@ -41,10 +42,17 @@ public class ClienteServicio : IClienteServicio
             PasswordSalt = salt,
         };
         await _clienteRepositorio.CrearClienteAsync(nuevoCliente);
-        return nuevoCliente;
+        return new ClienteDTO
+        {
+            IdCliente = nuevoCliente.IdCliente,
+            NombreCliente = nuevoCliente.NombreCliente,
+            EmailCliente = nuevoCliente.EmailCliente,
+            TelefonoCliente = nuevoCliente.TelefonoCliente,
+            Usuario = nuevoCliente.Usuario
+        };
     }
 
-    public async Task<Cliente> ActualizarClienteAsync(ClienteUpdateDTO clienteDTO)
+    public async Task<ClienteDTO> ActualizarClienteAsync(ClienteUpdateDTO clienteDTO)
     {
         if (clienteDTO.IdCliente == null || clienteDTO.IdCliente == Guid.Empty)
         {
@@ -58,7 +66,15 @@ public class ClienteServicio : IClienteServicio
         clienteExistente.EmailCliente = clienteDTO.EmailCliente;
         clienteExistente.TelefonoCliente = clienteDTO.TelefonoCliente;
 
-        return await _clienteRepositorio.ActualizarClienteAsync(clienteExistente);
+        var clienteActualizado = await _clienteRepositorio.ActualizarClienteAsync(clienteExistente);
+        return new ClienteDTO
+        {
+            IdCliente = clienteActualizado.IdCliente,
+            NombreCliente = clienteActualizado.NombreCliente,
+            EmailCliente = clienteActualizado.EmailCliente,
+            TelefonoCliente = clienteActualizado.TelefonoCliente,
+            Usuario = clienteActualizado.Usuario
+        };
     }
 
     public async Task<bool> EliminarClienteAsync(Guid idCliente)

@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <ProjectReference Include="..\FoodDelivery.Persistencia\FoodDelivery.Persistencia.csproj" />
     <ProjectReference Include="..\FoodDelivery.Domain\FoodDelivery.Domain.csproj" />
   </ItemGroup>
   <PropertyGroup>

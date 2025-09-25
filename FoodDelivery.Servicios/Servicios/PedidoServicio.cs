@@ -1,6 +1,7 @@
 using FoodDelivery.Domain.Modelos;
 using FoodDelivery.Servicios.Interfaces;
 using FoodDelivery.Servicios.DTOs;
+using FoodDelivery.Persistencia.Interfaces;
 
 namespace FoodDelivery.Servicios.Servicios;
 
@@ -17,7 +18,7 @@ public class PedidoServicio : IPedidoServicio
         _empresaRepositorio = empresaRepositorio;
     }
 
-    public async Task<Pedido> CrearPedidoAsync(PedidoCreateDTO pedidoDTO)
+    public async Task<PedidoDTO> CrearPedidoAsync(PedidoCreateDTO pedidoDTO)
     {
         var cliente = await _clienteRepositorio.ObtenerClientePorIdAsync(pedidoDTO.IdCliente);
         if (cliente == null)
@@ -39,10 +40,19 @@ public class PedidoServicio : IPedidoServicio
             Entrega = pedidoDTO.Entrega
         };
 
-        return await _pedidoRepositorio.CrearPedidoAsync(nuevoPedido);
+        var pedidoCreado = await _pedidoRepositorio.CrearPedidoAsync(nuevoPedido);
+        return new PedidoDTO
+        {
+            IdPedido = pedidoCreado.IdPedido,
+            IdCliente = pedidoCreado.IdCliente,
+            IdEmpresa = pedidoCreado.IdEmpresa,
+            FechaHora = pedidoCreado.FechaHora,
+            Estado = pedidoCreado.Estado,
+            TotalPedido = pedidoCreado.TotalPedido
+        };
     }
 
-    public async Task<Pedido> ActualizarPedidoAsync(int idPedido, Guid idCliente, Guid idEmpresa, PedidoUpdateDTO pedidoDTO)
+    public async Task<PedidoDTO> ActualizarPedidoAsync(int idPedido, Guid idCliente, Guid idEmpresa, PedidoUpdateDTO pedidoDTO)
 {
     var pedidoExistente = await _pedidoRepositorio.ObtenerPedidoPorIdAsync(idPedido, idCliente, idEmpresa);
     if (pedidoExistente == null)
@@ -53,7 +63,16 @@ public class PedidoServicio : IPedidoServicio
     pedidoExistente.MetodoPago = pedidoDTO.MetodoPago ?? pedidoExistente.MetodoPago;
     pedidoExistente.Entrega = pedidoDTO.Entrega;
 
-    return await _pedidoRepositorio.ActualizarPedidoAsync(pedidoExistente);
+    var pedidoActualizado = await _pedidoRepositorio.ActualizarPedidoAsync(pedidoExistente);
+    return new PedidoDTO
+    {
+        IdPedido = pedidoActualizado.IdPedido,
+        IdCliente = pedidoActualizado.IdCliente,
+        IdEmpresa = pedidoActualizado.IdEmpresa,
+        FechaHora = pedidoActualizado.FechaHora,
+        Estado = pedidoActualizado.Estado,
+        TotalPedido = pedidoActualizado.TotalPedido
+    };
 }
 
     public async Task<bool> EliminarPedidoAsync(int idPedido, Guid idCliente, Guid idEmpresa)

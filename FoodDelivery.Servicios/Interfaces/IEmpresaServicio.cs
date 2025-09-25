@@ -1,12 +1,11 @@
-using FoodDelivery.Domain.Modelos;
 using FoodDelivery.Servicios.DTOs;
 
 namespace FoodDelivery.Servicios.Interfaces;
 
 public interface IEmpresaServicio
 {
-    Task<Empresa> CrearEmpresaAsync(EmpresaCreateDTO empresaDTO);
-    Task<Empresa> ActualizarEmpresaAsync(EmpresaUpdateDTO empresaDTO);
+    Task<EmpresaDTO> CrearEmpresaAsync(EmpresaCreateDTO empresaDTO);
+    Task<EmpresaDTO> ActualizarEmpresaAsync(EmpresaUpdateDTO empresaDTO);
     Task<bool> EliminarEmpresaAsync(Guid idEmpresa);
     Task<EmpresaDTO> ObtenerEmpresaPorIdAsync(Guid idEmpresa);
     Task<List<EmpresaDTO>> ObtenerEmpresasAsync();

@@ -367,7 +367,7 @@
       },
       "FoodDelivery.Persistencia/1.0.0": {
         "dependencies": {
-          "FoodDelivery.Servicios": "1.0.0",
+          "FoodDelivery.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.9",
           "Microsoft.EntityFrameworkCore.Analyzers": "9.0.9",
           "Microsoft.Extensions.Configuration.Json": "9.0.9",
@@ -379,7 +379,8 @@
       },
       "FoodDelivery.Servicios/1.0.0": {
         "dependencies": {
-          "FoodDelivery.Domain": "1.0.0"
+          "FoodDelivery.Domain": "1.0.0",
+          "FoodDelivery.Persistencia": "1.0.0"
         },
         "runtime": {
           "FoodDelivery.Servicios.dll": {}

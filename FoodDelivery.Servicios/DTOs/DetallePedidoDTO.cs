@@ -6,5 +6,5 @@ public class DetallePedidoDTO
     public decimal? PrecioUnitario { get; set; }
     public int IdPedido { get; set; }
     public int IdProducto { get; set; }
-    public List<int> AdicionalesIds { get; set; }
+    public List<int> AdicionalesIds { get; set; } // IDs de los adicionales seleccionados
 }

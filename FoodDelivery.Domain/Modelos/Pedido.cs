@@ -34,6 +34,7 @@ namespace FoodDelivery.Domain.Modelos
         [Column("total_pedido")]
         public decimal TotalPedido { get; set; }
 
+        [Required]
         [Column("metodo_pago")]
         public string MetodoPago { get; set; }
 
@@ -45,8 +46,10 @@ namespace FoodDelivery.Domain.Modelos
         public EstadoPedido Estado { get; set; }
 
         // Claves foráneas
+        [Required]
         [Column("id_cliente")]
         public Guid IdCliente { get; set; }
+        [Required]
         [Column("id_empresa")]
         public Guid IdEmpresa { get; set; }
         [Column("id_direccion_cliente")]

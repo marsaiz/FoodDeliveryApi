@@ -13,5 +13,5 @@ public class PedidoDTO
     public Guid IdCliente { get; set; }
     public int IdDireccionCliente { get; set; }
     public Guid IdEmpresa { get; set; }
-    // public List<DetallePedidoDTO> Detalles { get; set; }
+    public List<DetallePedidoDTO> Detalles { get; set; } // Lista de detalles del pedido
 }

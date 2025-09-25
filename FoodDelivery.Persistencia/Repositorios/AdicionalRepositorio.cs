@@ -1,4 +1,4 @@
-using FoodDelivery.Servicios.Interfaces;
+using FoodDelivery.Persistencia.Interfaces;
 using FoodDelivery.Domain.Modelos;
 using Microsoft.EntityFrameworkCore;
 

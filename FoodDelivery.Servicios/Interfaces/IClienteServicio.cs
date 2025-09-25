@@ -1,12 +1,12 @@
-using FoodDelivery.Domain.Modelos;
+
 using FoodDelivery.Servicios.DTOs;
 
 namespace FoodDelivery.Servicios.Interfaces
 {
     public interface IClienteServicio
     {
-        Task<Cliente> CrearClienteAsync(ClienteCreateDTO cliente);
-        Task<Cliente> ActualizarClienteAsync(ClienteUpdateDTO cliente);
+        Task<ClienteDTO> CrearClienteAsync(ClienteCreateDTO cliente);
+        Task<ClienteDTO> ActualizarClienteAsync(ClienteUpdateDTO cliente);
         Task<bool> EliminarClienteAsync(Guid idCliente);
         Task<ClienteDTO> ObtenerClientePorIdAsync(Guid idCliente);
         Task<List<ClienteDTO>> ObtenerClientesAsync();

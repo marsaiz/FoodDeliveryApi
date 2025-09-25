@@ -1,6 +1,7 @@
 using FoodDelivery.Domain.Modelos;
 using FoodDelivery.Servicios.Interfaces;
 using FoodDelivery.Servicios.DTOs;
+using FoodDelivery.Persistencia.Interfaces;
 using static FoodDelivery.Servicios.Utils.PasswordHelper;
 
 namespace FoodDelivery.Servicios.Servicios;
@@ -14,7 +15,7 @@ public class EmpresaServicio : IEmpresaServicio
         _empresaRepositorio = empresaRepositorio;
     }
 
-    public async Task<Empresa> CrearEmpresaAsync(EmpresaCreateDTO empresaDTO)
+    public async Task<EmpresaDTO> CrearEmpresaAsync(EmpresaCreateDTO empresaDTO)
     {
 
     // Verifica si el usuario o email ya existen
@@ -46,7 +47,17 @@ public class EmpresaServicio : IEmpresaServicio
         };
 
         await _empresaRepositorio.CrearEmpresaAsync(empresa);
-        return empresa;
+        return new EmpresaDTO
+        {
+            IdEmpresa = empresa.IdEmpresa,
+            Nombre = empresa.Nombre,
+            Direccion = empresa.Direccion,
+            Telefono = empresa.Telefono,
+            Email = empresa.Email,
+            Latitud = empresa.Latitud,
+            Longitud = empresa.Longitud,
+            Usuario = empresa.Usuario
+        };
     }
 
     public async Task<EmpresaDTO> ObtenerEmpresaPorUsuarioAsync(string usuario)
@@ -83,7 +94,7 @@ public class EmpresaServicio : IEmpresaServicio
         };
     }
 
-    public async Task<Empresa> ActualizarEmpresaAsync(EmpresaUpdateDTO empresaDTO)
+    public async Task<EmpresaDTO> ActualizarEmpresaAsync(EmpresaUpdateDTO empresaDTO)
     {
         var empresaExistente = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(empresaDTO.IdEmpresa);
         if (empresaExistente == null)
@@ -95,7 +106,17 @@ public class EmpresaServicio : IEmpresaServicio
         empresaExistente.Email = empresaDTO.Email;
 
         await _empresaRepositorio.ActualizarEmpresaAsync(empresaExistente);
-        return empresaExistente;
+        return new EmpresaDTO
+        {
+            IdEmpresa = empresaExistente.IdEmpresa,
+            Nombre = empresaExistente.Nombre,
+            Direccion = empresaExistente.Direccion,
+            Telefono = empresaExistente.Telefono,
+            Email = empresaExistente.Email,
+            Latitud = empresaExistente.Latitud,
+            Longitud = empresaExistente.Longitud,
+            Usuario = empresaExistente.Usuario
+        };
     }
 
     public async Task<bool> EliminarEmpresaAsync(Guid idEmpresa)

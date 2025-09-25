@@ -1,6 +1,9 @@
 using FoodDelivery.Servicios.Interfaces;
-using FoodDelivery.Domain.Modelos;
 using FoodDelivery.Servicios.DTOs;
+using FoodDelivery.Domain.Modelos;
+using FoodDelivery.Persistencia.Interfaces;
+// Add the following using if IAdicionalRepositorio is in another namespace
+// using FoodDelivery.Persistencia.Repositorios;
 
 namespace FoodDelivery.Servicios.Servicios;
 
@@ -14,7 +17,7 @@ public class AdicionalServicio : IAdicionalServicio
         _adicionalRepositorio = adicionalRepositorio;
         _empresaRepositorio = empresaRepositorio;
     }
-    public async Task<Adicional> CrearAdicionalAsync(AdicionalCreateDTO adicionalDto)
+    public async Task<AdicionalDTO> CrearAdicionalAsync(AdicionalCreateDTO adicionalDto)
     {
         // Validar si la empresa existe
         var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(adicionalDto.IdEmpresa);
@@ -29,10 +32,17 @@ public class AdicionalServicio : IAdicionalServicio
             PrecioAdicional = adicionalDto.PrecioAdicional ?? 0, // Asignar 0 si es null
             IdEmpresa = adicionalDto.IdEmpresa
         };
-        return await _adicionalRepositorio.CrearAdicionalAsync(nuevoAdicional);
+        var adicionalCreado = await _adicionalRepositorio.CrearAdicionalAsync(nuevoAdicional);
+        return new AdicionalDTO
+        {
+            IdAdicional = adicionalCreado.IdAdicional,
+            NombreAdicional = adicionalCreado.NombreAdicional,
+            PrecioAdicional = adicionalCreado.PrecioAdicional,
+            IdEmpresa = adicionalCreado.IdEmpresa
+        };
     }
 
-    public async Task<Adicional> ActualizarAdicionalAsync(int idAdicional, Guid idEmpresa, AdicionalUpdateDTO adicionalDto)
+    public async Task<AdicionalDTO> ActualizarAdicionalAsync(int idAdicional, Guid idEmpresa, AdicionalUpdateDTO adicionalDto)
     {
         var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(idEmpresa);
         if (empresa == null)
@@ -47,7 +57,14 @@ public class AdicionalServicio : IAdicionalServicio
             adicionalExistente.NombreAdicional = adicionalDto.NombreAdicional;
             adicionalExistente.PrecioAdicional = adicionalDto.PrecioAdicional ?? 0; // Asignar 0 si es null
 
-        return await _adicionalRepositorio.ActualizarAdicionalAsync(adicionalExistente);
+        var actualizado = await _adicionalRepositorio.ActualizarAdicionalAsync(adicionalExistente);
+        return new AdicionalDTO
+        {
+            IdAdicional = actualizado.IdAdicional,
+            NombreAdicional = actualizado.NombreAdicional,
+            PrecioAdicional = actualizado.PrecioAdicional,
+            IdEmpresa = actualizado.IdEmpresa
+        };
     }
     public async Task<bool> EliminarAdicionalAsync(int idAdicional, Guid idEmpresa)
     {

@@ -1,7 +1,6 @@
 using FoodDelivery.Domain.Modelos;
 
-namespace FoodDelivery.Servicios.Interfaces;
-
+namespace FoodDelivery.Persistencia.Interfaces;
 public interface ICategoriaRepositorio
 {
     Task<Categoria> CrearCategoriaAsync(Categoria categoria);

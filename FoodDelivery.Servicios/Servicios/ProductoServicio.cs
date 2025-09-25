@@ -1,6 +1,7 @@
 using FoodDelivery.Domain.Modelos;
 using FoodDelivery.Servicios.Interfaces;
 using FoodDelivery.Servicios.DTOs;
+using FoodDelivery.Persistencia.Interfaces;
 
 namespace FoodDelivery.Servicios.Servicios;
 
@@ -48,7 +49,7 @@ public class ProductoServicio : IProductoServicio
         };
     }
 
-    public async Task<Producto> CrearProductoAsync(ProductoCreateDTO ProductoDTO)
+    public async Task<ProductoDTO> CrearProductoAsync(ProductoCreateDTO ProductoDTO)
     {
         var categoria = await _categoriaRepositorio.ObtenerCategoriaPorIdAsync(ProductoDTO.IdCategoria, ProductoDTO.IdEmpresa);
         if (categoria == null)
@@ -72,10 +73,20 @@ public class ProductoServicio : IProductoServicio
             IdEmpresa = ProductoDTO.IdEmpresa
         };
 
-        return await _productoRepositorio.CrearProductoAsync(nuevoproducto);
+        var productoCreado = await _productoRepositorio.CrearProductoAsync(nuevoproducto);
+        return new ProductoDTO
+        {
+            IdProducto = productoCreado.IdProducto,
+            NombreProducto = productoCreado.NombreProducto,
+            DescripcionProducto = productoCreado.DescripcionProducto,
+            PrecioProducto = productoCreado.PrecioProducto,
+            ImagenUrl = productoCreado.ImagenUrl,
+            IdCategoria = productoCreado.IdCategoria,
+            IdEmpresa = productoCreado.IdEmpresa
+        };
     }
 
-    public async Task<Producto> ActualizarProductoAsync(int id_producto, Guid id_empresa, ProductoUpdateDTO productoDTO)
+    public async Task<ProductoDTO> ActualizarProductoAsync(int id_producto, Guid id_empresa, ProductoUpdateDTO productoDTO)
     {
         var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(id_empresa);
         if (empresa == null)
@@ -92,7 +103,17 @@ public class ProductoServicio : IProductoServicio
         productoExistente.ImagenUrl = productoDTO.ImagenUrl;
         //productoExistente.IdCategoria = productoDTO.IdCategoria; // No se actualiza la categoría
 
-        return await _productoRepositorio.ActualizarProductoAsync(productoExistente);
+        var productoActualizado = await _productoRepositorio.ActualizarProductoAsync(productoExistente);
+        return new ProductoDTO
+        {
+            IdProducto = productoActualizado.IdProducto,
+            NombreProducto = productoActualizado.NombreProducto,
+            DescripcionProducto = productoActualizado.DescripcionProducto,
+            PrecioProducto = productoActualizado.PrecioProducto,
+            ImagenUrl = productoActualizado.ImagenUrl,
+            IdCategoria = productoActualizado.IdCategoria,
+            IdEmpresa = productoActualizado.IdEmpresa
+        };
     }
 
     public async Task<bool> EliminarProductoAsync(int idProducto, Guid idEmpresa)

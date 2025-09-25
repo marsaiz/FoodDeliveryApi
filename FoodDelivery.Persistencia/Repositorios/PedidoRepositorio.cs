@@ -1,5 +1,5 @@
 using FoodDelivery.Domain.Modelos;
-using FoodDelivery.Servicios.Interfaces;
+using FoodDelivery.Persistencia.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace FoodDelivery.Persistencia.Repositorios;

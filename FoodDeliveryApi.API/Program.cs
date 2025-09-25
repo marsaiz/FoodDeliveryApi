@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using FoodDelivery.Persistencia.Repositorios;
+using FoodDelivery.Persistencia.Interfaces; // Add this line if IClienteRepositorio is in this namespace
 using FoodDelivery.Servicios.Interfaces;
 using FoodDelivery.Servicios.Servicios;
+using FoodDelivery.Persistencia;
 
 var builder = WebApplication.CreateBuilder(args);
 
