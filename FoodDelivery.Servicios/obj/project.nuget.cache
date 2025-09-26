@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FIt9jFQNwg0=",
+  "dgSpecHash": "dLORO2ZiKso=",
   "success": true,
-  "projectFilePath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj",
+  "projectFilePath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marsa\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.9\\microsoft.entityframeworkcore.9.0.9.nupkg.sha512",
     "C:\\Users\\marsa\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.9\\microsoft.entityframeworkcore.abstractions.9.0.9.nupkg.sha512",

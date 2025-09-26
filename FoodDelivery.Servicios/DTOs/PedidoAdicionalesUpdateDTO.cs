@@ -1,6 +1,6 @@
 namespace FoodDelivery.Servicios.DTOs;
 
-public class PedidoAdicionalesDTO
+public class PedidoAdicionalesUpdateDTO
 {
     public int IdDetallePedido { get; set; }
     public int IdAdicional { get; set; }

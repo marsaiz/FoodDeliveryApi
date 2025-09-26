@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj": {}
+    "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj": {}
   },
   "projects": {
     "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Domain\\FoodDelivery.Domain.csproj": {
@@ -72,14 +72,14 @@
         }
       }
     },
-    "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj": {
+    "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj",
+        "projectUniqueName": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj",
         "projectName": "FoodDelivery.Persistencia",
-        "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj",
+        "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj",
         "packagesPath": "C:\\Users\\marsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\obj\\",
+        "outputPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marsa\\AppData\\Roaming\\NuGet\\NuGet.Config"

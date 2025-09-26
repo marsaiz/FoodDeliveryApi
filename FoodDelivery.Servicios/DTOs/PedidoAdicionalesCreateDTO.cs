@@ -1,6 +1,8 @@
+using FoodDelivery.Domain.Modelos;
+
 namespace FoodDelivery.Servicios.DTOs;
 
-public class PedidoAdicionalesDTO
+public class PedidoAdicionalesCreateDTO
 {
     public int IdDetallePedido { get; set; }
     public int IdAdicional { get; set; }

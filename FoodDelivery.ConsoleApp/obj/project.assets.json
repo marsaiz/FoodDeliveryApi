@@ -1323,11 +1323,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\FoodDelivery.ConsoleApp.csproj",
+      "projectUniqueName": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\FoodDelivery.ConsoleApp.csproj",
       "projectName": "FoodDelivery.ConsoleApp",
-      "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\FoodDelivery.ConsoleApp.csproj",
+      "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\FoodDelivery.ConsoleApp.csproj",
       "packagesPath": "C:\\Users\\marsa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\obj\\",
+      "outputPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\marsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1342,8 +1342,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj": {
-              "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj"
+            "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj": {
+              "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj"
             }
           }
         }

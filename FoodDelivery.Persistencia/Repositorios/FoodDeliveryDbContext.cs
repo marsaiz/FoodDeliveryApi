@@ -30,13 +30,13 @@ public class FoodDeliveryDbContext : DbContext
 
         // Clave primaria compuesta para PedidoAdicionales
         modelBuilder.Entity<PedidoAdicionales>()
-            .HasKey(pa => new { pa.IdPedido, pa.IdProducto, pa.IdAdicional });
+            .HasKey(pa => new { pa.IdAdicional, pa.IdDetallePedido });
 
         // Relación PedidoAdicionales -> DetallePedido
         modelBuilder.Entity<PedidoAdicionales>()
             .HasOne(pa => pa.DetallePedido)
             .WithMany(dp => dp.PedidoAdicionales)
-            .HasForeignKey(pa => new { pa.IdPedido, pa.IdProducto });
+            .HasForeignKey(pa => new { pa.IdDetallePedido, pa.IdAdicional });
 
         // Relación PedidoAdicionales -> Adicional
         modelBuilder.Entity<PedidoAdicionales>()

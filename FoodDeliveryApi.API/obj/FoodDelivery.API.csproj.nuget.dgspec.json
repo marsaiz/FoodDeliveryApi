@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\FoodDelivery.API.csproj": {}
+    "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\FoodDelivery.API.csproj": {}
   },
   "projects": {
     "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Domain\\FoodDelivery.Domain.csproj": {
@@ -72,14 +72,14 @@
         }
       }
     },
-    "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj": {
+    "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj",
+        "projectUniqueName": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj",
         "projectName": "FoodDelivery.Persistencia",
-        "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj",
+        "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj",
         "packagesPath": "C:\\Users\\marsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\obj\\",
+        "outputPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -158,14 +158,14 @@
         }
       }
     },
-    "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj": {
+    "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj",
+        "projectUniqueName": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj",
         "projectName": "FoodDelivery.Servicios",
-        "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj",
+        "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj",
         "packagesPath": "C:\\Users\\marsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\obj\\",
+        "outputPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -183,8 +183,8 @@
               "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Domain\\FoodDelivery.Domain.csproj": {
                 "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Domain\\FoodDelivery.Domain.csproj"
               },
-              "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj": {
-                "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj"
+              "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj": {
+                "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj"
               }
             }
           }
@@ -223,14 +223,14 @@
         }
       }
     },
-    "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\FoodDelivery.API.csproj": {
+    "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\FoodDelivery.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\FoodDelivery.API.csproj",
+        "projectUniqueName": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\FoodDelivery.API.csproj",
         "projectName": "FoodDelivery.API",
-        "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\FoodDelivery.API.csproj",
+        "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\FoodDelivery.API.csproj",
         "packagesPath": "C:\\Users\\marsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\obj\\",
+        "outputPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -245,11 +245,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj": {
-                "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj"
+              "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj": {
+                "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj"
               },
-              "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj": {
-                "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj"
+              "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj": {
+                "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj"
               }
             }
           }
