@@ -2,8 +2,6 @@ using FoodDelivery.Servicios.Interfaces;
 using FoodDelivery.Servicios.DTOs;
 using FoodDelivery.Domain.Modelos;
 using FoodDelivery.Persistencia.Interfaces;
-// Add the following using if IAdicionalRepositorio is in another namespace
-// using FoodDelivery.Persistencia.Repositorios;
 
 namespace FoodDelivery.Servicios.Servicios;
 
@@ -23,7 +21,7 @@ public class AdicionalServicio : IAdicionalServicio
         var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(adicionalDto.IdEmpresa);
         if (empresa == null)
             throw new Exception("La empresa especificada no existe.");
-        Console.WriteLine($"Creando adicional para empresa: {adicionalDto.IdEmpresa}");
+        Console.WriteLine($"Creando adicional para empresa: {adicionalDto.IdEmpresa}"); // Debug log
     
         var nuevoAdicional = new Adicional
         {
@@ -53,7 +51,6 @@ public class AdicionalServicio : IAdicionalServicio
         if (adicionalExistente == null)
             return null; // O lanzar una excepción si prefieres
         
-            //IdAdicional = adicionalDto.IdAdicional,
             adicionalExistente.NombreAdicional = adicionalDto.NombreAdicional;
             adicionalExistente.PrecioAdicional = adicionalDto.PrecioAdicional ?? 0; // Asignar 0 si es null
 

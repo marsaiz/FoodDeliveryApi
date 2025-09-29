@@ -24,7 +24,7 @@ public class FoodDeliveryDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        
+
         // Clave primaria compuesta para DetallePedido
         modelBuilder.Entity<DetallePedido>()
             .HasKey(dp => new { dp.IdPedido, dp.IdProducto });
@@ -47,6 +47,10 @@ public class FoodDeliveryDbContext : DbContext
 
         modelBuilder.Entity<Pedido>()
             .Property(p => p.Estado)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Pedido>()
+            .Property(p => p.Entrega)
             .HasConversion<string>();
     }
 }

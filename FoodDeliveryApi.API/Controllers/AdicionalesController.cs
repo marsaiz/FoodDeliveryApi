@@ -6,7 +6,7 @@ using FoodDelivery.Servicios.DTOs;
 namespace FoodDeliveryApi.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]")] // Controller name based routing, e.g., api/adicionales for AdicionalesController
 public class AdicionalesController : ControllerBase
 {
     private readonly IAdicionalServicio _adicionalService;
