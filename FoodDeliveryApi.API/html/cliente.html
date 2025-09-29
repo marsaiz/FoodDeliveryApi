@@ -1,0 +1,44 @@
+<!-- archivo: cliente.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear Pedido - Cliente</title>
+</head>
+<body>
+  <h2>Nuevo Pedido</h2>
+  <form id="pedidoForm">
+    <input type="text" id="idCliente" placeholder="ID Cliente (GUID)" required><br>
+    <input type="text" id="idEmpresa" placeholder="ID Empresa (GUID)" required><br>
+    <input type="text" id="direccion" placeholder="Dirección" required><br>
+    <input type="number" id="totalPedido" placeholder="Total" required><br>
+    <input type="text" id="metodoPago" placeholder="Método de Pago" required><br>
+    <select id="tipoEntrega">
+      <option value="0">Domicilio</option>
+      <option value="1">Para Llevar</option>
+      <option value="2">En Local</option>
+    </select><br>
+    <button type="submit">Enviar Pedido</button>
+  </form>
+  <div id="respuesta"></div>
+  <script>
+    document.getElementById('pedidoForm').onsubmit = async function(e) {
+      e.preventDefault();
+      const data = {
+        idCliente: document.getElementById('idCliente').value,
+        idEmpresa: document.getElementById('idEmpresa').value,
+        direccion: document.getElementById('direccion').value,
+        totalPedido: parseFloat(document.getElementById('totalPedido').value),
+        metodoPago: document.getElementById('metodoPago').value,
+        tipoEntrega: parseInt(document.getElementById('tipoEntrega').value)
+      };
+      const res = await fetch('http://localhost:5012/api/pedidos', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      document.getElementById('respuesta').innerText = await res.text();
+    };
+  </script>
+</body>
+</html>
