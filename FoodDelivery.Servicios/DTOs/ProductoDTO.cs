@@ -9,4 +9,6 @@ public class ProductoDTO
     public string? ImagenUrl { get; set; } // ? Puede ser null
     public int IdCategoria { get; set; }
     public Guid IdEmpresa { get; set; }
+    public bool Activo { get; set; }
+    public int CantidadDisponible { get; set; }
 }

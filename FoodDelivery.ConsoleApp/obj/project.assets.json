@@ -1318,19 +1318,19 @@
     ]
   },
   "packageFolders": {
-    "/home/marcelo/.nuget/packages/": {}
+    "C:\\Users\\marsa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.ConsoleApp/FoodDelivery.ConsoleApp.csproj",
+      "projectUniqueName": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\FoodDelivery.ConsoleApp.csproj",
       "projectName": "FoodDelivery.ConsoleApp",
-      "projectPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.ConsoleApp/FoodDelivery.ConsoleApp.csproj",
-      "packagesPath": "/home/marcelo/.nuget/packages/",
-      "outputPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/",
+      "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\FoodDelivery.ConsoleApp.csproj",
+      "packagesPath": "C:\\Users\\marsa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.ConsoleApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/marcelo/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\marsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -1342,8 +1342,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Servicios/FoodDelivery.Servicios.csproj": {
-              "projectPath": "/home/marcelo/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.Servicios/FoodDelivery.Servicios.csproj"
+            "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj": {
+              "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj"
             }
           }
         }
@@ -1352,6 +1352,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -1379,7 +1384,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.119/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -35,6 +35,9 @@ public class ProductoController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> Create(ProductoCreateDTO productoDTO)
     {
+        if (!ModelState.IsValid) //Control automático de validaciones
+            return BadRequest(ModelState);
+
         var creado = await _productoService.CrearProductoAsync(productoDTO);
 
         // Mapeo manual, a ProductoDTO. Hacía referencia circularn en el swagger.
@@ -46,7 +49,8 @@ public class ProductoController : ControllerBase
             DescripcionProducto = creado.DescripcionProducto,
             PrecioProducto = creado.PrecioProducto,
             IdCategoria = creado.IdCategoria,
-            IdEmpresa = creado.IdEmpresa
+            IdEmpresa = creado.IdEmpresa,
+            CantidadDisponible = creado.CantidadDisponible,
         };
         // Suponiendo que 'creado' es el objeto Producto creado y tiene IdProducto y IdEmpresa
         return CreatedAtAction(nameof(GetById), new { idProducto = dto.IdProducto, idEmpresa = dto.IdEmpresa }, dto);
@@ -60,7 +64,9 @@ public class ProductoController : ControllerBase
             NombreProducto = productoDTO.NombreProducto,
             DescripcionProducto = productoDTO.DescripcionProducto,
             PrecioProducto = productoDTO.PrecioProducto,
-            ImagenUrl = productoDTO.ImagenUrl
+            ImagenUrl = productoDTO.ImagenUrl,
+            Activo = productoDTO.Activo,
+            CantidadDisponible = productoDTO.CantidadDisponible
         };
         var actualizado = await _productoService.ActualizarProductoAsync(idProducto, idEmpresa, productoUpdate);
         if (actualizado == null)

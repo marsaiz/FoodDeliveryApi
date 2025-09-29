@@ -29,7 +29,9 @@ public class ProductoServicio : IProductoServicio
             PrecioProducto = p.PrecioProducto,
             ImagenUrl = p.ImagenUrl,
             IdCategoria = p.IdCategoria,
-            IdEmpresa = p.IdEmpresa
+            IdEmpresa = p.IdEmpresa,
+            Activo = p.Activo,
+            CantidadDisponible = p.CantidadDisponible
         }).ToList();
     }
 
@@ -45,7 +47,9 @@ public class ProductoServicio : IProductoServicio
             PrecioProducto = producto.PrecioProducto,
             ImagenUrl = producto.ImagenUrl,
             IdCategoria = producto.IdCategoria,
-            IdEmpresa = producto.IdEmpresa
+            IdEmpresa = producto.IdEmpresa,
+            Activo = producto.Activo,
+            CantidadDisponible = producto.CantidadDisponible
         };
     }
 
@@ -70,9 +74,13 @@ public class ProductoServicio : IProductoServicio
             PrecioProducto = ProductoDTO.PrecioProducto,
             ImagenUrl = ProductoDTO.ImagenUrl,
             IdCategoria = ProductoDTO.IdCategoria,
-            IdEmpresa = ProductoDTO.IdEmpresa
+            IdEmpresa = ProductoDTO.IdEmpresa,
+            CantidadDisponible = ProductoDTO.CantidadDisponible
         };
 
+        if (ProductoDTO.CantidadDisponible < 0)
+            throw new Exception("La cantidad disponible no puede ser negativa.");
+            
         var productoCreado = await _productoRepositorio.CrearProductoAsync(nuevoproducto);
         return new ProductoDTO
         {
@@ -82,7 +90,8 @@ public class ProductoServicio : IProductoServicio
             PrecioProducto = productoCreado.PrecioProducto,
             ImagenUrl = productoCreado.ImagenUrl,
             IdCategoria = productoCreado.IdCategoria,
-            IdEmpresa = productoCreado.IdEmpresa
+            IdEmpresa = productoCreado.IdEmpresa,
+            CantidadDisponible = productoCreado.CantidadDisponible
         };
     }
 
@@ -101,6 +110,8 @@ public class ProductoServicio : IProductoServicio
         productoExistente.DescripcionProducto = productoDTO.DescripcionProducto;
         productoExistente.PrecioProducto = productoDTO.PrecioProducto;
         productoExistente.ImagenUrl = productoDTO.ImagenUrl;
+        productoExistente.Activo = productoDTO.Activo;
+        productoExistente.CantidadDisponible = productoDTO.CantidadDisponible;
         //productoExistente.IdCategoria = productoDTO.IdCategoria; // No se actualiza la categoría
 
         var productoActualizado = await _productoRepositorio.ActualizarProductoAsync(productoExistente);
@@ -112,7 +123,9 @@ public class ProductoServicio : IProductoServicio
             PrecioProducto = productoActualizado.PrecioProducto,
             ImagenUrl = productoActualizado.ImagenUrl,
             IdCategoria = productoActualizado.IdCategoria,
-            IdEmpresa = productoActualizado.IdEmpresa
+            IdEmpresa = productoActualizado.IdEmpresa,
+            Activo = productoActualizado.Activo,
+            CantidadDisponible = productoActualizado.CantidadDisponible
         };
     }
 

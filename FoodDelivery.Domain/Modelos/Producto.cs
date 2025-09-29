@@ -25,6 +25,12 @@ namespace FoodDelivery.Domain.Modelos
         [Column("imagen_url")]
         public string? ImagenUrl { get; set; }
 
+        [Column("activo")]
+        public bool Activo { get; set; } = true;
+
+        [Column("cantidad_disponible")]
+        public int CantidadDisponible { get; set; }
+
         // Claves foráneas
         [Column("id_categoria")]
         public int IdCategoria { get; set; }

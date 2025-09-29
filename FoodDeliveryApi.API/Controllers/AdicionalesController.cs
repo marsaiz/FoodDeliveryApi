@@ -37,7 +37,7 @@ public class AdicionalesController : ControllerBase
     {
         var creado = await _adicionalService.CrearAdicionalAsync(adicionalDTO);
 
-        // Mapeo manual, a AdicionalDT. Hacía referencia circularn en el swagger.
+        // Mapeo manual, a AdicionalDTO. Hacía referencia circular en el swagger.
         //  En el servicio se recibe el DTO de AdicionalCreateDTO
         var dto = new AdicionalDTO
         {
@@ -60,6 +60,7 @@ public class AdicionalesController : ControllerBase
         };
 
         var actualizado = await _adicionalService.ActualizarAdicionalAsync(idAdicional, idEmpresa, adicionalUpdate);
+
         if (actualizado == null)
             return NotFound();
 
@@ -70,6 +71,7 @@ public class AdicionalesController : ControllerBase
     public async Task<ActionResult> Delete(int idAdicional, Guid idEmpresa)
     {
         var adicionalExistente = await _adicionalService.ObtenerAdicionalPorIdAsync(idAdicional, idEmpresa);
+        
         if (adicionalExistente == null)
         {
             return NotFound();

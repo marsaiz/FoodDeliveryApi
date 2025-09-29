@@ -19,6 +19,7 @@ public class AdicionalServicio : IAdicionalServicio
     {
         // Validar si la empresa existe
         var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(adicionalDto.IdEmpresa);
+
         if (empresa == null)
             throw new Exception("La empresa especificada no existe.");
         Console.WriteLine($"Creando adicional para empresa: {adicionalDto.IdEmpresa}"); // Debug log
@@ -43,13 +44,14 @@ public class AdicionalServicio : IAdicionalServicio
     public async Task<AdicionalDTO> ActualizarAdicionalAsync(int idAdicional, Guid idEmpresa, AdicionalUpdateDTO adicionalDto)
     {
         var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(idEmpresa);
+
         if (empresa == null)
             throw new Exception("La empresa especificada no existe.");
 
         // 1. Obtener la entidad existente desde el repositorio (y la base de datos)
         var adicionalExistente = await _adicionalRepositorio.ObtenerAdicionalPorIdAsync(idAdicional, idEmpresa);
         if (adicionalExistente == null)
-            return null; // O lanzar una excepción si prefieres
+            return null; // O lanzar una excepción si prefieres, ademas permite manejar el error en el controlador con un NotFound 404
         
             adicionalExistente.NombreAdicional = adicionalDto.NombreAdicional;
             adicionalExistente.PrecioAdicional = adicionalDto.PrecioAdicional ?? 0; // Asignar 0 si es null
