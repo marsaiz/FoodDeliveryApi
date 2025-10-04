@@ -53,13 +53,7 @@ public class AdicionalesController : ControllerBase
     [HttpPut("{idAdicional}/{idEmpresa}")]
     public async Task<ActionResult> Update(int idAdicional, Guid idEmpresa, [FromBody] AdicionalUpdateDTO adicionalDTO)
     {
-        var adicionalUpdate = new AdicionalUpdateDTO
-        {
-            NombreAdicional = adicionalDTO.NombreAdicional,
-            PrecioAdicional = adicionalDTO.PrecioAdicional
-        };
-
-        var actualizado = await _adicionalService.ActualizarAdicionalAsync(idAdicional, idEmpresa, adicionalUpdate);
+        var actualizado = await _adicionalService.ActualizarAdicionalAsync(idAdicional, idEmpresa, adicionalDTO);
 
         if (actualizado == null)
             return NotFound();

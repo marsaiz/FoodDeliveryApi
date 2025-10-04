@@ -59,7 +59,7 @@ public class ProductoController : ControllerBase
     [HttpPut("{idProducto}/{idEmpresa}")]
     public async Task<ActionResult> Update(int idProducto, Guid idEmpresa, ProductoUpdateDTO productoDTO)
     {
-        var productoUpdate = new ProductoUpdateDTO
+       /*  var productoUpdate = new ProductoUpdateDTO
         {
             NombreProducto = productoDTO.NombreProducto,
             DescripcionProducto = productoDTO.DescripcionProducto,
@@ -67,8 +67,8 @@ public class ProductoController : ControllerBase
             ImagenUrl = productoDTO.ImagenUrl,
             Activo = productoDTO.Activo,
             CantidadDisponible = productoDTO.CantidadDisponible
-        };
-        var actualizado = await _productoService.ActualizarProductoAsync(idProducto, idEmpresa, productoUpdate);
+        }; */
+        var actualizado = await _productoService.ActualizarProductoAsync(idProducto, idEmpresa, productoDTO);
         if (actualizado == null)
             return NotFound();
         return NoContent();

@@ -70,7 +70,10 @@ public class ClientesController : ControllerBase
     {
         if (idCliente != clienteDTO.IdCliente)
             return BadRequest();
-        await _clienteService.ActualizarClienteAsync(clienteDTO);
+
+        var actualizado = await _clienteService.ActualizarClienteAsync(clienteDTO);
+        if (actualizado == null)
+            return NotFound();
         return NoContent();
     }
 

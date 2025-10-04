@@ -51,11 +51,6 @@ public class CategoriaController : ControllerBase
     [HttpPut("{idCategoria}/{idEmpresa}")]
     public async Task<ActionResult> Update(int idCategoria, Guid idEmpresa, [FromBody] CategoriaUpdateDTO categoriaDTO)
     {
-        var categoriaUpdate = new CategoriaUpdateDTO
-        {
-            NombreCategoria = categoriaDTO.NombreCategoria
-        };
-
         var actualizado = await _categoriaServicio.ActualizarCategoriaAsync(idCategoria, idEmpresa, categoriaDTO);
         if (actualizado == null)
             return NotFound();

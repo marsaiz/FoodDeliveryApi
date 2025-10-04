@@ -10,6 +10,8 @@ public static class PasswordHelper
 public static string GenerateSalt()
     {
         // Genera un salt aleatorio (implementación simple, usa una más robusta en producción)
+        // Salt es un valor aleatorio que se añade a la contraseña antes de hashearla
+        // para aumentar la seguridad contra ataques de diccionario y rainbow tables.
         byte[] saltBytes = new byte[16];
         using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())
         {
@@ -18,6 +20,8 @@ public static string GenerateSalt()
         return Convert.ToBase64String(saltBytes);
     }
     // Método simple de hashing de contraseña (usa una implementación real en producción)
+    // Hashing es un proceso de convertir la contraseña en una cadena fija de caracteres
+    // que no puede ser revertida a la contraseña original.
     public static string HashPassword(string password, string salt) // Hashing simple, reemplazar con lógica real
     {
         // Ejemplo simple usando SHA256, reemplaza por tu lógica real de hashing y salting

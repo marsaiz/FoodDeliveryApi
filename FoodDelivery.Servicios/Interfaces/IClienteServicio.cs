@@ -6,7 +6,7 @@ namespace FoodDelivery.Servicios.Interfaces
     public interface IClienteServicio
     {
         Task<ClienteDTO> CrearClienteAsync(ClienteCreateDTO cliente);
-        Task<ClienteDTO> ActualizarClienteAsync(ClienteUpdateDTO cliente);
+        Task<ClienteDTO?> ActualizarClienteAsync(ClienteUpdateDTO cliente);
         Task<bool> EliminarClienteAsync(Guid idCliente);
         Task<ClienteDTO> ObtenerClientePorIdAsync(Guid idCliente);
         Task<List<ClienteDTO>> ObtenerClientesAsync();

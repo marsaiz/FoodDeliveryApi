@@ -69,9 +69,9 @@ public class ClienteServicio : IClienteServicio
         };
     }
 
-    public async Task<ClienteDTO> ActualizarClienteAsync(ClienteUpdateDTO clienteDTO)
+    public async Task<ClienteDTO?> ActualizarClienteAsync(ClienteUpdateDTO clienteDTO)
     {
-        if (clienteDTO.IdCliente == null || clienteDTO.IdCliente == Guid.Empty)
+        if (clienteDTO?.IdCliente == null || clienteDTO.IdCliente == Guid.Empty)
         {
             throw new ArgumentException("El IdCliente es obligatorio para actualizar un cliente.");
         }
@@ -79,9 +79,9 @@ public class ClienteServicio : IClienteServicio
         var clienteExistente = await _clienteRepositorio.ObtenerClientePorIdAsync(clienteDTO.IdCliente);
         if (clienteExistente == null) return null;
 
-        clienteExistente.NombreCliente = clienteDTO.NombreCliente;
-        clienteExistente.EmailCliente = clienteDTO.EmailCliente;
-        clienteExistente.TelefonoCliente = clienteDTO.TelefonoCliente;
+        clienteExistente.NombreCliente = clienteDTO?.NombreCliente ?? clienteExistente.NombreCliente;
+        clienteExistente.EmailCliente = clienteDTO?.EmailCliente ?? clienteExistente.EmailCliente;
+        clienteExistente.TelefonoCliente = clienteDTO?.TelefonoCliente ?? clienteExistente.TelefonoCliente;
 
         var clienteActualizado = await _clienteRepositorio.ActualizarClienteAsync(clienteExistente);
 

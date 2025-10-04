@@ -54,7 +54,7 @@ public class DireccionClienteController : ControllerBase
     [HttpPut("{idDireccion}/{idCliente}")]
     public async Task<ActionResult> Update(int idDireccion, Guid idCliente, DireccionClienteUpdateDTO direccionDto)
     {
-       var direccionClienteUpdate = new DireccionClienteUpdateDTO
+       /* var direccionClienteUpdate = new DireccionClienteUpdateDTO
         {
             Calle = direccionDto.Calle,
             Numero = direccionDto.Numero,
@@ -64,9 +64,9 @@ public class DireccionClienteController : ControllerBase
             Referencia = direccionDto.Referencia,
             Latitud = direccionDto.Latitud,
             Longitud = direccionDto.Longitud
-        };
+        }; */
 
-        var actualizado = await _direccionClienteServicio.ActualizarDireccionClienteAsync(idDireccion, idCliente, direccionClienteUpdate);
+        var actualizado = await _direccionClienteServicio.ActualizarDireccionClienteAsync(idDireccion, idCliente, direccionDto);
         if (actualizado == null)
             return NotFound();
 
