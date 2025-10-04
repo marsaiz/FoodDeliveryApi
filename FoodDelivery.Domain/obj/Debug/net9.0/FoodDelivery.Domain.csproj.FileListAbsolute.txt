@@ -1,0 +1,13 @@
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/bin/Debug/net9.0/FoodDelivery.Domain.deps.json
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/bin/Debug/net9.0/FoodDelivery.Domain.dll
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/bin/Debug/net9.0/FoodDelivery.Domain.pdb
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/obj/Debug/net9.0/FoodDelivery.Domain.csproj.AssemblyReference.cache
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/obj/Debug/net9.0/FoodDelivery.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/obj/Debug/net9.0/FoodDelivery.Domain.AssemblyInfoInputs.cache
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/obj/Debug/net9.0/FoodDelivery.Domain.AssemblyInfo.cs
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/obj/Debug/net9.0/FoodDelivery.Domain.csproj.CoreCompileInputs.cache
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/obj/Debug/net9.0/FoodDelivery.Domain.sourcelink.json
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/obj/Debug/net9.0/FoodDelivery.Domain.dll
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/obj/Debug/net9.0/refint/FoodDelivery.Domain.dll
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/obj/Debug/net9.0/FoodDelivery.Domain.pdb
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/obj/Debug/net9.0/ref/FoodDelivery.Domain.dll

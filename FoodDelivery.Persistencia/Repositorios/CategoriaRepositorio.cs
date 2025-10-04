@@ -31,9 +31,9 @@ public class CategoriaRepositorio : ICategoriaRepositorio
     {
         var categoria = await _context.Categorias
             .Where(c => c.IdCategoria == idCategoria && c.IdEmpresa == idEmpresa)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(); // Devuelve null si no se encuentra
 
-        if (categoria != null)
+        if (categoria != null) // Si se encuentra, eliminarla
         {
             _context.Categorias.Remove(categoria);
             await _context.SaveChangesAsync();
@@ -42,7 +42,7 @@ public class CategoriaRepositorio : ICategoriaRepositorio
         return false;
     }
 
-    public async Task<Categoria> ObtenerCategoriaPorIdAsync(int idCategoria, Guid idEmpresa)
+    public async Task<Categoria?> ObtenerCategoriaPorIdAsync(int idCategoria, Guid idEmpresa)
     {
         return await _context.Categorias
             .Where(c => c.IdCategoria == idCategoria && c.IdEmpresa == idEmpresa)

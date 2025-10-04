@@ -127,7 +127,7 @@ namespace FoodDelivery.Persistencia.Migrations
                     fecha_hora = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     total_pedido = table.Column<decimal>(type: "numeric", nullable: false),
                     metodo_pago = table.Column<string>(type: "text", nullable: false),
-                    tipo_entrega = table.Column<int>(type: "integer", nullable: false),
+                    tipo_entrega = table.Column<string>(type: "text", nullable: false),
                     estado_pedido = table.Column<string>(type: "text", nullable: false),
                     id_cliente = table.Column<Guid>(type: "uuid", nullable: false),
                     id_empresa = table.Column<Guid>(type: "uuid", nullable: false),
@@ -165,6 +165,8 @@ namespace FoodDelivery.Persistencia.Migrations
                     descripcion_producto = table.Column<string>(type: "text", nullable: false),
                     precio_producto = table.Column<decimal>(type: "numeric", nullable: false),
                     imagen_url = table.Column<string>(type: "text", nullable: true),
+                    activo = table.Column<bool>(type: "boolean", nullable: false),
+                    cantidad_disponible = table.Column<int>(type: "integer", nullable: false),
                     id_categoria = table.Column<int>(type: "integer", nullable: false),
                     id_empresa = table.Column<Guid>(type: "uuid", nullable: false)
                 },

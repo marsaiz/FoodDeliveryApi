@@ -17,17 +17,33 @@ public class ClienteServicio : IClienteServicio
 
     public async Task<ClienteDTO> CrearClienteAsync(ClienteCreateDTO clienteDTO)
     {
-        // Verificar si el usuario o email ya existen podría ser una buena práctica aquí.
-        var clienteExistentePorUsuario = await _clienteRepositorio.ObtenerClientePorUsuarioAsync(clienteDTO.EmailCliente);
+        // Validaciones básicas
+        if (string.IsNullOrWhiteSpace(clienteDTO.Usuario))
+        {
+            throw new ArgumentException("El usuario es obligatorio.");
+        }
+        if (string.IsNullOrWhiteSpace(clienteDTO.Password) || clienteDTO.Password.Length < 6)
+        {
+            throw new ArgumentException("La contraseña es obligatoria y debe tener al menos 6 caracteres.");
+        }
+        if (string.IsNullOrWhiteSpace(clienteDTO.EmailCliente))
+        {
+            throw new ArgumentException("El email es obligatorio.");
+        }
+
+        // Verificar si ya existe un cliente con el mismo usuario o email
+        var clienteExistentePorUsuario = await _clienteRepositorio.ObtenerClientePorUsuarioAsync(clienteDTO.Usuario);
         if (clienteExistentePorUsuario != null)
         {
-            throw new ArgumentException("Ya existe un cliente registrado con este email.");
+            throw new ArgumentException("Ya existe un cliente registrado con este usuario.");
         }
         var clienteExistentePorEmail = await _clienteRepositorio.ObtenerClientePorEmailAsync(clienteDTO.EmailCliente);
         if (clienteExistentePorEmail != null)
         {
             throw new ArgumentException("Ya existe un cliente registrado con este email.");
         }
+
+        // Crear el cliente con hash de la contraseña
         string salt = GenerateSalt();
         string passwordHash = HashPassword(clienteDTO.Password, salt);
 
@@ -42,6 +58,7 @@ public class ClienteServicio : IClienteServicio
             PasswordSalt = salt,
         };
         await _clienteRepositorio.CrearClienteAsync(nuevoCliente);
+
         return new ClienteDTO
         {
             IdCliente = nuevoCliente.IdCliente,
@@ -67,6 +84,8 @@ public class ClienteServicio : IClienteServicio
         clienteExistente.TelefonoCliente = clienteDTO.TelefonoCliente;
 
         var clienteActualizado = await _clienteRepositorio.ActualizarClienteAsync(clienteExistente);
+
+        // Mapear a DTO y devolver
         return new ClienteDTO
         {
             IdCliente = clienteActualizado.IdCliente,
@@ -123,7 +142,7 @@ public class ClienteServicio : IClienteServicio
         };
     }
 
-    public async Task<ClienteDTO> ObtenerClientePorEmailAsync(string email)
+    public async Task<ClienteDTO?> ObtenerClientePorEmailAsync(string email)
     {
         var cliente = await _clienteRepositorio.ObtenerClientePorEmailAsync(email);
         if (cliente == null) return null;

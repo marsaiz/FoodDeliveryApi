@@ -21,6 +21,7 @@ namespace FoodDelivery.Domain.Modelos
         [Column("email_cliente")]
         public string? EmailCliente { get; set; }
 
+        // Campos para autenticación para que el cliente no tenga que ingresar sus datos cada vez.
         [Column("usuario")]
         public string? Usuario { get; set; }
 

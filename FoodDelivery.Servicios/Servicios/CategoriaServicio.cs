@@ -49,7 +49,7 @@ public class CategoriaServicio : ICategoriaServicio
         if (categoriaExistente == null)
             return null; // O lanzar una excepción si prefieres
         
-            //IdAdicional = adicionalDto.IdAdicional,
+        // 2. Actualizar los campos necesarios
             categoriaExistente.NombreCategoria = categoriaDto.NombreCategoria;
 
         var categoriaActualizada = await _categoriaRepositorio.ActualizarCategoriaAsync(categoriaExistente);

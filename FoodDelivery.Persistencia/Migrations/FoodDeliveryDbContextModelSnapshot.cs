@@ -258,8 +258,9 @@ namespace FoodDelivery.Persistencia.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdPedido"));
 
-                    b.Property<int>("Entrega")
-                        .HasColumnType("integer")
+                    b.Property<string>("Entrega")
+                        .IsRequired()
+                        .HasColumnType("text")
                         .HasColumnName("tipo_entrega");
 
                     b.Property<string>("Estado")
@@ -341,6 +342,14 @@ namespace FoodDelivery.Persistencia.Migrations
                         .HasColumnName("id_producto");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdProducto"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("boolean")
+                        .HasColumnName("activo");
+
+                    b.Property<int>("CantidadDisponible")
+                        .HasColumnType("integer")
+                        .HasColumnName("cantidad_disponible");
 
                     b.Property<string>("DescripcionProducto")
                         .IsRequired()

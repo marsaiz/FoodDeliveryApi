@@ -22,7 +22,7 @@ public class ClienteRepositorio : IClienteRepositorio
 
     public async Task<Cliente> ActualizarClienteAsync(Cliente cliente)
     {
-        _context.Entry(cliente).State = EntityState.Modified;
+        _context.Entry(cliente).State = EntityState.Modified; // Marca la entidad como modificada
         await _context.SaveChangesAsync();
         return cliente;
     }
@@ -40,7 +40,7 @@ public class ClienteRepositorio : IClienteRepositorio
         return true;
     }
 
-    public async Task<Cliente> ObtenerClientePorIdAsync(Guid idCliente)
+    public async Task<Cliente?> ObtenerClientePorIdAsync(Guid idCliente)
     {
         return await _context.Clientes
         .Where(c => c.IdCliente == idCliente)
@@ -66,7 +66,7 @@ public class ClienteRepositorio : IClienteRepositorio
         return true;
     }
 
-    public async Task<Cliente> ObtenerClientePorUsuarioAsync(string usuario)
+    public async Task<Cliente?> ObtenerClientePorUsuarioAsync(string usuario)
     {
         return await _context.Clientes
             .Where(c => c.Usuario == usuario)
@@ -77,7 +77,7 @@ public class ClienteRepositorio : IClienteRepositorio
     {
         return await _context.Clientes.AnyAsync(c => c.EmailCliente == email);
     }
-    public async Task<Cliente> ObtenerClientePorEmailAsync(string email)
+    public async Task<Cliente?> ObtenerClientePorEmailAsync(string email)
     {
         return await _context.Clientes
             .Where(c => c.EmailCliente == email)

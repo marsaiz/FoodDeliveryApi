@@ -44,6 +44,7 @@ public class CategoriaController : ControllerBase
             IdEmpresa = creado.IdEmpresa
         };
         // Suponiendo que 'creado' es el objeto Categoria creado y tiene IdCategoria y IdEmpresa
+        // nameof(GetById) se refiere al método GetById en este controlador
         return CreatedAtAction(nameof(GetById), new { idCategoria = creado.IdCategoria, idEmpresa = creado.IdEmpresa }, dto);
     }
 

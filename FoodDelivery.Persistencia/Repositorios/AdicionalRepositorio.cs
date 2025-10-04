@@ -41,7 +41,7 @@ public class AdicionalRepositorio : IAdicionalRepositorio
         return false;
     }
 
-    public async Task<Adicional> ObtenerAdicionalPorIdAsync(int idAdicional, Guid idEmpresa)
+    public async Task<Adicional?> ObtenerAdicionalPorIdAsync(int idAdicional, Guid idEmpresa)
     {
         return await _context.Adicionales
             .Where(a => a.IdAdicional == idAdicional && a.IdEmpresa == idEmpresa)
