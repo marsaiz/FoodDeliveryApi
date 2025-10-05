@@ -8,23 +8,23 @@ namespace FoodDelivery.Servicios.Servicios;
 public class PedidoServicio : IPedidoServicio
 {
     private readonly IPedidoRepositorio _pedidoRepositorio;
-    private readonly IClienteRepositorio _clienteRepositorio;
-    private readonly IEmpresaRepositorio _empresaRepositorio;
+    private readonly IClienteServicio _clienteServicio;
+    private readonly IEmpresaServicio _empresaServicio;
 
-    public PedidoServicio(IPedidoRepositorio pedidoRepositorio, IClienteRepositorio clienteRepositorio, IEmpresaRepositorio empresaRepositorio)
+    public PedidoServicio(IPedidoRepositorio pedidoRepositorio, IClienteServicio clienteServicio, IEmpresaServicio empresaServicio)
     {
         _pedidoRepositorio = pedidoRepositorio;
-        _clienteRepositorio = clienteRepositorio;
-        _empresaRepositorio = empresaRepositorio;
+        _clienteServicio = clienteServicio;
+        _empresaServicio = empresaServicio;
     }
 
     public async Task<PedidoDTO> CrearPedidoAsync(PedidoCreateDTO pedidoDTO)
     {
-        var cliente = await _clienteRepositorio.ObtenerClientePorIdAsync(pedidoDTO.IdCliente);
+        var cliente = await _clienteServicio.ObtenerClientePorIdAsync(pedidoDTO.IdCliente);
         if (cliente == null)
             throw new Exception("El cliente no existe.");
 
-        var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(pedidoDTO.IdEmpresa);
+        var empresa = await _empresaServicio.ObtenerEmpresaPorIdAsync(pedidoDTO.IdEmpresa);
         if (empresa == null)
             throw new Exception("La empresa no existe.");
 

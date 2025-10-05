@@ -730,24 +730,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\marsa\\.nuget\\packages\\": {}
+    "/home/marcelo-aberlardo-saiz/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Domain\\FoodDelivery.Domain.csproj",
+      "projectUniqueName": "/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/FoodDelivery.Domain.csproj",
       "projectName": "FoodDelivery.Domain",
-      "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Domain\\FoodDelivery.Domain.csproj",
-      "packagesPath": "C:\\Users\\marsa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Domain\\obj\\",
+      "projectPath": "/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/FoodDelivery.Domain.csproj",
+      "packagesPath": "/home/marcelo-aberlardo-saiz/.nuget/packages/",
+      "outputPath": "/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Domain/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\marsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/marcelo-aberlardo-saiz/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "/usr/lib/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -765,7 +766,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -791,12 +793,22 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.20, 8.0.20]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.20, 8.0.20]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.110/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

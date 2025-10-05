@@ -8,14 +8,14 @@ namespace FoodDelivery.Servicios.Servicios;
 public class ProductoServicio : IProductoServicio
 {
     private readonly IProductoRepositorio _productoRepositorio;
-    private readonly IEmpresaRepositorio _empresaRepositorio;
-    private readonly ICategoriaRepositorio _categoriaRepositorio; // Repositorio de categorías
+    private readonly IEmpresaServicio _empresaServicio;
+    private readonly ICategoriaServicio _categoriaServicio; // Repositorio de categorías
 
-    public ProductoServicio(IProductoRepositorio productoRepositorio, IEmpresaRepositorio empresaRepositorio, ICategoriaRepositorio categoriaRepositorio)
+    public ProductoServicio(IProductoRepositorio productoRepositorio, IEmpresaServicio empresaServicio, ICategoriaServicio categoriaServicio)
     {
         _productoRepositorio = productoRepositorio;
-        _empresaRepositorio = empresaRepositorio;
-        _categoriaRepositorio = categoriaRepositorio;
+        _empresaServicio = empresaServicio;
+        _categoriaServicio = categoriaServicio;
     }
 
     public async Task<List<ProductoDTO>> ObtenerProductosPorEmpresaAsync(Guid idEmpresa)
@@ -55,13 +55,13 @@ public class ProductoServicio : IProductoServicio
 
     public async Task<ProductoDTO> CrearProductoAsync(ProductoCreateDTO ProductoDTO)
     {
-        var categoria = await _categoriaRepositorio.ObtenerCategoriaPorIdAsync(ProductoDTO.IdCategoria, ProductoDTO.IdEmpresa);
+        var categoria = await _categoriaServicio.ObtenerCategoriaPorIdAsync(ProductoDTO.IdCategoria, ProductoDTO.IdEmpresa);
         if (categoria == null)
             throw new Exception("La categoría no existe.");
         if (categoria.IdEmpresa != ProductoDTO.IdEmpresa)
             throw new Exception("La categoría no pertenece a la empresa.");
 
-        var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(ProductoDTO.IdEmpresa);
+        var empresa = await _empresaServicio.ObtenerEmpresaPorIdAsync(ProductoDTO.IdEmpresa);
         if (empresa == null)
         {
             throw new Exception("La empresa no existe.");
@@ -97,7 +97,7 @@ public class ProductoServicio : IProductoServicio
 
     public async Task<ProductoDTO> ActualizarProductoAsync(int id_producto, Guid id_empresa, ProductoUpdateDTO productoDTO)
     {
-        var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(id_empresa);
+        var empresa = await _empresaServicio.ObtenerEmpresaPorIdAsync(id_empresa);
         if (empresa == null)
         {
             throw new Exception("La empresa no existe.");

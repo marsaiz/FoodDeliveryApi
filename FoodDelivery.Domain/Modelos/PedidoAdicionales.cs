@@ -7,12 +7,18 @@ namespace FoodDelivery.Domain.Modelos
     [Table("pedido_adicionales")]
     public class PedidoAdicionales
     {
+
         // Clave compuesta: IdDetallePedido + IdAdicional
-        [Column("id_detalle_pedido")]
-        public int IdDetallePedido { get; set; } // Clave foránea
+        [Key, Column(Order = 0)]
+        //[Column("id_pedido")]
+        public int IdPedido { get; set; } // Clave foránea a DetallePedido
+
+        [Key, Column(Order = 1)]
+        public int IdProducto { get; set; } // Clave foránea a DetallePedido
 
         // Clave foránea a Adicional
-        [Column("id_adicional")]
+        [Key, Column(Order = 2)]
+        //[Column("id_adicional")]
         public int IdAdicional { get; set; }
 
         [Column("mitad")]
@@ -23,10 +29,10 @@ namespace FoodDelivery.Domain.Modelos
         public decimal? PrecioAdicionalPersonalizado { get; set; }
 
         // Propiedades de navegación
-        [ForeignKey("IdDetallePedido")]
-        public DetallePedido DetallePedido { get; set; }
+        [ForeignKey("IdPedido,IdProducto")]
+        public DetallePedido? DetallePedido { get; set; }
 
         [ForeignKey("IdAdicional")]
-        public Adicional Adicional { get; set; }
+        public Adicional? Adicional { get; set; }
     }
 }

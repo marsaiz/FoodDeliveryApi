@@ -8,17 +8,17 @@ namespace FoodDelivery.Servicios.Servicios;
 public class DireccionClienteServicio : IDireccionClienteServicio
 {
     private readonly IDireccionClienteRepositorio _direccionClienteRepositorio;
-    private readonly IClienteRepositorio _clienteRepositorio;
+    private readonly IClienteServicio _clienteServicio;
 
-    public DireccionClienteServicio(IDireccionClienteRepositorio direccionClienteRepositorio, IClienteRepositorio clienteRepositorio)
+    public DireccionClienteServicio(IDireccionClienteRepositorio direccionClienteRepositorio, IClienteServicio clienteServicio)
     {
         _direccionClienteRepositorio = direccionClienteRepositorio;
-        _clienteRepositorio = clienteRepositorio;
+        _clienteServicio = clienteServicio;
     }
 
     public async Task<DireccionClienteDTO> CrearDireccionClienteAsync(DireccionClienteCreateDTO direccionDto)
     {
-        var clienteExistente = await _clienteRepositorio.ObtenerClientePorIdAsync(direccionDto.IdCliente);
+        var clienteExistente = await _clienteServicio.ObtenerClientePorIdAsync(direccionDto.IdCliente);
         if (clienteExistente == null)
             throw new KeyNotFoundException("El cliente especificado no existe.");
 

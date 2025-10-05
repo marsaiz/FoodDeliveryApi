@@ -19,7 +19,8 @@ public class PedidoAdicionalServicio : IPedidoAdicionalServicio
         var adicionales = await _pedidoAdicionalesRepositorio.ObtenerPedidoAdicional(idAdicional, idDetallePedido);
         return adicionales.Select(pa => new PedidoAdicionalesDTO
         {
-            IdDetallePedido = pa.IdDetallePedido,
+            IdPedido = pa.IdPedido,
+            IdProducto = pa.IdProducto,
             IdAdicional = pa.IdAdicional,
             Mitad = pa.Mitad,
             PrecioAdicionalPersonalizado = pa.PrecioAdicionalPersonalizado
@@ -30,7 +31,7 @@ public class PedidoAdicionalServicio : IPedidoAdicionalServicio
     {
         var pedidoAdicionales = new PedidoAdicionales
         {
-            IdDetallePedido = pedidoAdicionalesCreateDTO.IdDetallePedido,
+            IdPedido = pedidoAdicionalesCreateDTO.IdPedido,
             IdAdicional = pedidoAdicionalesCreateDTO.IdAdicional,
             Mitad = pedidoAdicionalesCreateDTO.Mitad,
             PrecioAdicionalPersonalizado = pedidoAdicionalesCreateDTO.PrecioAdicionalPersonalizado
@@ -40,7 +41,8 @@ public class PedidoAdicionalServicio : IPedidoAdicionalServicio
 
         return new PedidoAdicionalesDTO
         {
-            IdDetallePedido = creado.IdDetallePedido,
+            IdPedido = creado.IdPedido,
+            IdProducto = creado.IdProducto,
             IdAdicional = creado.IdAdicional,
             Mitad = creado.Mitad,
             PrecioAdicionalPersonalizado = creado.PrecioAdicionalPersonalizado
@@ -51,7 +53,8 @@ public class PedidoAdicionalServicio : IPedidoAdicionalServicio
     {
         var pedidoAdicionales = new PedidoAdicionales
         {
-            IdDetallePedido = pedidoAdicionalesUpdateDTO.IdDetallePedido,
+            IdPedido = pedidoAdicionalesUpdateDTO.IdPedido,
+            IdProducto = pedidoAdicionalesUpdateDTO.IdProducto,
             IdAdicional = pedidoAdicionalesUpdateDTO.IdAdicional,
             Mitad = pedidoAdicionalesUpdateDTO.Mitad,
             PrecioAdicionalPersonalizado = pedidoAdicionalesUpdateDTO.PrecioAdicionalPersonalizado
@@ -61,7 +64,8 @@ public class PedidoAdicionalServicio : IPedidoAdicionalServicio
 
         return new PedidoAdicionalesDTO
         {
-            IdDetallePedido = actualizado.IdDetallePedido,
+            IdPedido = actualizado.IdPedido,
+            IdProducto = actualizado.IdProducto,
             IdAdicional = actualizado.IdAdicional,
             Mitad = actualizado.Mitad,
             PrecioAdicionalPersonalizado = actualizado.PrecioAdicionalPersonalizado

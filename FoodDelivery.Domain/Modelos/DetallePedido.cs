@@ -7,10 +7,12 @@ namespace FoodDelivery.Domain.Modelos
     public class DetallePedido
     {
         // Claves foráneas que actúan como clave primaria compuesta
-        [Column("id_pedido")]
+        [Key, Column(Order = 0)]
+        //[Column("id_pedido")]
         public int IdPedido { get; set; }
-        
-        [Column("id_producto")]
+
+        [Key, Column(Order = 1)]
+        //[Column("id_producto")]
         public int IdProducto { get; set; }
 
         [Required]

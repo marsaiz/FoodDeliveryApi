@@ -7,17 +7,17 @@ namespace FoodDelivery.Servicios.Servicios;
 public class CategoriaServicio : ICategoriaServicio
 {
     private readonly ICategoriaRepositorio _categoriaRepositorio;
-    private readonly IEmpresaRepositorio _empresaRepositorio;
+    private readonly IEmpresaServicio _empresaServicio;
 
-    public CategoriaServicio(ICategoriaRepositorio categoriaRepositorio, IEmpresaRepositorio empresaRepositorio)
+    public CategoriaServicio(ICategoriaRepositorio categoriaRepositorio, IEmpresaServicio empresaServicio)
     {
         _categoriaRepositorio = categoriaRepositorio;
-        _empresaRepositorio = empresaRepositorio;
+        _empresaServicio = empresaServicio;
     }
 
     public async Task<CategoriaDTO> CrearCategoriaAsync(CategoriaCreateDTO categoriaDto)
     {
-        var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(categoriaDto.IdEmpresa);
+        var empresa = await _empresaServicio.ObtenerEmpresaPorIdAsync(categoriaDto.IdEmpresa);
         if (empresa == null)
         {
             throw new KeyNotFoundException("La empresa no existe.");
@@ -40,7 +40,7 @@ public class CategoriaServicio : ICategoriaServicio
 
     public async Task<CategoriaDTO> ActualizarCategoriaAsync(int idCategoria, Guid idEmpresa, CategoriaUpdateDTO categoriaDto)
     {
-        var empresa = await _empresaRepositorio.ObtenerEmpresaPorIdAsync(idEmpresa);
+        var empresa = await _empresaServicio.ObtenerEmpresaPorIdAsync(idEmpresa);
         if (empresa == null)
             throw new Exception("La empresa especificada no existe.");
 
