@@ -14,9 +14,9 @@ public class PedidoAdicionalServicio : IPedidoAdicionalServicio
         _pedidoAdicionalesRepositorio = pedidoAdicionalesRepositorio;
     }
 
-    public async Task<List<PedidoAdicionalesDTO>> ObtenerPedidoAdicional(int idAdicional, int idDetallePedido)
+    public async Task<List<PedidoAdicionalesDTO>> ObtenerPedidoAdicional(int idPedido, int idProducto)
     {
-        var adicionales = await _pedidoAdicionalesRepositorio.ObtenerPedidoAdicional(idAdicional, idDetallePedido);
+        var adicionales = await _pedidoAdicionalesRepositorio.ObtenerPedidoAdicional(idPedido, idProducto);
         return adicionales.Select(pa => new PedidoAdicionalesDTO
         {
             IdPedido = pa.IdPedido,
@@ -32,6 +32,7 @@ public class PedidoAdicionalServicio : IPedidoAdicionalServicio
         var pedidoAdicionales = new PedidoAdicionales
         {
             IdPedido = pedidoAdicionalesCreateDTO.IdPedido,
+            IdProducto = pedidoAdicionalesCreateDTO.IdProducto,
             IdAdicional = pedidoAdicionalesCreateDTO.IdAdicional,
             Mitad = pedidoAdicionalesCreateDTO.Mitad,
             PrecioAdicionalPersonalizado = pedidoAdicionalesCreateDTO.PrecioAdicionalPersonalizado
@@ -57,7 +58,7 @@ public class PedidoAdicionalServicio : IPedidoAdicionalServicio
             IdProducto = pedidoAdicionalesUpdateDTO.IdProducto,
             IdAdicional = pedidoAdicionalesUpdateDTO.IdAdicional,
             Mitad = pedidoAdicionalesUpdateDTO.Mitad,
-            PrecioAdicionalPersonalizado = pedidoAdicionalesUpdateDTO.PrecioAdicionalPersonalizado
+            PrecioAdicionalPersonalizado = pedidoAdicionalesUpdateDTEliminarAsyncO.PrecioAdicionalPersonalizado
         };
 
         var actualizado = await _pedidoAdicionalesRepositorio.ActualizarPedidoAdicionalAsync(pedidoAdicionales);
@@ -72,8 +73,28 @@ public class PedidoAdicionalServicio : IPedidoAdicionalServicio
         };
     }
 
-    public async Task<bool> EliminarAsync(int idDetallePedido, int idAdicional)
+    public async Task<bool> EliminarAsync(int idPedidoAdicional, int idAdicional)
     {
-        return await _pedidoAdicionalesRepositorio.EliminarAsync(idDetallePedido, idAdicional);
+        return await _pedidoAdicionalesRepositorio.EliminarAsync(idPedidoAdicional, idAdicional);
+    }
+
+    public async Task<AdicionalDTO> AgregarAdicionalADetallePedidoAsync(int idPedido, int idProducto, int idAdicional, int? mitad, decimal? precioPersonalizado)
+    {
+        var pedidoAdicional = new PedidoAdicionales
+        {
+            IdPedido = idPedido,
+            IdProducto = idProducto,
+            IdAdicional = idAdicional,
+            Mitad = mitad,
+            PrecioAdicionalPersonalizado = precioPersonalizado
+        };
+        var creado = await _pedidoAdicionalesRepositorio.CrearPedidoAdicionalAsync(pedidoAdicional);
+        // Retornar un DTO del adicional asociado
+        return new AdicionalDTO
+        {
+            IdAdicional = creado.IdAdicional,
+            NombreAdicional = creado.Adicional?.NombreAdicional,
+            PrecioAdicional = creado.PrecioAdicionalPersonalizado ?? creado.Adicional?.PrecioAdicional
+        };
     }
 }

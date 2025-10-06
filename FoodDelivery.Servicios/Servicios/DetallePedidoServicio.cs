@@ -10,12 +10,14 @@ public class DetallePedidoServicio : IDetallePedidoServicio
     private readonly IDetallePedidoRepositorio _detallePedidoRepositorio;
     private readonly IProductoServicio _productoServicio;
     private readonly IAdicionalServicio _adicionalServicio;
+    private readonly IPedidoAdicionalServicio _pedidoAdicionalServicio;
 
-    public DetallePedidoServicio(IDetallePedidoRepositorio detallePedidoRepositorio, IProductoServicio productoServicio, IAdicionalServicio adicionalServicio)
+    public DetallePedidoServicio(IDetallePedidoRepositorio detallePedidoRepositorio, IProductoServicio productoServicio, IAdicionalServicio adicionalServicio, IPedidoAdicionalServicio pedidoAdicionalServicio)
     {
         _detallePedidoRepositorio = detallePedidoRepositorio;
         _productoServicio = productoServicio;
         _adicionalServicio = adicionalServicio;
+        _pedidoAdicionalServicio = pedidoAdicionalServicio;
     }
 
     public async Task<DetallePedidoDTO> CrearDetallePedidoAsync(DetallePedidoCreateDTO detallePedidoCreateDTO)
@@ -29,7 +31,7 @@ public class DetallePedidoServicio : IDetallePedidoServicio
             IdPedido = detallePedidoCreateDTO.IdPedido,
             IdProducto = detallePedidoCreateDTO.IdProducto,
             Cantidad = detallePedidoCreateDTO.Cantidad,
-            PrecioUnitario = producto.PrecioProducto // Asignar el precio del producto al detalle del pedido
+            PrecioUnitario = producto.PrecioProducto // Asignar el precio del producto al detalle del pedido. El precio sale de la tabla productos.
         };
 
         var detalleCreado = await _detallePedidoRepositorio.CrearDetallePedidoAsync(detallePedido);
@@ -39,15 +41,8 @@ public class DetallePedidoServicio : IDetallePedidoServicio
         {
             foreach (var adicionalId in detallePedidoCreateDTO.AdicionalesIds)
             {
-                // Aquí llamas al servicio/repositorio para crear el registro en PedidoAdicionales
-                await _adicionalServicio.CrearAdicionalAsync(new AdicionalCreateDTO
-                {
-                    IdDetallePedido = detalleCreado.IdPedido, // Ajusta según tu modelo
-                    IdProducto = detalleCreado.IdProducto,
-                    IdEmpresa = detallePedidoCreateDTO.IdEmpresa,
-                    NombreAdicional = "Adicional desde DetallePedido", // Puedes ajustar esto según tus necesidades
-                    PrecioAdicional = 0 // Ajusta según sea necesario
-                });
+                // Llamar al servicio de adicionales para agregar el adicional al detalle del pedido
+                await _pedidoAdicionalServicio.AgregarAdicionalADetallePedidoAsync(detalleCreado.IdPedido, detalleCreado.IdProducto, adicionalId, null, null);
             }
         }
 
@@ -62,6 +57,12 @@ public class DetallePedidoServicio : IDetallePedidoServicio
         };
     }
 
+    public async Task<bool> EliminarDetallePedidoAsync(int idPedido, int idProducto)
+    {
+        var detalleExistente = await _detallePedidoRepositorio.ObtenerDetallePorPedidoAsync(idPedido);
+        if (detalleExistente == null)
+            throw new Exception("El detalle del pedido no existe.");
 
-  
+        return await _detallePedidoRepositorio.EliminarDetallePedidoAsync(idPedido, idProducto);
+    }
 }

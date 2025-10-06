@@ -37,7 +37,7 @@ public class DetallePedidoRepositorio : IDetallePedidoRepositorio
         return false;
     }
 
-    public async Task<IEnumerable<DetallePedido>> ObtenerDetallesPorPedidoAsync(int IdPedido)
+    public async Task<IEnumerable<DetallePedido>> ObtenerDetallePorPedidoAsync(int IdPedido)
     {
         return await _dbContext.DetallePedidos
             .Where(dp => dp.IdPedido == IdPedido)
