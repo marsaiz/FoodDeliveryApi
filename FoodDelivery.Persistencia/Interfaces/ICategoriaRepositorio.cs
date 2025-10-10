@@ -8,4 +8,5 @@ public interface ICategoriaRepositorio
     Task<bool> EliminarCategoriaAsync(int idCategoria, Guid idEmpresa);
     Task<Categoria?> ObtenerCategoriaPorIdAsync(int idCategoria, Guid idEmpresa);
     Task<List<Categoria>> ObtenerCategoriasPorEmpresaAsync(Guid idEmpresa);
+    Task<List<Categoria>> ObtenerCategoriasAsync();
 }

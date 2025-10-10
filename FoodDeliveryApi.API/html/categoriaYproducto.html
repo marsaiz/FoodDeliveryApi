@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cargar Categoría y Producto</title>
+</head>
+
+<body>
+  <h2>Crear Categoría</h2>
+  <form id="formCategoria">
+    <input type="text" id="nombreCategoria" placeholder="Nombre de la categoría" required><br>
+    <input type="text" id="descripcion" placeholder="Descripción"><br>
+    <input type="text" id="idEmpresa" placeholder="ID Empresa (GUID)" required><br>
+    <button type="submit">Crear Categoría</button>
+  </form>
+  <pre id="respuestaCategoria"></pre>
+
+  <h2>Crear Producto</h2>
+  <form id="formProducto">
+    <input type="text" id="nombreProducto" placeholder="Nombre del producto" required><br>
+    <input type="text" id="descripcionProducto" placeholder="Descripción"><br>
+    <input type="number" id="precioProducto" placeholder="Precio" required><br>
+    <input type="text" id="imagenUrl" placeholder="URL de imagen"><br>
+    <input type="number" id="cantidadDisponible" placeholder="Cantidad disponible" required><br>
+    <input type="text" id="idCategoriaProducto" placeholder="ID Categoría" required><br>
+    <input type="text" id="idEmpresaProducto" placeholder="ID Empresa (GUID)" required><br>
+    <button type="submit">Crear Producto</button>
+  </form>
+  <pre id="respuestaProducto"></pre>
+
+  <script>
+    // Crear categoría
+    document.getElementById('formCategoria').onsubmit = async function (e) {
+      e.preventDefault();
+      const data = {
+        nombreCategoria: document.getElementById('nombreCategoria').value,
+        descripcion: document.getElementById('descripcion').value,
+        idEmpresa: document.getElementById('idEmpresa').value
+      };
+      const res = await fetch('http://localhost:5012/api/Categoria', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const respuesta = await res.json();
+      document.getElementById('respuestaCategoria').textContent = JSON.stringify(respuesta, null, 2);
+      // Autocompletar el ID de categoría e ID de empresa en el formulario de producto
+      if (respuesta.idCategoria) {
+        document.getElementById('idCategoriaProducto').value = respuesta.idCategoria;
+      }
+      document.getElementById('idEmpresaProducto').value = data.idEmpresa;
+    };
+
+    // Crear producto
+    document.getElementById('formProducto').onsubmit = async function (e) {
+      e.preventDefault();
+      const data = {
+        nombreProducto: document.getElementById('nombreProducto').value,
+        descripcionProducto: document.getElementById('descripcionProducto').value,
+        precioProducto: parseFloat(document.getElementById('precioProducto').value),
+        imagenUrl: document.getElementById('imagenUrl').value,
+        cantidadDisponible: parseInt(document.getElementById('cantidadDisponible').value),
+        idCategoria: parseInt(document.getElementById('idCategoriaProducto').value),
+        idEmpresa: document.getElementById('idEmpresaProducto').value
+      };
+      const res = await fetch('http://localhost:5012/api/Producto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const respuesta = await res.json();
+      document.getElementById('respuestaProducto').textContent = JSON.stringify(respuesta, null, 2);
+    };
+  </script>
+  <br><br>
+  <h2>Categorías Registradas</h2>
+  <button onclick="consultarCategorias()">Consultar Categorías</button>
+  <ul id="listaCategorias"></ul>
+  <script>
+    async function consultarCategorias() {
+      const res = await fetch('http://localhost:5012/api/Categoria/');
+      const categorias = await res.json();
+      const lista = document.getElementById('listaCategorias');
+      lista.innerHTML = '';
+      categorias.forEach(c => {
+        const li = document.createElement('li');
+        li.innerText = `ID: ${c.idCategoria} | Nombre: ${c.nombreCategoria} | Empresa: ${c.idEmpresa}`;
+        lista.appendChild(li);
+      });
+    }
+  </script>
+
+  <h3>Filtrar Categorías por Empresa</h3>
+  <input type="text" id="idEmpresaFiltro" placeholder="ID Empresa (GUID)">
+  <button onclick="consultarCategoriasPorEmpresa()">Buscar Categorías</button>
+  <ul id="listaCategoriasPorEmpresa"></ul>
+  <script>
+    async function consultarCategoriasPorEmpresa() {
+      const idEmpresa = document.getElementById('idEmpresaFiltro').value;
+      const res = await fetch('http://localhost:5012/api/Categoria/empresa/' + idEmpresa);
+      const categorias = await res.json();
+      const lista = document.getElementById('listaCategoriasPorEmpresa');
+      lista.innerHTML = '';
+      categorias.forEach(c => {
+        const li = document.createElement('li');
+        li.innerText = `ID: ${c.idCategoria} | Nombre: ${c.nombreCategoria}`;
+        lista.appendChild(li);
+      });
+    }
+  </script>
+
+  <br><br>
+  <h2>Productos Registrados</h2>
+  <button onclick="consultarProductos()">Consultar Productos</button>
+  <ul id="listaProductos"></ul>
+  <script>
+    async function consultarProductos() {
+      const res = await fetch('http://localhost:5012/api/Producto/todos');
+      const productos = await res.json();
+      const lista = document.getElementById('listaProductos');
+      lista.innerHTML = '';
+      productos.forEach(p => {
+        const li = document.createElement('li');
+        li.innerText = `ID: ${p.idProducto} | Nombre: ${p.nombreProducto} | Categoría: ${p.idCategoria} | Empresa: ${p.idEmpresa}`;
+        lista.appendChild(li);
+      });
+    }
+  </script>
+
+  <br><br>
+  <h3>Filtrar Productos por Empresa</h3>
+  <input type="text" id="idEmpresaProductoFiltro" placeholder="ID Empresa (GUID)">
+  <button onclick="consultarProductosPorEmpresa()">Buscar Productos</button>
+  <ul id="listaProductosPorEmpresa"></ul>
+  <script>
+    async function consultarProductosPorEmpresa() {
+      const idEmpresa = document.getElementById('idEmpresaProductoFiltro').value;
+      const res = await fetch('http://localhost:5012/api/Producto/idempresa/' + idEmpresa);
+      const productos = await res.json();
+      const lista = document.getElementById('listaProductosPorEmpresa');
+      lista.innerHTML = '';
+      productos.forEach(p => {
+        const li = document.createElement('li');
+        li.innerText = `ID: ${p.idProducto} | Nombre: ${p.nombreProducto} | Categoría: ${p.idCategoria}`;
+        lista.appendChild(li);
+      });
+    }
+  </script>
+</body>
+
+</html>

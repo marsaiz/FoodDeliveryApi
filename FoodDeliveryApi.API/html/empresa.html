@@ -1,10 +1,12 @@
 <!-- archivo: empresa.html -->
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Panel Empresa</title>
 </head>
+
 <body>
   <!-- <h2>Pedidos de la Empresa</h2>
   <input type="text" id="idEmpresa" placeholder="ID Empresa (GUID)">
@@ -66,7 +68,7 @@
   <pre id="respuestaEmpresa"></pre>
 
   <script>
-    document.getElementById('formEmpresa').onsubmit = async function(e) {
+    document.getElementById('formEmpresa').onsubmit = async function (e) {
       e.preventDefault();
       const data = {
         nombre: document.getElementById('nombre').value,
@@ -84,6 +86,24 @@
       const respuesta = await res.json();
       document.getElementById('respuestaEmpresa').textContent = JSON.stringify(respuesta, null, 2);
     };
+  </script>
+<br><br>
+  <h2>Empresas Registradas</h2>
+  <button onclick="consultarEmpresas()">Consultar Empresas</button>
+  <ul id="listaEmpresas"></ul>
+
+  <script>
+    async function consultarEmpresas() {
+      const res = await fetch('http://localhost:5012/api/Empresas');
+      const empresas = await res.json();
+      const lista = document.getElementById('listaEmpresas');
+      lista.innerHTML = '';
+      empresas.forEach(e => {
+        const li = document.createElement('li');
+        li.innerText = `Empresa: ${e.nombre} - ID: ${e.idEmpresa}`;
+        lista.appendChild(li);
+      });
+    }
   </script>
 </body>
 </html>

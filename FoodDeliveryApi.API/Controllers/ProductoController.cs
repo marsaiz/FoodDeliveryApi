@@ -80,4 +80,11 @@ public class ProductoController : ControllerBase
         await _productoService.EliminarProductoAsync(idProducto, idEmpresa);
         return NoContent();
     }
+
+    [HttpGet("todos")]
+    public async Task<ActionResult<List<ProductoDTO>>> GetTodos()
+    {
+        var productos = await _productoService.ObtenerTodosAsync();
+        return Ok(productos);
+    }
 }

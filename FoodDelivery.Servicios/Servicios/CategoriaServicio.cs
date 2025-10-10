@@ -90,4 +90,15 @@ public class CategoriaServicio : ICategoriaServicio
             IdEmpresa = c.IdEmpresa
         }).ToList();
     }
+
+    public async Task<List<CategoriaDTO>> ObtenerCategoriasAsync()
+    {
+        var categorias = await _categoriaRepositorio.ObtenerCategoriasAsync();
+        return categorias.Select(c => new CategoriaDTO
+        {
+            IdCategoria = c.IdCategoria,
+            NombreCategoria = c.NombreCategoria,
+            IdEmpresa = c.IdEmpresa
+        }).ToList();
+    }
 }

@@ -8,4 +8,5 @@ public interface IProductoRepositorio
     Task<Producto> CrearProductoAsync(Producto producto);
     Task<Producto> ActualizarProductoAsync(Producto producto);
     Task<bool> EliminarProductoAsync(int idProducto, Guid idEmpresa);
+    Task<List<Producto>> ObtenerTodosAsync();
 }

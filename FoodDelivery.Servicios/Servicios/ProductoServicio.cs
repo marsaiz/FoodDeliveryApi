@@ -133,4 +133,21 @@ public class ProductoServicio : IProductoServicio
     {
         return await _productoRepositorio.EliminarProductoAsync(idProducto, idEmpresa);
     }
+
+    public async Task<List<ProductoDTO>> ObtenerTodosAsync()
+    {
+        var productos = await _productoRepositorio.ObtenerTodosAsync();
+        return productos.Select(p => new ProductoDTO
+        {
+            IdProducto = p.IdProducto,
+            NombreProducto = p.NombreProducto,
+            DescripcionProducto = p.DescripcionProducto,
+            PrecioProducto = p.PrecioProducto,
+            ImagenUrl = p.ImagenUrl,
+            IdCategoria = p.IdCategoria,
+            IdEmpresa = p.IdEmpresa,
+            Activo = p.Activo,
+            CantidadDisponible = p.CantidadDisponible
+        }).ToList();
+    }
 }

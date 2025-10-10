@@ -55,4 +55,9 @@ public class ProductoRepositorio : IProductoRepositorio
     }
     return false; // No se encontró el producto
     }
+
+    public async Task<List<Producto>> ObtenerTodosAsync()
+    {
+        return await _context.Productos.ToListAsync();
+    }
 }

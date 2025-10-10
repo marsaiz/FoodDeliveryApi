@@ -55,4 +55,9 @@ public class CategoriaRepositorio : ICategoriaRepositorio
         .Where(c => c.IdEmpresa == idEmpresa)
         .ToListAsync();
     }
+
+    public async Task<List<Categoria>> ObtenerCategoriasAsync()
+    {
+        return await _context.Categorias.ToListAsync();
+    }
 }

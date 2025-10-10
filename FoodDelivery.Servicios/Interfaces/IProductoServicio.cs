@@ -9,4 +9,5 @@ public interface IProductoServicio
     Task<ProductoDTO> CrearProductoAsync(ProductoCreateDTO producto);
     Task<ProductoDTO> ActualizarProductoAsync(int idProducto, Guid idEmpresa, ProductoUpdateDTO producto);
     Task<bool> EliminarProductoAsync(int idProducto, Guid idEmpresa);
+    Task<List<ProductoDTO>> ObtenerTodosAsync();
 }

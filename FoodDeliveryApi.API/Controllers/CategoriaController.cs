@@ -16,6 +16,13 @@ public class CategoriaController : ControllerBase
         _categoriaServicio = categoriaServicio;
     }
 
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Categoria>>> GetAll()
+    {
+        var categorias = await _categoriaServicio.ObtenerCategoriasAsync();
+        return Ok(categorias);
+    }
+
     [HttpGet("empresa/{idEmpresa}")]
     public async Task<ActionResult<IEnumerable<Categoria>>> GetAll(Guid idEmpresa)
     {

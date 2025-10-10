@@ -9,4 +9,5 @@ public interface ICategoriaServicio
     Task<bool> EliminarCategoriaAsync(int idCategoria, Guid idEmpresa);
     Task<CategoriaDTO> ObtenerCategoriaPorIdAsync(int idCategoria, Guid idEmpresa);
     Task<List<CategoriaDTO>> ObtenerCategoriasPorEmpresaAsync(Guid idEmpresa);
+    Task<List<CategoriaDTO>> ObtenerCategoriasAsync();
 }
