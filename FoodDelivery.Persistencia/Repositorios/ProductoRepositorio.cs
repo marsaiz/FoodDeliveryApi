@@ -20,11 +20,10 @@ public class ProductoRepositorio : IProductoRepositorio
             .ToListAsync();
     }
 
-    public async Task<Producto> ObtenerProductoPorIdAsync(int idProducto, Guid idEmpresa)
+    public async Task<Producto> ObtenerProductoPorIdAsync(int idProducto)
     {
         return await _context.Productos
-            .Where(p => p.IdProducto == idProducto && p.IdEmpresa == idEmpresa)
-            .FirstOrDefaultAsync(); // si encuentra, devuelve el producto, sino null
+            .FirstOrDefaultAsync(p => p.IdProducto == idProducto);
     }
 
     public async Task<Producto> CrearProductoAsync(Producto producto)

@@ -26,7 +26,7 @@ public class ProductoController : ControllerBase
     [HttpGet("{idProducto}/{idEmpresa}")]
     public async Task<ActionResult<Producto>> GetById(int idProducto, Guid idEmpresa)
     {
-        var productoSeleccionado = await _productoService.ObtenerProductoPorIdAsync(idProducto, idEmpresa);
+        var productoSeleccionado = await _productoService.ObtenerProductoPorIdAsync(idProducto);
         if (productoSeleccionado == null)
             return NotFound();
         return Ok(productoSeleccionado);

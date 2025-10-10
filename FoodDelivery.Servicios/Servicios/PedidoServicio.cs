@@ -10,12 +10,14 @@ public class PedidoServicio : IPedidoServicio
     private readonly IPedidoRepositorio _pedidoRepositorio;
     private readonly IClienteServicio _clienteServicio;
     private readonly IEmpresaServicio _empresaServicio;
+    private readonly IDetallePedidoServicio _detallePedidoServicio;
 
-    public PedidoServicio(IPedidoRepositorio pedidoRepositorio, IClienteServicio clienteServicio, IEmpresaServicio empresaServicio)
+    public PedidoServicio(IPedidoRepositorio pedidoRepositorio, IClienteServicio clienteServicio, IEmpresaServicio empresaServicio, IDetallePedidoServicio detallePedidoServicio)
     {
         _pedidoRepositorio = pedidoRepositorio;
         _clienteServicio = clienteServicio;
         _empresaServicio = empresaServicio;
+        _detallePedidoServicio = detallePedidoServicio;
     }
 
     public async Task<PedidoDTO> CrearPedidoAsync(PedidoCreateDTO pedidoDTO)
@@ -35,12 +37,45 @@ public class PedidoServicio : IPedidoServicio
             IdEmpresa = pedidoDTO.IdEmpresa,
             FechaHora = DateTime.UtcNow,
             Estado = EstadoPedido.Pendiente,
-            TotalPedido = pedidoDTO.TotalPedido,
-            MetodoPago = pedidoDTO.MetodoPago,
-            Entrega = pedidoDTO.Entrega
+            TotalPedido = 0, // Se calculará luego
+            MetodoPago = pedidoDTO.MetodoPago ?? string.Empty,
+            Entrega = Enum.TryParse<TipoEntrega>(pedidoDTO.TipoEntrega, out var entrega) ? entrega : TipoEntrega.Domicilio
         };
 
         var pedidoCreado = await _pedidoRepositorio.CrearPedidoAsync(nuevoPedido);
+
+        decimal totalPedido = 0;
+        if (pedidoDTO.Detalles != null)
+        {
+            foreach (var detalle in pedidoDTO.Detalles)
+            {
+                // Asignar el id del pedido creado
+                var detalleDto = new DetallePedidoCreateDTO
+                {
+                    IdProducto = detalle.IdProducto,
+                    Cantidad = detalle.Cantidad,
+                    PrecioUnitario = detalle.PrecioUnitario,
+                    Adicionales = detalle.Adicionales
+                };
+                // El servicio de detalle debe asignar el IdPedido
+                detalleDto.GetType().GetProperty("IdPedido")?.SetValue(detalleDto, pedidoCreado.IdPedido);
+                var detalleCreado = await _detallePedidoServicio.CrearDetallePedidoAsync(detalleDto);
+                totalPedido += (detalleCreado.PrecioUnitario ?? 0) * detalleCreado.Cantidad;
+                // Sumar precio de adicionales
+                if (detalle.Adicionales != null)
+                {
+                    foreach (var adic in detalle.Adicionales)
+                    {
+                        if (adic.PrecioAdicionalPersonalizado.HasValue)
+                            totalPedido += adic.PrecioAdicionalPersonalizado.Value * detalle.Cantidad;
+                    }
+                }
+            }
+        }
+        // Actualizar el total del pedido
+        pedidoCreado.TotalPedido = totalPedido;
+        await _pedidoRepositorio.ActualizarPedidoAsync(pedidoCreado);
+
         return new PedidoDTO
         {
             IdPedido = pedidoCreado.IdPedido,

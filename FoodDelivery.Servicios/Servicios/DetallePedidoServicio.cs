@@ -22,7 +22,7 @@ public class DetallePedidoServicio : IDetallePedidoServicio
 
     public async Task<DetallePedidoDTO> CrearDetallePedidoAsync(DetallePedidoCreateDTO detallePedidoCreateDTO)
     {
-        var producto = await _productoServicio.ObtenerProductoPorIdAsync(detallePedidoCreateDTO.IdProducto, detallePedidoCreateDTO.IdEmpresa);
+    var producto = await _productoServicio.ObtenerProductoPorIdAsync(detallePedidoCreateDTO.IdProducto);
         if (producto == null)
             throw new Exception("El producto no existe.");
 

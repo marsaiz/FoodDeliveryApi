@@ -18,8 +18,9 @@ namespace FoodDeliveryApi.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CrearPedidoAdicional([FromBody] PedidoAdicionalesCreateDTO dto)
         {
-            var result = await _pedidoAdicionalServicio.CrearPedidoAdicionalAsync(dto);
-            return Ok(result);
+            // El método CrearPedidoAdicionalAsync no existe en el servicio ni la interfaz.
+            // Si necesitas crear un pedido adicional, utiliza AgregarAdicionalADetallePedidoAsync o implementa el método correspondiente.
+            return BadRequest("Método no implementado. Utiliza el flujo de agregar adicional a detalle de pedido.");
         }
 
         [HttpPut]

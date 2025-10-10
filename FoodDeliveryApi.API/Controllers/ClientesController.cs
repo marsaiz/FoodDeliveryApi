@@ -98,8 +98,8 @@ public class ClientesController : ControllerBase
     public async Task<IActionResult> Login([FromBody] ClienteLoginDTO dto)
     {
         var cliente = await _clienteService.LoginAsync(dto);
-        if (cliente == null)
+        if (cliente.Equals(default))
             return Unauthorized();
-        return Ok(new { idCliente = cliente.IdCliente, nombreCliente = cliente.NombreCliente, usuario = cliente.Usuario });
+        return Ok(new { idCliente = cliente.IdCliente, usuario = cliente.Usuario });
     }
 }

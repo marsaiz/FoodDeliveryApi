@@ -175,20 +175,13 @@ public class ClienteServicio : IClienteServicio
         return true;
     }
 
-    public async Task<ClienteDTO?> LoginAsync(ClienteLoginDTO loginDTO)
+    public async Task<(Guid? IdCliente, string? Usuario)> LoginAsync(ClienteLoginDTO loginDTO)
     {
         var cliente = await _clienteRepositorio.ObtenerClientePorUsuarioAsync(loginDTO.Usuario);
         if (cliente == null)
-            return null;
+            return (null, null);
         if (!VerifyPassword(loginDTO.Password, cliente.PasswordHash ?? string.Empty, cliente.PasswordSalt ?? string.Empty))
-            return null;
-        return new ClienteDTO
-        {
-            IdCliente = cliente.IdCliente,
-            NombreCliente = cliente.NombreCliente,
-            TelefonoCliente = cliente.TelefonoCliente,
-            EmailCliente = cliente.EmailCliente,
-            Usuario = cliente.Usuario
-        };
+            return (null, null);
+        return (cliente.IdCliente, cliente.Usuario);
     }
 }

@@ -36,6 +36,9 @@
             const resultadoDiv = document.getElementById('resultado');
             if (response.ok) {
                 resultadoDiv.innerHTML = "<span style='color:green'>Cliente registrado correctamente</span>";
+                setTimeout(() => {
+                    window.location.href = 'cliente-login.html';
+                }, 1200);
             } else {
                 const error = await response.text();
                 resultadoDiv.innerHTML = `<span style='color:red'>Error: ${error}</span>`;

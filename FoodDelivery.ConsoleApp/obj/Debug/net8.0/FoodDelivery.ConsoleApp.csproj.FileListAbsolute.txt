@@ -88,9 +88,6 @@ c:/Users/marsa/Desktop/programacion/ProyectosComerciales/FoodDeliveryApi/FoodDel
 c:/Users/marsa/Desktop/programacion/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/FoodDelivery.ConsoleApp.pdb
 C:/Users/marsa/Desktop/programacion/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/FoodDelivery.ConsoleApp.genruntimeconfig.cache
 C:/Users/marsa/Desktop/programacion/ProyectosComerciales/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/ref/FoodDelivery.ConsoleApp.dll
-/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/FoodDelivery.ConsoleApp.dll
-/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/refint/FoodDelivery.ConsoleApp.dll
-/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/FoodDelivery.ConsoleApp.pdb
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/bin/Debug/net8.0/FoodDelivery.ConsoleApp
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/bin/Debug/net8.0/FoodDelivery.ConsoleApp.deps.json
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/bin/Debug/net8.0/FoodDelivery.ConsoleApp.runtimeconfig.json
@@ -135,5 +132,8 @@ C:/Users/marsa/Desktop/programacion/ProyectosComerciales/FoodDeliveryApi/FoodDel
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/FoodDelivery.ConsoleApp.csproj.CoreCompileInputs.cache
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/FoodDelivery.ConsoleApp.sourcelink.json
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/FoodDeli.37766881.Up2Date
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/FoodDelivery.ConsoleApp.dll
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/refint/FoodDelivery.ConsoleApp.dll
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/FoodDelivery.ConsoleApp.pdb
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/FoodDelivery.ConsoleApp.genruntimeconfig.cache
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.ConsoleApp/obj/Debug/net8.0/ref/FoodDelivery.ConsoleApp.dll

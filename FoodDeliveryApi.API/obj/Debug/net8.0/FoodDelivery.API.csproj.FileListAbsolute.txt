@@ -128,9 +128,6 @@ c:/Users/marsa/Desktop/programacion/ProyectosComerciales/FoodDeliveryApi/FoodDel
 c:/Users/marsa/Desktop/programacion/ProyectosComerciales/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/FoodDelivery.API.pdb
 C:/Users/marsa/Desktop/programacion/ProyectosComerciales/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/FoodDelivery.API.genruntimeconfig.cache
 C:/Users/marsa/Desktop/programacion/ProyectosComerciales/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/ref/FoodDelivery.API.dll
-/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/FoodDelivery.API.dll
-/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/refint/FoodDelivery.API.dll
-/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/FoodDelivery.API.pdb
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/bin/Debug/net8.0/appsettings.Development.json
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/bin/Debug/net8.0/appsettings.json
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/bin/Debug/net8.0/FoodDelivery.API.staticwebassets.endpoints.json
@@ -194,5 +191,8 @@ C:/Users/marsa/Desktop/programacion/ProyectosComerciales/FoodDeliveryApi/FoodDel
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.FoodDelivery.API.props
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/staticwebassets.pack.json
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/FoodDeli.71F210FE.Up2Date
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/FoodDelivery.API.dll
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/refint/FoodDelivery.API.dll
+/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/FoodDelivery.API.pdb
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/FoodDelivery.API.genruntimeconfig.cache
 /home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/obj/Debug/net8.0/ref/FoodDelivery.API.dll

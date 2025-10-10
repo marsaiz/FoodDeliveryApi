@@ -27,28 +27,6 @@ public class PedidoAdicionalServicio : IPedidoAdicionalServicio
         }).ToList();
     }
 
-    public async Task<PedidoAdicionalesDTO> CrearPedidoAdicionalAsync(PedidoAdicionalesCreateDTO pedidoAdicionalesCreateDTO)
-    {
-        var pedidoAdicionales = new PedidoAdicionales
-        {
-            IdPedido = pedidoAdicionalesCreateDTO.IdPedido,
-            IdProducto = pedidoAdicionalesCreateDTO.IdProducto,
-            IdAdicional = pedidoAdicionalesCreateDTO.IdAdicional,
-            Mitad = pedidoAdicionalesCreateDTO.Mitad,
-            PrecioAdicionalPersonalizado = pedidoAdicionalesCreateDTO.PrecioAdicionalPersonalizado
-        };
-
-        var creado = await _pedidoAdicionalesRepositorio.CrearPedidoAdicionalAsync(pedidoAdicionales);
-
-        return new PedidoAdicionalesDTO
-        {
-            IdPedido = creado.IdPedido,
-            IdProducto = creado.IdProducto,
-            IdAdicional = creado.IdAdicional,
-            Mitad = creado.Mitad,
-            PrecioAdicionalPersonalizado = creado.PrecioAdicionalPersonalizado
-        };
-    }
 
     public async Task<PedidoAdicionalesDTO> ActualizarPedidoAdicionalAsync(PedidoAdicionalesUpdateDTO pedidoAdicionalesUpdateDTO)
     {

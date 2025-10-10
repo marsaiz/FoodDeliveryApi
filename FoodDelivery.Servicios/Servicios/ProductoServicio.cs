@@ -35,9 +35,9 @@ public class ProductoServicio : IProductoServicio
         }).ToList();
     }
 
-    public async Task<ProductoDTO> ObtenerProductoPorIdAsync(int idProducto, Guid idEmpresa)
+    public async Task<ProductoDTO> ObtenerProductoPorIdAsync(int idProducto)
     {
-        var producto = await _productoRepositorio.ObtenerProductoPorIdAsync(idProducto, idEmpresa);
+        var producto = await _productoRepositorio.ObtenerProductoPorIdAsync(idProducto);
         if (producto == null) return null;
         return new ProductoDTO
         {
@@ -52,6 +52,7 @@ public class ProductoServicio : IProductoServicio
             CantidadDisponible = producto.CantidadDisponible
         };
     }
+
 
     public async Task<ProductoDTO> CrearProductoAsync(ProductoCreateDTO ProductoDTO)
     {
@@ -102,7 +103,7 @@ public class ProductoServicio : IProductoServicio
         {
             throw new Exception("La empresa no existe.");
         }
-        var productoExistente = await _productoRepositorio.ObtenerProductoPorIdAsync(id_producto, id_empresa);
+    var productoExistente = await _productoRepositorio.ObtenerProductoPorIdAsync(id_producto);
         if (productoExistente == null)
             return null;
 

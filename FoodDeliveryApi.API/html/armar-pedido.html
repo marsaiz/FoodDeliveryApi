@@ -35,6 +35,7 @@
                     <th>Producto</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
+                    <th>Adicionales</th>
                     <th>Agregar</th>
                 </tr>
             </thead>
@@ -94,8 +95,20 @@
         total = 0;
         actualizarDetalle();
     });
+    // Cargar adicionales de la empresa seleccionada
+    let adicionalesEmpresa = [];
+    async function cargarAdicionales(idEmpresa) {
+        const res = await fetch('http://localhost:5012/api/Adicionales/empresa/' + idEmpresa);
+        let adicionales = await res.json();
+        if (!Array.isArray(adicionales)) {
+            adicionales = [];
+        }
+        adicionalesEmpresa = adicionales;
+    }
+
     // Cargar productos de la empresa seleccionada
     async function cargarProductos(idEmpresa) {
+        await cargarAdicionales(idEmpresa);
         const res = await fetch('http://localhost:5012/api/Producto/idempresa/' + idEmpresa);
         let productos = await res.json();
         if (!Array.isArray(productos)) {
@@ -105,8 +118,15 @@
         const tbody = document.getElementById('tablaProductos').querySelector('tbody');
         tbody.innerHTML = '';
         productosEmpresa.forEach(p => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${p.nombreProducto}</td><td>$${p.precioProducto}</td><td><input type='number' min='1' value='1' id='cant_${p.idProducto}' style='width:60px;'></td><td><button class='btn' onclick='agregarProducto(${p.idProducto})'>Agregar</button></td>`;
+            // Generar select de adicionales (permite seleccionar varios y mitad)
+            let adicionalesHtml = '';
+            if (adicionalesEmpresa.length > 0) {
+                adicionalesHtml = `<select multiple id='adics_${p.idProducto}' style='min-width:120px;'>` +
+                    adicionalesEmpresa.map(a => `<option value='${a.idAdicional}'>${a.nombreAdicional} ($${a.precioAdicional ?? 0})</option>`).join('') +
+                    `</select><br><label style='font-size:0.9em'>Mitad:</label> <select id='mitad_${p.idProducto}'><option value='0'>Completo</option><option value='1'>1ra mitad</option><option value='2'>2da mitad</option></select>`;
+            }
+            tr = document.createElement('tr');
+            tr.innerHTML = `<td>${p.nombreProducto}</td><td>$${p.precioProducto}</td><td><input type='number' min='1' value='1' id='cant_${p.idProducto}' style='width:60px;'></td><td>${adicionalesHtml}</td><td><button class='btn' onclick='agregarProducto(${p.idProducto})'>Agregar</button></td>`;
             tbody.appendChild(tr);
         });
     }
@@ -115,21 +135,56 @@
         const prod = productosEmpresa.find(p => p.idProducto === idProducto);
         const cantidad = parseInt(document.getElementById('cant_' + idProducto).value);
         if (!prod || cantidad < 1) return;
-        const existente = detalle.find(d => d.idProducto === idProducto);
+        // Obtener adicionales seleccionados y mitad
+        let adicionalesSel = [];
+        let mitad = 0;
+        const adicsSelElem = document.getElementById('adics_' + idProducto);
+        if (adicsSelElem) {
+            adicionalesSel = Array.from(adicsSelElem.selectedOptions).map(opt => parseInt(opt.value));
+        }
+        const mitadElem = document.getElementById('mitad_' + idProducto);
+        if (mitadElem) {
+            mitad = parseInt(mitadElem.value);
+        }
+        const existente = detalle.find(d => d.idProducto === idProducto && JSON.stringify(d.adicionales) === JSON.stringify(adicionalesSel) && d.mitad === mitad);
         if (existente) {
             existente.cantidad += cantidad;
         } else {
-            detalle.push({ idProducto, nombre: prod.nombreProducto, precio: prod.precioProducto, cantidad });
+            detalle.push({ idProducto, nombre: prod.nombreProducto, precio: prod.precioProducto, cantidad, adicionales: adicionalesSel, mitad });
         }
-        total += prod.precioProducto * cantidad;
+        // Sumar precio de adicionales
+        let precioAdics = 0;
+        adicionalesSel.forEach(idAdic => {
+            const adic = adicionalesEmpresa.find(a => a.idAdicional === idAdic);
+            if (adic && adic.precioAdicional) precioAdics += adic.precioAdicional;
+        });
+        total += (prod.precioProducto + precioAdics) * cantidad;
         actualizarDetalle();
     }
     function actualizarDetalle() {
         const ul = document.getElementById('detallePedido');
         ul.innerHTML = '';
         detalle.forEach(d => {
+            let adicsTxt = '';
+            if (d.adicionales && d.adicionales.length > 0) {
+                adicsTxt = ' + ' + d.adicionales.map(idAdic => {
+                    const adic = adicionalesEmpresa.find(a => a.idAdicional === idAdic);
+                    return adic ? adic.nombreAdicional : '';
+                }).join(', ');
+            }
+            let mitadTxt = '';
+            if (d.mitad === 1) mitadTxt = ' (1ra mitad)';
+            else if (d.mitad === 2) mitadTxt = ' (2da mitad)';
             const li = document.createElement('li');
-            li.textContent = `${d.nombre} x${d.cantidad} ($${(d.precio * d.cantidad).toFixed(2)})`;
+            // Sumar precio adicionales
+            let precioAdics = 0;
+            if (d.adicionales && d.adicionales.length > 0) {
+                d.adicionales.forEach(idAdic => {
+                    const adic = adicionalesEmpresa.find(a => a.idAdicional === idAdic);
+                    if (adic && adic.precioAdicional) precioAdics += adic.precioAdicional;
+                });
+            }
+            li.textContent = `${d.nombre}${adicsTxt}${mitadTxt} x${d.cantidad} ($${((d.precio + precioAdics) * d.cantidad).toFixed(2)})`;
             ul.appendChild(li);
         });
         document.getElementById('totalPedido').textContent = total.toFixed(2);
@@ -154,7 +209,13 @@
         const tipoEntrega = document.getElementById('tipoEntrega').value;
         const idDireccionCliente = document.getElementById('idDireccionCliente').value || null;
         // Construir detalles
-        const detalles = detalle.map(d => ({ idProducto: d.idProducto, cantidad: d.cantidad, precioUnitario: d.precio }));
+        const detalles = detalle.map(d => ({
+            idProducto: d.idProducto,
+            cantidad: d.cantidad,
+            precioUnitario: d.precio,
+            adicionales: d.adicionales || [],
+            mitad: d.mitad || 0
+        }));
         const data = {
             idCliente,
             idEmpresa,
