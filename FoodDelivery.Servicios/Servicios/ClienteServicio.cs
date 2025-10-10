@@ -174,4 +174,21 @@ public class ClienteServicio : IClienteServicio
         await _clienteRepositorio.ActualizarClienteAsync(clienteExistente);
         return true;
     }
+
+    public async Task<ClienteDTO?> LoginAsync(ClienteLoginDTO loginDTO)
+    {
+        var cliente = await _clienteRepositorio.ObtenerClientePorUsuarioAsync(loginDTO.Usuario);
+        if (cliente == null)
+            return null;
+        if (!VerifyPassword(loginDTO.Password, cliente.PasswordHash ?? string.Empty, cliente.PasswordSalt ?? string.Empty))
+            return null;
+        return new ClienteDTO
+        {
+            IdCliente = cliente.IdCliente,
+            NombreCliente = cliente.NombreCliente,
+            TelefonoCliente = cliente.TelefonoCliente,
+            EmailCliente = cliente.EmailCliente,
+            Usuario = cliente.Usuario
+        };
+    }
 }

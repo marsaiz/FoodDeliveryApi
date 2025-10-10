@@ -7,7 +7,14 @@ namespace FoodDelivery.Servicios.Utils;
 
 public static class PasswordHelper
 {
-public static string GenerateSalt()
+    // Verifica si el password ingresado coincide con el hash y salt almacenados
+    public static bool VerifyPassword(string password, string storedHash, string storedSalt)
+    {
+        var hashOfInput = HashPassword(password, storedSalt);
+        return hashOfInput == storedHash;
+    }
+
+    public static string GenerateSalt()
     {
         // Genera un salt aleatorio (implementación simple, usa una más robusta en producción)
         // Salt es un valor aleatorio que se añade a la contraseña antes de hashearla
@@ -19,6 +26,7 @@ public static string GenerateSalt()
         }
         return Convert.ToBase64String(saltBytes);
     }
+
     // Método simple de hashing de contraseña (usa una implementación real en producción)
     // Hashing es un proceso de convertir la contraseña en una cadena fija de caracteres
     // que no puede ser revertida a la contraseña original.

@@ -78,6 +78,15 @@ public class EmpresasController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { idEmpresa = empresa.IdEmpresa }, empresaDTO);
     }
 
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] EmpresaLoginDTO dto)
+    {
+        var empresa = await _empresaService.LoginAsync(dto);
+        if (empresa == null)
+            return Unauthorized();
+        return Ok(new { idEmpresa = empresa.IdEmpresa, nombre = empresa.Nombre });
+    }
+
     [HttpPut("{idEmpresa}")]
     public async Task<ActionResult> Update(Guid idEmpresa, EmpresaUpdateDTO empresaDTO)
     {

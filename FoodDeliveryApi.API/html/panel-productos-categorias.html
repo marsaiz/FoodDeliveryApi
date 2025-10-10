@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Productos y Categorías</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 30px 40px 40px 40px;
+        }
+        h2, h3 {
+            color: #2c3e50;
+        }
+        form {
+            margin-bottom: 25px;
+            background: #f0f4f8;
+            padding: 18px 20px 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+        input, button {
+            margin-bottom: 10px;
+            padding: 7px 10px;
+            border-radius: 5px;
+            border: 1px solid #bfc9d1;
+            font-size: 1em;
+        }
+        input:focus {
+            outline: 2px solid #3498db;
+        }
+        button {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #217dbb;
+        }
+        pre {
+            background: #f8f8f8;
+            border-left: 4px solid #3498db;
+            padding: 10px;
+            border-radius: 5px;
+            color: #333;
+        }
+        ul {
+            background: #f0f4f8;
+            border-radius: 6px;
+            padding: 10px 20px;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        .section {
+            margin-bottom: 35px;
+        }
+        .flex-row {
+            display: flex;
+            gap: 30px;
+        }
+        @media (max-width: 700px) {
+            .container { padding: 10px; }
+            .flex-row { flex-direction: column; gap: 0; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+  <h1 style="text-align:center;">Panel de Productos y Categorías</h1>
+  <div class="flex-row">
+    <div class="section" style="flex:1;">
+      <h2>Crear Categoría</h2>
+      <form id="formCategoria">
+        <input type="text" id="nombreCategoria" placeholder="Nombre de la categoría" required><br>
+        <input type="text" id="descripcion" placeholder="Descripción"><br>
+        <input type="text" id="idEmpresa" placeholder="ID Empresa (GUID)" required><br>
+        <button type="submit">Crear Categoría</button>
+      </form>
+      <pre id="respuestaCategoria"></pre>
+    </div>
+    <div class="section" style="flex:1;">
+      <h2>Crear Producto</h2>
+      <form id="formProducto">
+        <input type="text" id="nombreProducto" placeholder="Nombre del producto" required><br>
+        <input type="text" id="descripcionProducto" placeholder="Descripción"><br>
+        <input type="number" id="precioProducto" placeholder="Precio" required><br>
+        <input type="text" id="imagenUrl" placeholder="URL de imagen"><br>
+        <input type="number" id="cantidadDisponible" placeholder="Cantidad disponible" required><br>
+        <input type="text" id="idCategoriaProducto" placeholder="ID Categoría" required><br>
+        <input type="text" id="idEmpresaProducto" placeholder="ID Empresa (GUID)" required><br>
+        <button type="submit">Crear Producto</button>
+      </form>
+      <pre id="respuestaProducto"></pre>
+    </div>
+  </div>
+  <div class="section">
+    <h2>Categorías Registradas</h2>
+    <button onclick="consultarCategorias()">Consultar Categorías</button>
+    <ul id="listaCategorias"></ul>
+  </div>
+  <div class="section">
+    <h3>Filtrar Categorías por Empresa</h3>
+    <input type="text" id="idEmpresaFiltro" placeholder="ID Empresa (GUID)">
+    <button onclick="consultarCategoriasPorEmpresa()">Buscar Categorías</button>
+    <ul id="listaCategoriasPorEmpresa"></ul>
+  </div>
+  <div class="section">
+    <h2>Productos Registrados</h2>
+    <button onclick="consultarProductos()">Consultar Productos</button>
+    <ul id="listaProductos"></ul>
+  </div>
+  <div class="section">
+    <h3>Filtrar Productos por Empresa</h3>
+    <input type="text" id="idEmpresaProductoFiltro" placeholder="ID Empresa (GUID)">
+    <button onclick="consultarProductosPorEmpresa()">Buscar Productos</button>
+    <ul id="listaProductosPorEmpresa"></ul>
+  </div>
+</div>
+<script>
+    // Autocompletar el ID de empresa desde localStorage si existe
+    const idEmpresaLS = localStorage.getItem('idEmpresa');
+    if (idEmpresaLS) {
+      document.getElementById('idEmpresa').value = idEmpresaLS;
+      document.getElementById('idEmpresaProducto').value = idEmpresaLS;
+    }
+    // Crear categoría
+    document.getElementById('formCategoria').onsubmit = async function (e) {
+      e.preventDefault();
+      const data = {
+        nombreCategoria: document.getElementById('nombreCategoria').value,
+        descripcion: document.getElementById('descripcion').value,
+        idEmpresa: document.getElementById('idEmpresa').value
+      };
+      const res = await fetch('http://localhost:5012/api/Categoria', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const respuesta = await res.json();
+      document.getElementById('respuestaCategoria').textContent = JSON.stringify(respuesta, null, 2);
+      // Autocompletar el ID de categoría e ID de empresa en el formulario de producto
+      if (respuesta.idCategoria) {
+        document.getElementById('idCategoriaProducto').value = respuesta.idCategoria;
+      }
+      document.getElementById('idEmpresaProducto').value = data.idEmpresa;
+    };
+    // Crear producto
+    document.getElementById('formProducto').onsubmit = async function (e) {
+      e.preventDefault();
+      const data = {
+        nombreProducto: document.getElementById('nombreProducto').value,
+        descripcionProducto: document.getElementById('descripcionProducto').value,
+        precioProducto: parseFloat(document.getElementById('precioProducto').value),
+        imagenUrl: document.getElementById('imagenUrl').value,
+        cantidadDisponible: parseInt(document.getElementById('cantidadDisponible').value),
+        idCategoria: parseInt(document.getElementById('idCategoriaProducto').value),
+        idEmpresa: document.getElementById('idEmpresaProducto').value
+      };
+      const res = await fetch('http://localhost:5012/api/Producto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const respuesta = await res.json();
+      document.getElementById('respuestaProducto').textContent = JSON.stringify(respuesta, null, 2);
+    };
+    async function consultarCategorias() {
+      const res = await fetch('http://localhost:5012/api/Categoria/');
+      const categorias = await res.json();
+      const lista = document.getElementById('listaCategorias');
+      lista.innerHTML = '';
+      categorias.forEach(c => {
+        const li = document.createElement('li');
+        li.innerText = `ID: ${c.idCategoria} | Nombre: ${c.nombreCategoria} | Empresa: ${c.idEmpresa}`;
+        lista.appendChild(li);
+      });
+    }
+    async function consultarCategoriasPorEmpresa() {
+      const idEmpresa = document.getElementById('idEmpresaFiltro').value;
+      const res = await fetch('http://localhost:5012/api/Categoria/empresa/' + idEmpresa);
+      const categorias = await res.json();
+      const lista = document.getElementById('listaCategoriasPorEmpresa');
+      lista.innerHTML = '';
+      categorias.forEach(c => {
+        const li = document.createElement('li');
+        li.innerText = `ID: ${c.idCategoria} | Nombre: ${c.nombreCategoria}`;
+        lista.appendChild(li);
+      });
+    }
+    async function consultarProductos() {
+      const res = await fetch('http://localhost:5012/api/Producto/todos');
+      const productos = await res.json();
+      const lista = document.getElementById('listaProductos');
+      lista.innerHTML = '';
+      productos.forEach(p => {
+        const li = document.createElement('li');
+        li.innerText = `ID: ${p.idProducto} | Nombre: ${p.nombreProducto} | Categoría: ${p.idCategoria} | Empresa: ${p.idEmpresa}`;
+        lista.appendChild(li);
+      });
+    }
+    async function consultarProductosPorEmpresa() {
+      const idEmpresa = document.getElementById('idEmpresaProductoFiltro').value;
+      const res = await fetch('http://localhost:5012/api/Producto/idempresa/' + idEmpresa);
+      const productos = await res.json();
+      const lista = document.getElementById('listaProductosPorEmpresa');
+      lista.innerHTML = '';
+      productos.forEach(p => {
+        const li = document.createElement('li');
+        li.innerText = `ID: ${p.idProducto} | Nombre: ${p.nombreProducto} | Categoría: ${p.idCategoria}`;
+        lista.appendChild(li);
+      });
+    }
+</script>
+</body>
+</html>

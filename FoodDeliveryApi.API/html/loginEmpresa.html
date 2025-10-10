@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Empresa</title>
+</head>
+<body>
+  <h2>Login Empresa</h2>
+  <form id="loginForm">
+    <input type="text" id="usuario" placeholder="Usuario" required><br>
+    <input type="password" id="password" placeholder="Contraseña" required><br>
+    <button type="submit">Ingresar</button>
+  </form>
+  <div id="loginError" style="color:red;"></div>
+
+  <script>
+    document.getElementById('loginForm').onsubmit = async function(e) {
+      e.preventDefault();
+      const data = {
+        usuario: document.getElementById('usuario').value,
+        password: document.getElementById('password').value
+      };
+      // Cambia la URL por la de tu endpoint real de login de empresa
+      const res = await fetch('http://localhost:5012/api/Empresas/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        // Si el login es exitoso, redirige a la página de alta de categorías y productos
+        window.location.href = "categoriaYproducto.html";
+      } else {
+        document.getElementById('loginError').textContent = "Usuario o contraseña incorrectos";
+      }
+    };
+  </script>
+</body>
+</html>

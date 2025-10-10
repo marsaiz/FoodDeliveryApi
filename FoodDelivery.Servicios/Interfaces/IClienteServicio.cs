@@ -11,7 +11,8 @@ namespace FoodDelivery.Servicios.Interfaces
         Task<ClienteDTO> ObtenerClientePorIdAsync(Guid idCliente);
         Task<List<ClienteDTO>> ObtenerClientesAsync();
         Task<bool> CambiarPasswordAsync(Guid idCliente, ClienteChangePasswordDTO dto);
-        Task<ClienteDTO> ObtenerClientePorUsuarioAsync(string usuario);
-        Task<ClienteDTO> ObtenerClientePorEmailAsync(string email);
+    Task<ClienteDTO> ObtenerClientePorUsuarioAsync(string usuario);
+    Task<ClienteDTO> ObtenerClientePorEmailAsync(string email);
+    Task<ClienteDTO?> LoginAsync(ClienteLoginDTO loginDTO);
     }
 }

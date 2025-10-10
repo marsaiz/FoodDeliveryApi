@@ -12,4 +12,5 @@ public interface IEmpresaServicio
     Task<EmpresaDTO> ObtenerEmpresaPorUsuarioAsync(string usuario);
     Task<EmpresaDTO> ObtenerEmpresaPorEmailAsync(string email);
     Task<bool> CambiarPasswordAsync(Guid idEmpresa, EmpresaChangePasswordDTO dto);
+    Task<EmpresaDTO?> LoginAsync(EmpresaLoginDTO loginDTO);
 }

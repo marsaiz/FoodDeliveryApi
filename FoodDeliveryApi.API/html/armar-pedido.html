@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Armar Pedido</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f7f7f7; }
+        .container { max-width: 900px; margin: 30px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 30px 40px 40px 40px; }
+        h1, h2 { color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { border: 1px solid #bfc9d1; padding: 8px 10px; text-align: left; }
+        th { background: #eaf1fb; }
+        tr:nth-child(even) { background: #f8f8f8; }
+        .btn { background: #3498db; color: #fff; border: none; border-radius: 5px; padding: 7px 14px; cursor: pointer; transition: background 0.2s; }
+        .btn:hover { background: #217dbb; }
+        .section { margin-bottom: 35px; }
+        .form-group { margin-bottom: 12px; }
+        input, select { padding: 7px 10px; border-radius: 5px; border: 1px solid #bfc9d1; font-size: 1em; }
+        input:focus, select:focus { outline: 2px solid #3498db; }
+        pre { background: #f8f8f8; border-left: 4px solid #3498db; padding: 10px; border-radius: 5px; color: #333; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Armar Pedido</h1>
+    <div class="section">
+        <h2>Seleccionar Empresa</h2>
+        <select id="empresaSelect"></select>
+    </div>
+    <div class="section">
+        <h2>Seleccionar Productos</h2>
+        <table id="tablaProductos">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Agregar</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <h3>Detalle del Pedido</h3>
+        <ul id="detallePedido"></ul>
+        <div><b>Total: $<span id="totalPedido">0.00</span></b></div>
+    </div>
+    <div class="section">
+        <h2>Finalizar Pedido</h2>
+        <form id="formFinalizarPedido">
+            <div class="form-group">
+                <label>Método de Pago:</label>
+                <input type="text" id="metodoPago" required>
+            </div>
+            <div class="form-group">
+                <label>Tipo de Entrega:</label>
+                <select id="tipoEntrega">
+                    <option value="Domicilio">Domicilio</option>
+                    <option value="ParaLlevar">Para Llevar</option>
+                    <option value="EnLocal">En Local</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Dirección (ID, opcional):</label>
+                <input type="number" id="idDireccionCliente">
+            </div>
+            <button type="submit" class="btn">Enviar Pedido</button>
+        </form>
+        <pre id="respuestaPedido"></pre>
+    </div>
+</div>
+<script>
+    // Variables globales
+    let idCliente = localStorage.getItem('idCliente');
+    let productosEmpresa = [];
+    let detalle = [];
+    let total = 0;
+    // Cargar empresas
+    async function cargarEmpresas() {
+        const res = await fetch('http://localhost:5012/api/Empresas');
+        const empresas = await res.json();
+        const select = document.getElementById('empresaSelect');
+        select.innerHTML = '';
+        empresas.forEach(e => {
+            const opt = document.createElement('option');
+            opt.value = e.idEmpresa;
+            opt.textContent = e.nombre;
+            select.appendChild(opt);
+        });
+        if (empresas.length > 0) cargarProductos(empresas[0].idEmpresa);
+    }
+    document.getElementById('empresaSelect').addEventListener('change', function() {
+        cargarProductos(this.value);
+        detalle = [];
+        total = 0;
+        actualizarDetalle();
+    });
+    // Cargar productos de la empresa seleccionada
+    async function cargarProductos(idEmpresa) {
+        const res = await fetch('http://localhost:5012/api/Producto/idempresa/' + idEmpresa);
+        let productos = await res.json();
+        if (!Array.isArray(productos)) {
+            productos = [];
+        }
+        productosEmpresa = productos;
+        const tbody = document.getElementById('tablaProductos').querySelector('tbody');
+        tbody.innerHTML = '';
+        productosEmpresa.forEach(p => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${p.nombreProducto}</td><td>$${p.precioProducto}</td><td><input type='number' min='1' value='1' id='cant_${p.idProducto}' style='width:60px;'></td><td><button class='btn' onclick='agregarProducto(${p.idProducto})'>Agregar</button></td>`;
+            tbody.appendChild(tr);
+        });
+    }
+    // Agregar producto al detalle
+    window.agregarProducto = function(idProducto) {
+        const prod = productosEmpresa.find(p => p.idProducto === idProducto);
+        const cantidad = parseInt(document.getElementById('cant_' + idProducto).value);
+        if (!prod || cantidad < 1) return;
+        const existente = detalle.find(d => d.idProducto === idProducto);
+        if (existente) {
+            existente.cantidad += cantidad;
+        } else {
+            detalle.push({ idProducto, nombre: prod.nombreProducto, precio: prod.precioProducto, cantidad });
+        }
+        total += prod.precioProducto * cantidad;
+        actualizarDetalle();
+    }
+    function actualizarDetalle() {
+        const ul = document.getElementById('detallePedido');
+        ul.innerHTML = '';
+        detalle.forEach(d => {
+            const li = document.createElement('li');
+            li.textContent = `${d.nombre} x${d.cantidad} ($${(d.precio * d.cantidad).toFixed(2)})`;
+            ul.appendChild(li);
+        });
+        document.getElementById('totalPedido').textContent = total.toFixed(2);
+    }
+    // Enviar pedido
+    document.getElementById('formFinalizarPedido').onsubmit = async function(e) {
+        e.preventDefault();
+        const mensaje = document.getElementById('respuestaPedido');
+        mensaje.style.color = '';
+        if (!idCliente) {
+            mensaje.textContent = 'Debes iniciar sesión como cliente.';
+            mensaje.style.color = 'red';
+            return;
+        }
+        if (detalle.length === 0) {
+            mensaje.textContent = 'Agrega al menos un producto al pedido.';
+            mensaje.style.color = 'red';
+            return;
+        }
+        const idEmpresa = document.getElementById('empresaSelect').value;
+        const metodoPago = document.getElementById('metodoPago').value;
+        const tipoEntrega = document.getElementById('tipoEntrega').value;
+        const idDireccionCliente = document.getElementById('idDireccionCliente').value || null;
+        // Construir detalles
+        const detalles = detalle.map(d => ({ idProducto: d.idProducto, cantidad: d.cantidad, precioUnitario: d.precio }));
+        const data = {
+            idCliente,
+            idEmpresa,
+            metodoPago,
+            tipoEntrega,
+            idDireccionCliente,
+            detalles
+        };
+        try {
+            const res = await fetch('http://localhost:5012/api/pedidos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            if (!res.ok) {
+                const error = await res.text();
+                mensaje.textContent = 'Error: ' + error;
+                mensaje.style.color = 'red';
+                return;
+            }
+            const respuesta = await res.json();
+            mensaje.innerHTML = `<span style='color:green'>¡Pedido realizado con éxito!<br>Número de pedido: <b>${respuesta.idPedido ?? '(desconocido)'}</b></span><br>`;
+            if (respuesta.idPedido) {
+                mensaje.innerHTML += `<a href='pedidos-cliente.html' style='color:#217dbb;text-decoration:underline;'>Ver mis pedidos</a>`;
+            }
+            // Limpiar detalle
+            detalle = [];
+            total = 0;
+            actualizarDetalle();
+        } catch (err) {
+            mensaje.textContent = 'Error inesperado al enviar el pedido.';
+            mensaje.style.color = 'red';
+        }
+    };
+    // Inicializar
+    cargarEmpresas();
+</script>
+</body>
+</html>

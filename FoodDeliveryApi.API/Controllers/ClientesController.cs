@@ -93,4 +93,13 @@ public class ClientesController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] ClienteLoginDTO dto)
+    {
+        var cliente = await _clienteService.LoginAsync(dto);
+        if (cliente == null)
+            return Unauthorized();
+        return Ok(new { idCliente = cliente.IdCliente, nombreCliente = cliente.NombreCliente, usuario = cliente.Usuario });
+    }
 }

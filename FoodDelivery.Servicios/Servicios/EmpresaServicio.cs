@@ -164,7 +164,7 @@ public class EmpresaServicio : IEmpresaServicio
             throw new Exception("Empresa no encontrada.");
 
         // Verifica la contraseña actual
-        if (empresa.PasswordHash != HashPassword(dto.PasswordActual, empresa.PasswordSalt)) // Asumiendo que tienes un método de hashing
+        if ((empresa.PasswordHash ?? string.Empty) != HashPassword(dto.PasswordActual, empresa.PasswordSalt ?? string.Empty)) // Asumiendo que tienes un método de hashing
             throw new Exception("La contraseña actual es incorrecta.");
 
 
@@ -177,5 +177,27 @@ public class EmpresaServicio : IEmpresaServicio
         return await _empresaRepositorio.CambiarPasswordAsync(idEmpresa, nuevoPasswordHash);
         // Si requiere un objeto DTO, usa:
         // return await _empresaRepositorio.CambiarPasswordAsync(new CambiarPasswordDTO { IdEmpresa = dto.IdEmpresa, PasswordHash = nuevoPasswordHash, PasswordSalt = nuevoPasswordSalt });
-    }    
+    }   
+
+    public async Task<EmpresaDTO?> LoginAsync(EmpresaLoginDTO loginDTO)
+    {
+        var empresa = await _empresaRepositorio.ObtenerEmpresaPorUsuarioAsync(loginDTO.Usuario);
+        if (empresa == null)
+            return null;
+        // Verifica el hash de la contraseña (ajusta según tu lógica de hash)
+        if (!VerifyPassword(loginDTO.Password, empresa.PasswordHash ?? string.Empty, empresa.PasswordSalt ?? string.Empty))
+            return null;
+        return new EmpresaDTO
+        {
+            IdEmpresa = empresa.IdEmpresa,
+            Nombre = empresa.Nombre,
+            Telefono = empresa.Telefono,
+            Email = empresa.Email,
+            Direccion = empresa.Direccion,
+            Latitud = empresa.Latitud,
+            Longitud = empresa.Longitud,
+            EstaAbierta = empresa.EstaAbierta,
+            Usuario = empresa.Usuario
+        };
+    }
 }

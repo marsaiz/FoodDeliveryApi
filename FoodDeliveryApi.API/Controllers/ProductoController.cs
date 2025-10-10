@@ -87,4 +87,13 @@ public class ProductoController : ControllerBase
         var productos = await _productoService.ObtenerTodosAsync();
         return Ok(productos);
     }
+
+    [HttpGet("idempresa/{idEmpresa}")]
+    public async Task<ActionResult<IEnumerable<ProductoDTO>>> GetByEmpresaId(string idEmpresa)
+    {
+        if (!Guid.TryParse(idEmpresa, out var guidEmpresa))
+            return BadRequest("El idEmpresa no es un GUID válido.");
+        var productos = await _productoService.ObtenerProductosPorEmpresaAsync(guidEmpresa);
+        return Ok(productos);
+    }
 }
