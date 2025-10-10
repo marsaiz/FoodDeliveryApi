@@ -117,11 +117,11 @@ namespace FoodDelivery.Persistencia.Migrations
                 {
                     b.Property<int>("IdPedido")
                         .HasColumnType("integer")
-                        .HasColumnName("id_pedido");
+                        .HasColumnOrder(0);
 
                     b.Property<int>("IdProducto")
                         .HasColumnType("integer")
-                        .HasColumnName("id_producto");
+                        .HasColumnOrder(1);
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("integer")
@@ -306,30 +306,29 @@ namespace FoodDelivery.Persistencia.Migrations
 
             modelBuilder.Entity("FoodDelivery.Domain.Modelos.PedidoAdicionales", b =>
                 {
+                    b.Property<int>("IdPedido")
+                        .HasColumnType("integer")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("IdProducto")
+                        .HasColumnType("integer")
+                        .HasColumnOrder(1);
+
                     b.Property<int>("IdAdicional")
                         .HasColumnType("integer")
-                        .HasColumnName("id_adicional");
-
-                    b.Property<int>("IdDetallePedido")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_detalle_pedido");
+                        .HasColumnOrder(2);
 
                     b.Property<int?>("Mitad")
                         .HasColumnType("integer")
                         .HasColumnName("mitad");
 
-                    b.Property<int?>("PedidoIdPedido")
-                        .HasColumnType("integer");
-
                     b.Property<decimal?>("PrecioAdicionalPersonalizado")
                         .HasColumnType("numeric")
                         .HasColumnName("precio_adicional_personalizado");
 
-                    b.HasKey("IdAdicional", "IdDetallePedido");
+                    b.HasKey("IdPedido", "IdProducto", "IdAdicional");
 
-                    b.HasIndex("PedidoIdPedido");
-
-                    b.HasIndex("IdDetallePedido", "IdAdicional");
+                    b.HasIndex("IdAdicional");
 
                     b.ToTable("pedido_adicionales");
                 });
@@ -471,13 +470,9 @@ namespace FoodDelivery.Persistencia.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FoodDelivery.Domain.Modelos.Pedido", null)
-                        .WithMany("PedidosAdicionales")
-                        .HasForeignKey("PedidoIdPedido");
-
                     b.HasOne("FoodDelivery.Domain.Modelos.DetallePedido", "DetallePedido")
                         .WithMany("PedidoAdicionales")
-                        .HasForeignKey("IdDetallePedido", "IdAdicional")
+                        .HasForeignKey("IdPedido", "IdProducto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -541,8 +536,6 @@ namespace FoodDelivery.Persistencia.Migrations
             modelBuilder.Entity("FoodDelivery.Domain.Modelos.Pedido", b =>
                 {
                     b.Navigation("DetallePedidos");
-
-                    b.Navigation("PedidosAdicionales");
                 });
 
             modelBuilder.Entity("FoodDelivery.Domain.Modelos.Producto", b =>

@@ -13,10 +13,10 @@ public class PedidoAdicionalRepositorio : IPedidoAdicionalesRepositorio
         _context = context;
     }
 
-    public async Task<List<PedidoAdicionales>> ObtenerPedidoAdicional(int idAdicional, int idDetallePedido)
+    public async Task<List<PedidoAdicionales>> ObtenerPedidoAdicional(int idPedido, int idProducto, int idAdicional)
     {
         return await _context.PedidoAdicionales
-            .Where(pa => pa.IdAdicional == idAdicional && pa.IdDetallePedido == idDetallePedido)
+            .Where(pa => pa.IdPedido == idPedido && pa.IdProducto == idProducto && pa.IdAdicional == idAdicional)
             .ToListAsync();
     }
 
@@ -37,7 +37,22 @@ public class PedidoAdicionalRepositorio : IPedidoAdicionalesRepositorio
     public async Task<bool> EliminarAsync(int idDetallePedido, int idAdicional)
     {
         var pedidoAdicional = await _context.PedidoAdicionales
-            .Where(pa => pa.IdDetallePedido == idDetallePedido && pa.IdAdicional == idAdicional)
+            .Where(pa => pa.IdPedido == idDetallePedido && pa.IdAdicional == idAdicional)
+            .FirstOrDefaultAsync();
+
+        if (pedidoAdicional != null)
+        {
+            _context.PedidoAdicionales.Remove(pedidoAdicional);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        return false;
+    }
+
+    public async Task<bool> EliminarAsync(int idPedido, int idProducto, int idAdicional)
+    {
+        var pedidoAdicional = await _context.PedidoAdicionales
+            .Where(pa => pa.IdPedido == idPedido && pa.IdProducto == idProducto && pa.IdAdicional == idAdicional)
             .FirstOrDefaultAsync();
 
         if (pedidoAdicional != null)

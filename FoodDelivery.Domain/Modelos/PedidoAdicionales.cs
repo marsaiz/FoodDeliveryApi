@@ -22,7 +22,7 @@ namespace FoodDelivery.Domain.Modelos
         public int IdAdicional { get; set; }
 
         [Column("mitad")]
-        public int? Mitad { get; set; } // 1: primera mitad, 2: segunda mitad, null: adicional completo
+        public int? Mitad { get; set; } // 0: sin mitad, 1: primera mitad, 2: segunda mitad, null: adicional completo
 
         // Nuevo campo para el precio personalizado
         [Column("precio_adicional_personalizado")]

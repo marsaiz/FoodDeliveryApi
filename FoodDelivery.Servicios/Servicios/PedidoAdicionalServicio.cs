@@ -14,9 +14,9 @@ public class PedidoAdicionalServicio : IPedidoAdicionalServicio
         _pedidoAdicionalesRepositorio = pedidoAdicionalesRepositorio;
     }
 
-    public async Task<List<PedidoAdicionalesDTO>> ObtenerPedidoAdicional(int idPedido, int idProducto)
+    public async Task<List<PedidoAdicionalesDTO>> ObtenerPedidoAdicional(int idPedido, int idProducto, int idAdicional)
     {
-        var adicionales = await _pedidoAdicionalesRepositorio.ObtenerPedidoAdicional(idPedido, idProducto);
+        var adicionales = await _pedidoAdicionalesRepositorio.ObtenerPedidoAdicional(idPedido, idProducto, idAdicional);
         return adicionales.Select(pa => new PedidoAdicionalesDTO
         {
             IdPedido = pa.IdPedido,
@@ -58,7 +58,7 @@ public class PedidoAdicionalServicio : IPedidoAdicionalServicio
             IdProducto = pedidoAdicionalesUpdateDTO.IdProducto,
             IdAdicional = pedidoAdicionalesUpdateDTO.IdAdicional,
             Mitad = pedidoAdicionalesUpdateDTO.Mitad,
-            PrecioAdicionalPersonalizado = pedidoAdicionalesUpdateDTEliminarAsyncO.PrecioAdicionalPersonalizado
+            PrecioAdicionalPersonalizado = pedidoAdicionalesUpdateDTO.PrecioAdicionalPersonalizado
         };
 
         var actualizado = await _pedidoAdicionalesRepositorio.ActualizarPedidoAdicionalAsync(pedidoAdicionales);
@@ -73,9 +73,11 @@ public class PedidoAdicionalServicio : IPedidoAdicionalServicio
         };
     }
 
-    public async Task<bool> EliminarAsync(int idPedidoAdicional, int idAdicional)
+    // Removed invalid overload: EliminarAsync(int, int)
+
+    public async Task<bool> EliminarAsync(int idPedido, int idProducto, int idAdicional)
     {
-        return await _pedidoAdicionalesRepositorio.EliminarAsync(idPedidoAdicional, idAdicional);
+        return await _pedidoAdicionalesRepositorio.EliminarAsync(idPedido, idProducto, idAdicional);
     }
 
     public async Task<AdicionalDTO> AgregarAdicionalADetallePedidoAsync(int idPedido, int idProducto, int idAdicional, int? mitad, decimal? precioPersonalizado)

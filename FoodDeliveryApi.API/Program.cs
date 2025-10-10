@@ -30,8 +30,24 @@ builder.Services.AddScoped<IDireccionClienteRepositorio, DireccionClienteReposit
 builder.Services.AddScoped<IDireccionClienteServicio, DireccionClienteServicio>();
 builder.Services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();
 builder.Services.AddScoped<IPedidoServicio, PedidoServicio>();
+builder.Services.AddScoped<IPedidoAdicionalesRepositorio, PedidoAdicionalesRepositorio>();
+builder.Services.AddScoped<IPedidoAdicionalServicio, PedidoAdicionalServicio>();
+builder.Services.AddScoped<IDetallePedidoRepositorio, DetallePedidoRepositorio>();
+builder.Services.AddScoped<IDetallePedidoServicio, DetallePedidoServicio>();
 
 builder.Services.AddControllers();
+
+// Permitir cualquier origen (solo para desarrollo)
+// Access-Control-Allow-Origin
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 /* builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -40,6 +56,9 @@ builder.Services.AddControllers();
     }); */
 
 var app = builder.Build();
+
+app.UseCors(); // Habilitar CORS
+app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

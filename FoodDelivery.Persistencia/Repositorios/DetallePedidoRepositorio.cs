@@ -25,9 +25,23 @@ public class DetallePedidoRepositorio : IDetallePedidoRepositorio
         await _dbContext.SaveChangesAsync();
         return detallePedido;
     }
-    public async Task<bool> EliminarDetallePedidoAsync(int idDetallePedido)
+    /* public async Task<bool> EliminarDetallePedidoAsync(int idDetallePedido)
     {
         var detallePedido = await _dbContext.DetallePedidos.FindAsync(idDetallePedido);
+        if (detallePedido != null)
+        {
+            _dbContext.DetallePedidos.Remove(detallePedido);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+        return false;
+    } */
+
+    // Implementación del método requerido por la interfaz
+    public async Task<bool> EliminarDetallePedidoAsync(int idPedido, int idProducto)
+    {
+        var detallePedido = await _dbContext.DetallePedidos
+            .FirstOrDefaultAsync(dp => dp.IdPedido == idPedido && dp.IdProducto == idProducto);
         if (detallePedido != null)
         {
             _dbContext.DetallePedidos.Remove(detallePedido);

@@ -37,12 +37,18 @@ public class DetallePedidoServicio : IDetallePedidoServicio
         var detalleCreado = await _detallePedidoRepositorio.CrearDetallePedidoAsync(detallePedido);
 
         // 3. Manejar los adicionales si existen
-        if (detallePedidoCreateDTO.AdicionalesIds != null && detallePedidoCreateDTO.AdicionalesIds.Any())
+        if (detallePedidoCreateDTO.Adicionales != null && detallePedidoCreateDTO.Adicionales.Any())
         {
-            foreach (var adicionalId in detallePedidoCreateDTO.AdicionalesIds)
+            foreach (var adicional in detallePedidoCreateDTO.Adicionales)
             {
-                // Llamar al servicio de adicionales para agregar el adicional al detalle del pedido
-                await _pedidoAdicionalServicio.AgregarAdicionalADetallePedidoAsync(detalleCreado.IdPedido, detalleCreado.IdProducto, adicionalId, null, null);
+                // Llamar al servicio de adicionales para agregar el adicional al detalle del pedido con mitad y precio personalizado
+                await _pedidoAdicionalServicio.AgregarAdicionalADetallePedidoAsync(
+                    detalleCreado.IdPedido,
+                    detalleCreado.IdProducto,
+                    adicional.IdAdicional,
+                    adicional.Mitad,
+                    adicional.PrecioAdicionalPersonalizado
+                );
             }
         }
 
@@ -53,7 +59,8 @@ public class DetallePedidoServicio : IDetallePedidoServicio
             IdProducto = detalleCreado.IdProducto,
             Cantidad = detalleCreado.Cantidad,
             PrecioUnitario = detalleCreado.PrecioUnitario,
-            AdicionalesIds = detallePedidoCreateDTO.AdicionalesIds
+            // Puedes mapear los IDs de los adicionales si lo necesitas
+            AdicionalesIds = detallePedidoCreateDTO.Adicionales?.Select(a => a.IdAdicional).ToList()
         };
     }
 
@@ -64,5 +71,61 @@ public class DetallePedidoServicio : IDetallePedidoServicio
             throw new Exception("El detalle del pedido no existe.");
 
         return await _detallePedidoRepositorio.EliminarDetallePedidoAsync(idPedido, idProducto);
+    }
+
+    public async Task<DetallePedidoDTO> ActualizarDetallePedidoAsync(int idPedido, int idProducto, DetallePedidoUpdateDTO detallePedidoUpdateDTO)
+    {
+        var detalleExistente = (await _detallePedidoRepositorio.ObtenerDetallePorPedidoAsync(idPedido))
+            .FirstOrDefault(dp => dp.IdProducto == idProducto);
+        if (detalleExistente == null)
+            throw new Exception("El detalle del pedido no existe.");
+
+        // Actualizar campos
+        detalleExistente.Cantidad = detallePedidoUpdateDTO.Cantidad;
+        if (detallePedidoUpdateDTO.PrecioUnitario.HasValue)
+            detalleExistente.PrecioUnitario = detallePedidoUpdateDTO.PrecioUnitario.Value;
+
+        var actualizado = await _detallePedidoRepositorio.ActualizarDetallePedidoAsync(detalleExistente);
+
+        // Nota: aquí podrías actualizar los adicionales si lo necesitas
+
+        return new DetallePedidoDTO
+        {
+            IdPedido = actualizado.IdPedido,
+            IdProducto = actualizado.IdProducto,
+            Cantidad = actualizado.Cantidad,
+            PrecioUnitario = actualizado.PrecioUnitario,
+            AdicionalesIds = detallePedidoUpdateDTO.AdicionalesIds
+        };
+    }
+
+    public async Task<DetallePedidoDTO> ObtenerDetallePedidoPorIdAsync(int idPedido, int idProducto)
+    {
+        var detalle = (await _detallePedidoRepositorio.ObtenerDetallePorPedidoAsync(idPedido))
+            .FirstOrDefault(dp => dp.IdProducto == idProducto);
+        if (detalle == null)
+            throw new Exception("El detalle del pedido no existe.");
+
+        return new DetallePedidoDTO
+        {
+            IdPedido = detalle.IdPedido,
+            IdProducto = detalle.IdProducto,
+            Cantidad = detalle.Cantidad,
+            PrecioUnitario = detalle.PrecioUnitario,
+            AdicionalesIds = detalle.PedidoAdicionales?.Select(a => a.IdAdicional).ToList() ?? new List<int>()
+        };
+    }
+
+    public async Task<List<DetallePedidoDTO>> ObtenerDetallesPorPedidoAsync(int idPedido)
+    {
+        var detalles = await _detallePedidoRepositorio.ObtenerDetallePorPedidoAsync(idPedido);
+        return detalles.Select(detalle => new DetallePedidoDTO
+        {
+            IdPedido = detalle.IdPedido,
+            IdProducto = detalle.IdProducto,
+            Cantidad = detalle.Cantidad,
+            PrecioUnitario = detalle.PrecioUnitario,
+            AdicionalesIds = detalle.PedidoAdicionales?.Select(a => a.IdAdicional).ToList() ?? new List<int>()
+        }).ToList();
     }
 }

@@ -7,5 +7,6 @@ public class DetallePedidoCreateDTO
     public int IdProducto { get; set; }
     public Guid IdEmpresa { get; set; }
     public int IdPedido { get; set; }
-    public List<int>? AdicionalesIds { get; set; }
+    // Cambiar de lista de IDs a lista de objetos para soportar mitad y precio personalizado
+    public List<PedidoAdicionalesCreateDTO>? Adicionales { get; set; }
 }

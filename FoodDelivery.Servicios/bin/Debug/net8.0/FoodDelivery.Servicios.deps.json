@@ -9,7 +9,8 @@
       "FoodDelivery.Servicios/1.0.0": {
         "dependencies": {
           "FoodDelivery.Domain": "1.0.0",
-          "FoodDelivery.Persistencia": "1.0.0"
+          "FoodDelivery.Persistencia": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "9.0.9"
         },
         "runtime": {
           "FoodDelivery.Servicios.dll": {}

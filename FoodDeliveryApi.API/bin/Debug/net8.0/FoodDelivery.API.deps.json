@@ -12,6 +12,7 @@
           "FoodDelivery.Servicios": "1.0.0",
           "Microsoft.AspNetCore.OpenApi": "8.0.19",
           "Microsoft.EntityFrameworkCore": "9.0.9",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
           "Swashbuckle.AspNetCore": "6.6.2"
         },
         "runtime": {
@@ -362,7 +363,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4"
         },
         "runtime": {
-          "FoodDelivery.Domain.dll": {}
+          "FoodDelivery.Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "FoodDelivery.Persistencia/1.0.0": {
@@ -374,16 +378,23 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4"
         },
         "runtime": {
-          "FoodDelivery.Persistencia.dll": {}
+          "FoodDelivery.Persistencia.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "FoodDelivery.Servicios/1.0.0": {
         "dependencies": {
           "FoodDelivery.Domain": "1.0.0",
-          "FoodDelivery.Persistencia": "1.0.0"
+          "FoodDelivery.Persistencia": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "9.0.9"
         },
         "runtime": {
-          "FoodDelivery.Servicios.dll": {}
+          "FoodDelivery.Servicios.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

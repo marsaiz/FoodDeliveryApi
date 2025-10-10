@@ -6,7 +6,7 @@
   <title>Panel Empresa</title>
 </head>
 <body>
-  <h2>Pedidos de la Empresa</h2>
+  <!-- <h2>Pedidos de la Empresa</h2>
   <input type="text" id="idEmpresa" placeholder="ID Empresa (GUID)">
   <button onclick="cargarPedidos()">Cargar Pedidos</button>
   <ul id="listaPedidos"></ul>
@@ -50,6 +50,39 @@
         body: JSON.stringify(data)
       });
       document.getElementById('respuestaUpdate').innerText = await res.text();
+    };
+  </script> -->
+
+  <h2>Crear Empresa</h2>
+  <form id="formEmpresa">
+    <input type="text" id="nombre" placeholder="Nombre" required><br>
+    <input type="text" id="direccion" placeholder="Dirección" required><br>
+    <input type="text" id="telefono" placeholder="Teléfono" required><br>
+    <input type="email" id="email" placeholder="Email" required><br>
+    <input type="text" id="usuario" placeholder="Usuario" required><br>
+    <input type="password" id="password" placeholder="Contraseña" required><br>
+    <button type="submit">Crear Empresa</button>
+  </form>
+  <pre id="respuestaEmpresa"></pre>
+
+  <script>
+    document.getElementById('formEmpresa').onsubmit = async function(e) {
+      e.preventDefault();
+      const data = {
+        nombre: document.getElementById('nombre').value,
+        direccion: document.getElementById('direccion').value,
+        telefono: document.getElementById('telefono').value,
+        email: document.getElementById('email').value,
+        usuario: document.getElementById('usuario').value,
+        password: document.getElementById('password').value
+      };
+      const res = await fetch('http://localhost:5012/api/Empresas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const respuesta = await res.json();
+      document.getElementById('respuestaEmpresa').textContent = JSON.stringify(respuesta, null, 2);
     };
   </script>
 </body>
