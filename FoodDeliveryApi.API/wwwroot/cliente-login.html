@@ -19,7 +19,7 @@
             e.preventDefault();
             const usuario = document.getElementById('usuario').value;
             const password = document.getElementById('password').value;
-            const response = await fetch('http://localhost:5012/api/clientes/login', {
+            const response = await fetch('http://localhost:5012/api/Clientes/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ usuario, password })
@@ -31,7 +31,7 @@
                 localStorage.setItem('idCliente', data.idCliente);
                 resultadoDiv.innerHTML = `<span style='color:green'>Login exitoso. Redirigiendo...</span>`;
                 setTimeout(() => {
-                    window.location.href = 'armar-pedido.html';
+                    //window.location.href = 'armar-pedido.html';
                 }, 1200);
             } else {
                 resultadoDiv.innerHTML = "<span style='color:red'>Login fallido</span>";

@@ -1745,36 +1745,35 @@
     ]
   },
   "packageFolders": {
-    "/home/marcelo-aberlardo-saiz/.nuget/packages/": {}
+    "C:\\Users\\marsa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/FoodDelivery.API.csproj",
+      "projectUniqueName": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\FoodDelivery.API.csproj",
       "projectName": "FoodDelivery.API",
-      "projectPath": "/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/FoodDelivery.API.csproj",
-      "packagesPath": "/home/marcelo-aberlardo-saiz/.nuget/packages/",
-      "outputPath": "/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDeliveryApi.API/obj/",
+      "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\FoodDelivery.API.csproj",
+      "packagesPath": "C:\\Users\\marsa\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/marcelo-aberlardo-saiz/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\marsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "/usr/lib/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Persistencia/FoodDelivery.Persistencia.csproj": {
-              "projectPath": "/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Persistencia/FoodDelivery.Persistencia.csproj"
+            "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj": {
+              "projectPath": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Persistencia\\FoodDelivery.Persistencia.csproj"
             },
-            "/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Servicios/FoodDelivery.Servicios.csproj": {
-              "projectPath": "/home/marcelo-aberlardo-saiz/Proyectos/FoodDeliveryApi/FoodDelivery.Servicios/FoodDelivery.Servicios.csproj"
+            "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj": {
+              "projectPath": "C:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDelivery.Servicios\\FoodDelivery.Servicios.csproj"
             }
           }
         }
@@ -1788,8 +1787,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.100"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -1823,20 +1821,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.20, 8.0.20]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.linux-x64",
-            "version": "[8.0.20, 8.0.20]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.20, 8.0.20]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -1845,7 +1829,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.110/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

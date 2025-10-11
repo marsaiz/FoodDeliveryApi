@@ -314,10 +314,7 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4"
         },
         "runtime": {
-          "FoodDelivery.Domain.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "FoodDelivery.Domain.dll": {}
         }
       },
       "FoodDelivery.Persistencia/1.0.0": {
@@ -329,10 +326,7 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4"
         },
         "runtime": {
-          "FoodDelivery.Persistencia.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "FoodDelivery.Persistencia.dll": {}
         }
       },
       "FoodDelivery.Servicios/1.0.0": {
@@ -342,10 +336,7 @@
           "Microsoft.EntityFrameworkCore": "9.0.9"
         },
         "runtime": {
-          "FoodDelivery.Servicios.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "FoodDelivery.Servicios.dll": {}
         }
       }
     }

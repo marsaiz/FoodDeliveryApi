@@ -1,0 +1,57 @@
+{
+  "Files": [
+    {
+      "Id": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\wwwroot\\armar-pedido.html",
+      "PackagePath": "staticwebassets\\armar-pedido.html"
+    },
+    {
+      "Id": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\wwwroot\\cliente-login.html",
+      "PackagePath": "staticwebassets\\cliente-login.html"
+    },
+    {
+      "Id": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\wwwroot\\cliente-registro.html",
+      "PackagePath": "staticwebassets\\cliente-registro.html"
+    },
+    {
+      "Id": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\wwwroot\\cliente.pedido.html",
+      "PackagePath": "staticwebassets\\cliente.pedido.html"
+    },
+    {
+      "Id": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\wwwroot\\empresa-login.html",
+      "PackagePath": "staticwebassets\\empresa-login.html"
+    },
+    {
+      "Id": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\wwwroot\\empresa-registro.html",
+      "PackagePath": "staticwebassets\\empresa-registro.html"
+    },
+    {
+      "Id": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\wwwroot\\loginEmpresa.html",
+      "PackagePath": "staticwebassets\\loginEmpresa.html"
+    },
+    {
+      "Id": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\wwwroot\\panel-productos-categorias.html",
+      "PackagePath": "staticwebassets\\panel-productos-categorias.html"
+    },
+    {
+      "Id": "c:\\Users\\marsa\\Desktop\\programacion\\ProyectosComerciales\\FoodDeliveryApi\\FoodDeliveryApi.API\\wwwroot\\pedidos-cliente.html",
+      "PackagePath": "staticwebassets\\pedidos-cliente.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.FoodDelivery.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.FoodDelivery.API.props",
+      "PackagePath": "build\\FoodDelivery.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.FoodDelivery.API.props",
+      "PackagePath": "buildMultiTargeting\\FoodDelivery.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.FoodDelivery.API.props",
+      "PackagePath": "buildTransitive\\FoodDelivery.API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
