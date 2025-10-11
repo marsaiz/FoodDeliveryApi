@@ -27,6 +27,7 @@
             const resultadoDiv = document.getElementById('resultado');
             if (response.ok) {
                 const data = await response.json();
+                console.log('Respuesta login:', data);
                 localStorage.setItem('idCliente', data.idCliente);
                 resultadoDiv.innerHTML = `<span style='color:green'>Login exitoso. Redirigiendo...</span>`;
                 setTimeout(() => {

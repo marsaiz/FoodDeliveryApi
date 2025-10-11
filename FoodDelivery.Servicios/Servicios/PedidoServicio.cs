@@ -20,6 +20,7 @@ public class PedidoServicio : IPedidoServicio
         _detallePedidoServicio = detallePedidoServicio;
     }
 
+    // Se corrigió el método CrearPedidoAsync para manejar la creación del pedido y sus detalles correctamente
     public async Task<PedidoDTO> CrearPedidoAsync(PedidoCreateDTO pedidoDTO)
     {
         var cliente = await _clienteServicio.ObtenerClientePorIdAsync(pedidoDTO.IdCliente);
@@ -30,6 +31,7 @@ public class PedidoServicio : IPedidoServicio
         if (empresa == null)
             throw new Exception("La empresa no existe.");
 
+        // Crea el pedido sin detalles primero
         var nuevoPedido = new Pedido
         {
             IdCliente = pedidoDTO.IdCliente,
@@ -39,7 +41,7 @@ public class PedidoServicio : IPedidoServicio
             Estado = EstadoPedido.Pendiente,
             TotalPedido = 0, // Se calculará luego
             MetodoPago = pedidoDTO.MetodoPago ?? string.Empty,
-            Entrega = Enum.TryParse<TipoEntrega>(pedidoDTO.TipoEntrega, out var entrega) ? entrega : TipoEntrega.Domicilio
+            Entrega = Enum.TryParse<TipoEntrega>(pedidoDTO.TipoEntrega, out var entrega) ? entrega : TipoEntrega.EnLocal
         };
 
         var pedidoCreado = await _pedidoRepositorio.CrearPedidoAsync(nuevoPedido);
@@ -47,6 +49,8 @@ public class PedidoServicio : IPedidoServicio
         decimal totalPedido = 0;
         if (pedidoDTO.Detalles != null)
         {
+            // Crear cada detalle del pedido
+            // El servicio de detalle debe asignar el IdPedido
             foreach (var detalle in pedidoDTO.Detalles)
             {
                 // Asignar el id del pedido creado

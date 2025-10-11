@@ -72,6 +72,7 @@
 <script>
     // Variables globales
     let idCliente = localStorage.getItem('idCliente');
+    console.log('idCliente desde localStorage:', idCliente);
     let productosEmpresa = [];
     let detalle = [];
     let total = 0;
@@ -117,48 +118,118 @@
         productosEmpresa = productos;
         const tbody = document.getElementById('tablaProductos').querySelector('tbody');
         tbody.innerHTML = '';
-        productosEmpresa.forEach(p => {
-            // Generar select de adicionales (permite seleccionar varios y mitad)
-            let adicionalesHtml = '';
-            if (adicionalesEmpresa.length > 0) {
-                adicionalesHtml = `<select multiple id='adics_${p.idProducto}' style='min-width:120px;'>` +
-                    adicionalesEmpresa.map(a => `<option value='${a.idAdicional}'>${a.nombreAdicional} ($${a.precioAdicional ?? 0})</option>`).join('') +
-                    `</select><br><label style='font-size:0.9em'>Mitad:</label> <select id='mitad_${p.idProducto}'><option value='0'>Completo</option><option value='1'>1ra mitad</option><option value='2'>2da mitad</option></select>`;
-            }
-            tr = document.createElement('tr');
-            tr.innerHTML = `<td>${p.nombreProducto}</td><td>$${p.precioProducto}</td><td><input type='number' min='1' value='1' id='cant_${p.idProducto}' style='width:60px;'></td><td>${adicionalesHtml}</td><td><button class='btn' onclick='agregarProducto(${p.idProducto})'>Agregar</button></td>`;
-            tbody.appendChild(tr);
-        });
+                productosEmpresa.forEach(p => {
+                        let adicionalesHtml = '';
+                        if (adicionalesEmpresa.length > 0) {
+                                // Selector para elegir entera o mitad
+                                adicionalesHtml = `
+                                <div id='tipoPizza_${p.idProducto}'>
+                                    <label><input type='radio' name='tipo_${p.idProducto}' value='entera' checked> Entera</label>
+                                    <label><input type='radio' name='tipo_${p.idProducto}' value='mitad'> Mitad</label>
+                                </div>
+                                <div id='adicionales_entera_${p.idProducto}'>
+                                    <label style='font-size:0.9em'>Adicionales:</label>
+                                    <select multiple id='adics_entera_${p.idProducto}' style='min-width:120px;'>
+                                        ${adicionalesEmpresa.map(a => `<option value='${a.idAdicional}'>${a.nombreAdicional} ($${a.precioAdicional ?? 0})</option>`).join('')}
+                                    </select>
+                                </div>
+                                <div id='adicionales_mitad_${p.idProducto}' style='display:none;'>
+                                    <label style='font-size:0.9em'>Adicionales 1ra mitad:</label>
+                                    <select multiple id='adics_mitad1_${p.idProducto}' style='min-width:120px;'>
+                                        ${adicionalesEmpresa.map(a => `<option value='${a.idAdicional}'>${a.nombreAdicional} ($${a.precioAdicional ?? 0})</option>`).join('')}
+                                    </select><br>
+                                    <label style='font-size:0.9em'>Adicionales 2da mitad:</label>
+                                    <select multiple id='adics_mitad2_${p.idProducto}' style='min-width:120px;'>
+                                        ${adicionalesEmpresa.map(a => `<option value='${a.idAdicional}'>${a.nombreAdicional} ($${a.precioAdicional ?? 0})</option>`).join('')}
+                                    </select>
+                                </div>`;
+                        }
+                        tr = document.createElement('tr');
+                        tr.innerHTML = `<td>${p.nombreProducto}</td><td>$${p.precioProducto}</td><td><input type='number' min='1' value='1' id='cant_${p.idProducto}' style='width:60px;'></td><td>${adicionalesHtml}</td><td><button class='btn' onclick='agregarProducto(${p.idProducto})'>Agregar</button></td>`;
+                        tbody.appendChild(tr);
+                        // Lógica para mostrar/ocultar adicionales según tipo
+                        if (adicionalesEmpresa.length > 0) {
+                                const tipoPizzaDiv = document.getElementById(`tipoPizza_${p.idProducto}`);
+                                tipoPizzaDiv.querySelectorAll('input[type=radio]').forEach(radio => {
+                                        radio.addEventListener('change', function() {
+                                                if (this.value === 'entera') {
+                                                        document.getElementById(`adicionales_entera_${p.idProducto}`).style.display = '';
+                                                        document.getElementById(`adicionales_mitad_${p.idProducto}`).style.display = 'none';
+                                                } else {
+                                                        document.getElementById(`adicionales_entera_${p.idProducto}`).style.display = 'none';
+                                                        document.getElementById(`adicionales_mitad_${p.idProducto}`).style.display = '';
+                                                }
+                                        });
+                                });
+                        }
+                });
     }
     // Agregar producto al detalle
     window.agregarProducto = function(idProducto) {
         const prod = productosEmpresa.find(p => p.idProducto === idProducto);
         const cantidad = parseInt(document.getElementById('cant_' + idProducto).value);
         if (!prod || cantidad < 1) return;
-        // Obtener adicionales seleccionados y mitad
+        // Determinar si es entera o mitad
+        let tipo = 'entera';
+        const tipoPizzaDiv = document.getElementById(`tipoPizza_${idProducto}`);
+        if (tipoPizzaDiv) {
+            const checked = tipoPizzaDiv.querySelector('input[type=radio]:checked');
+            if (checked) tipo = checked.value;
+        }
         let adicionalesSel = [];
         let mitad = 0;
-        const adicsSelElem = document.getElementById('adics_' + idProducto);
-        if (adicsSelElem) {
-            adicionalesSel = Array.from(adicsSelElem.selectedOptions).map(opt => parseInt(opt.value));
-        }
-        const mitadElem = document.getElementById('mitad_' + idProducto);
-        if (mitadElem) {
-            mitad = parseInt(mitadElem.value);
-        }
-        const existente = detalle.find(d => d.idProducto === idProducto && JSON.stringify(d.adicionales) === JSON.stringify(adicionalesSel) && d.mitad === mitad);
-        if (existente) {
-            existente.cantidad += cantidad;
+        let adicionalesMitad1 = [], adicionalesMitad2 = [];
+        if (tipo === 'entera') {
+            const adicsSelElem = document.getElementById('adics_entera_' + idProducto);
+            if (adicsSelElem) {
+                adicionalesSel = Array.from(adicsSelElem.selectedOptions).map(opt => parseInt(opt.value));
+            }
+            mitad = 0;
         } else {
-            detalle.push({ idProducto, nombre: prod.nombreProducto, precio: prod.precioProducto, cantidad, adicionales: adicionalesSel, mitad });
+            const adicsMitad1Elem = document.getElementById('adics_mitad1_' + idProducto);
+            const adicsMitad2Elem = document.getElementById('adics_mitad2_' + idProducto);
+            if (adicsMitad1Elem) {
+                adicionalesMitad1 = Array.from(adicsMitad1Elem.selectedOptions).map(opt => parseInt(opt.value));
+            }
+            if (adicsMitad2Elem) {
+                adicionalesMitad2 = Array.from(adicsMitad2Elem.selectedOptions).map(opt => parseInt(opt.value));
+            }
+            mitad = 1; // Para identificar que es por mitades
         }
-        // Sumar precio de adicionales
-        let precioAdics = 0;
-        adicionalesSel.forEach(idAdic => {
-            const adic = adicionalesEmpresa.find(a => a.idAdicional === idAdic);
-            if (adic && adic.precioAdicional) precioAdics += adic.precioAdicional;
-        });
-        total += (prod.precioProducto + precioAdics) * cantidad;
+        let existente;
+        if (tipo === 'entera') {
+            existente = detalle.find(d => d.idProducto === idProducto && JSON.stringify(d.adicionales) === JSON.stringify(adicionalesSel) && d.mitad === 0);
+            if (existente) {
+                existente.cantidad += cantidad;
+            } else {
+                detalle.push({ idProducto, nombre: prod.nombreProducto, precio: prod.precioProducto, cantidad, adicionales: adicionalesSel, mitad: 0 });
+            }
+            // Sumar precio de adicionales
+            let precioAdics = 0;
+            adicionalesSel.forEach(idAdic => {
+                const adic = adicionalesEmpresa.find(a => a.idAdicional === idAdic);
+                if (adic && adic.precioAdicional) precioAdics += adic.precioAdicional;
+            });
+            total += (prod.precioProducto + precioAdics) * cantidad;
+        } else {
+            existente = detalle.find(d => d.idProducto === idProducto && JSON.stringify(d.adicionalesMitad1) === JSON.stringify(adicionalesMitad1) && JSON.stringify(d.adicionalesMitad2) === JSON.stringify(adicionalesMitad2) && d.mitad === 1);
+            if (existente) {
+                existente.cantidad += cantidad;
+            } else {
+                detalle.push({ idProducto, nombre: prod.nombreProducto, precio: prod.precioProducto, cantidad, adicionalesMitad1, adicionalesMitad2, mitad: 1 });
+            }
+            // Sumar precio de adicionales de ambas mitades
+            let precioAdics = 0;
+            adicionalesMitad1.forEach(idAdic => {
+                const adic = adicionalesEmpresa.find(a => a.idAdicional === idAdic);
+                if (adic && adic.precioAdicional) precioAdics += adic.precioAdicional / 2;
+            });
+            adicionalesMitad2.forEach(idAdic => {
+                const adic = adicionalesEmpresa.find(a => a.idAdicional === idAdic);
+                if (adic && adic.precioAdicional) precioAdics += adic.precioAdicional / 2;
+            });
+            total += (prod.precioProducto + precioAdics) * cantidad;
+        }
         actualizarDetalle();
     }
     function actualizarDetalle() {
@@ -208,14 +279,31 @@
         const metodoPago = document.getElementById('metodoPago').value;
         const tipoEntrega = document.getElementById('tipoEntrega').value;
         const idDireccionCliente = document.getElementById('idDireccionCliente').value || null;
-        // Construir detalles
-        const detalles = detalle.map(d => ({
-            idProducto: d.idProducto,
-            cantidad: d.cantidad,
-            precioUnitario: d.precio,
-            adicionales: d.adicionales || [],
-            mitad: d.mitad || 0
-        }));
+        // Construir detalles con adicionales estructurados
+        const detalles = detalle.map(d => {
+            if (d.mitad === 1) {
+                // Pizza por mitades
+                return {
+                    idProducto: d.idProducto,
+                    cantidad: d.cantidad,
+                    precioUnitario: d.precio,
+                    mitad: 1,
+                    adicionales: [
+                        ...(d.adicionalesMitad1 || []).map(id => ({ idAdicional: id, mitad: 1 })),
+                        ...(d.adicionalesMitad2 || []).map(id => ({ idAdicional: id, mitad: 2 }))
+                    ]
+                };
+            } else {
+                // Pizza entera
+                return {
+                    idProducto: d.idProducto,
+                    cantidad: d.cantidad,
+                    precioUnitario: d.precio,
+                    mitad: 0,
+                    adicionales: (d.adicionales || []).map(id => ({ idAdicional: id, mitad: 0 }))
+                };
+            }
+        });
         const data = {
             idCliente,
             idEmpresa,

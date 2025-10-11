@@ -98,8 +98,13 @@ public class ClientesController : ControllerBase
     public async Task<IActionResult> Login([FromBody] ClienteLoginDTO dto)
     {
         var cliente = await _clienteService.LoginAsync(dto);
+        Console.WriteLine($"[LOGIN] DTO respuesta: idCliente={cliente.IdCliente}, usuario={cliente.Usuario}");
         if (cliente.Equals(default))
+        {
+            Console.WriteLine("[LOGIN] Login fallido: cliente no encontrado o credenciales incorrectas");
             return Unauthorized();
+        }
+        Console.WriteLine("[LOGIN] Login exitoso, enviando DTO al frontend");
         return Ok(new { idCliente = cliente.IdCliente, usuario = cliente.Usuario });
     }
 }
